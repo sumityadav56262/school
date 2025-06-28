@@ -8,8 +8,10 @@
             <a href="{{ route('teachers.create') }}" class="reset-button">Add Teacher</a>
         </div>
         <div class="search-group">
-            <input class="search-box" type="text">
-            <button>Search</button>
+            <form method="GET" action="{{ route('teachers.index') }}">
+                <input type="text" class="search-box" name="search" value="{{ request('search') }}" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
         </div>
     </div>
     <table border="1" width="100%" style="margin-top: 10px;">

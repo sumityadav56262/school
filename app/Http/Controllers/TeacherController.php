@@ -7,8 +7,23 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    public function index() {
-        $teachers = Teacher::all();
+    public function index(Request $request) {        
+        $query = Teacher::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function($q) use ($search) {
+                $q->where('id_card_no', 'like', "%{$search}%")
+                ->orWhere('teacher_name', 'like', "%{$search}%")
+                ->orWhere('designation', 'like', "%{$search}%")
+                ->orWhere('mobile_no', 'like', "%{$search}%");
+            });
+        }     
+
+        $teachers = $query->get();
+        
         return view('teachers.index', compact('teachers'));
     }
 
@@ -33,5 +48,10 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher) {
         $teacher->delete();
         return redirect()->route('teachers.index')->with('success', 'Deleted');
+    }
+
+    public function search($value)
+    {
+        $teachers = Teacher::where('teacher_name', $value );
     }
 }
