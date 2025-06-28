@@ -22,7 +22,7 @@ class TeacherController extends Controller
             });
         }     
 
-        $teachers = $query->paginate(3)->withQueryString();
+        $teachers = $query->paginate(10)->withQueryString();
         
         return view('teachers.index', compact('teachers'));
     }

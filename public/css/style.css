@@ -310,13 +310,23 @@ body {
     color: #856404; /* Dark yellow */
 }
 
-.teacher-table {
+table {
     border-collapse: collapse;
     margin-top: 10px;
     width: 100%;
+    font-family: sans-serif;
 }
-.teacher-table th,
-.teacher-table td {
+
+table th {
+    background-color: #f5f5f5;
+    font-size: 15px;
+}
+
+table td {
     border: 1px solid #ccc;
     padding: 8px;
+}
+
+table tr:hover {
+    background-color: #eef;
 }

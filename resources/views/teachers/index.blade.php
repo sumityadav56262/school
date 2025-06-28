@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <table class="teacher-table">
+    <table>
         <thead>
             <tr>
                 <th>ID</th>

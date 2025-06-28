@@ -7,10 +7,25 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
 
-
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
+         $query = Student::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+            
+            $query->where(function($q) use ($search) {
+                $q->where('emis_no', 'like', "%{$search}%")
+                ->orWhere('class_name', 'like', "%{$search}%")
+                ->orWhere('stud_name', 'like', "%{$search}%")
+                ->orWhere('roll_no', 'like', "%{$search}%")
+                ->orWhere('father_name', 'like', "%{$search}%");
+            });
+        }     
+
+        $students = $query->paginate(10)->withQueryString();
+
         return view('students.index', compact('students'));
     }
 
