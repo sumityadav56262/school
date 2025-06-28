@@ -37,7 +37,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');
-            $table->foreign('class_name')->references('name')->on('stud_classes')->onDelete('cascade');
+            $table->foreign('class_name')->references('class_name')->on('stud_classes')->onDelete('cascade');
         });
     }
 

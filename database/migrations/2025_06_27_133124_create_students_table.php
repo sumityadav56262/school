@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('mobile_no');
             $table->string('address');
             $table->timestamps();
+
+            $table->foreign('class_name')->references('class_name')->on('stud_classes')->onDelete('cascade');
         });
     }
 
