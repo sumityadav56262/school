@@ -40,6 +40,9 @@ body {
 .menu-item {
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    font-size: large;
+    color: white;
     align-items: center;
     padding: 15px 0;
     cursor: pointer;
@@ -57,7 +60,7 @@ body {
 }
 
 .menu-item span {
-    font-size: 14px;
+    font-size: 20px;
     text-align: center;
 }
 
