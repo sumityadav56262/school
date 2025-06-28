@@ -11,22 +11,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_expenses', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_card_no');
-            $table->string('salary_amout');
-            $table->string('paid_amt');
-            $table->string('due_amt');
-            $table->string('paid_by');
-            $table->date('paid_date');
-            $table->string('remark')->nullable();
+            $table->integer('id_card_no')->unique();
+            $table->string('teacher_name');
+            $table->string('designation');
+            $table->string('mobile_no');
+            $table->string('address');
             $table->timestamps();
-
-            $table->foreign('id_card_no')->references('id_card_no')->on('teachers')->onDelete('cascade');
         });
     }
-
-
 
     /**
      * Reverse the migrations.
