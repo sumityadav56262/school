@@ -6,6 +6,7 @@
     <form method="POST" action="{{ route('teacher-expenses.store') }}">
         @csrf
         @include('teacher_expenses.form')
+        <div class="h-line"></div>
         <div class="add-fees-footer">
             <button type="submit">+</button>
         </div>

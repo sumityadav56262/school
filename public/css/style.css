@@ -13,21 +13,27 @@ body {
     text-align: center;
     font-size: 24px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+.h-line{
+    width: 100%;
+    border: #28a745 2px solid;
+    margin-top: 25px;
 }
 .container {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    height: fit-content;
+    height: 100%;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    border-top: 3px solid #28a745;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
 }
 
 /* Left Menu */
 .menu {
-    width: 200px;
+    min-width: 235px;
+    min-height: 500px;
     background-color: #333;
     color: white;
     padding: 20px 0;
@@ -35,18 +41,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
 }
 
 .menu-item {
+    width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-decoration: none;
     font-size: large;
     color: white;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 10%;
     cursor: pointer;
-    width: 100%;
     transition: background-color 0.3s;
 }
 
@@ -63,7 +70,9 @@ body {
     font-size: 20px;
     text-align: center;
 }
-
+.menu-item.active{
+    background-color: #28a745;
+}
 /* Main Content */
 .main-content {
     flex-grow: 1;
@@ -71,7 +80,42 @@ body {
     display: flex;
     flex-direction: column;
 }
+.nav-action{
+    width: 100%;
+    max-height: 40px;
+    /* background-color: #5baaff; */
+    display: flex;
+    justify-content: space-between;
+    /* padding: 10px; */
+}
+.nav-action .add-button{
+    background-color: #28a745;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    a{
+        text-decoration: none;
+        color: white;
 
+    }
+}
+.nav-action .search-group{
+    display: flex;
+    .search-box{
+        padding: 10px;
+        border-radius: 3px 0 0 3px;
+        margin: 0%;
+    }
+    button{
+        margin: 0%;
+        background-color: #28a745;
+        padding: 10px;
+        outline: none;
+        border-radius: 0 5px 5px 0;
+        border: none;
+        color: white;
+    }
+}
 /* Add Fees Section */
 .add-fees-section {
     border: 1px solid #ccc;
@@ -79,9 +123,31 @@ body {
     margin-bottom: 20px;
     background-color: #f9f9f9;
 }
-
+.add-fees-section{
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        td{
+            padding: 10px;
+            flex-direction: column;
+        }
+        a,button{
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        button{
+            outline: none;
+            border: 0;
+            font-size: 16px;
+            background-color: red;
+        }
+    }
+}
 .add-fees-header {
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     padding: 10px;
     text-align: center;

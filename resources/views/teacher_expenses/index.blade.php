@@ -3,7 +3,15 @@
 @section('content')
 <div class="add-fees-section">
     <div class="add-fees-header">Teacher Expenses</div>
-    <a href="{{ route('teacher-expenses.create') }}" class="reset-button">Add Expense</a>
+    <div class="nav-action">
+        <div class="add-button">
+            <a href="{{ route('teacher-expenses.create') }}" class="reset-button">Add Expense</a>
+        </div>
+        <div class="search-group">
+            <input class="search-box" type="text">
+            <button>Search</button>
+        </div>
+    </div>
     <table border="1" width="100%" style="margin-top: 10px;">
         <tr>
             <th>Teacher</th>
@@ -22,7 +30,7 @@
                 <a href="{{ route('teacher-expenses.edit', $exp) }}">Edit</a>
                 <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST" style="display:inline;">
                     @csrf @method('DELETE')
-                    <button type="submit" style="color: red;">Delete</button>
+                    <button type="submit">Delete</button>
                 </form>
             </td>
         </tr>

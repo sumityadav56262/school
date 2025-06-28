@@ -6,6 +6,7 @@
     <form method="POST" action="{{ route('misc-expenses.store') }}">
         @csrf
         @include('misc_expenses.form')
+        <div class="h-line"></div>
         <div class="add-fees-footer">
             <button type="submit">+</button>
         </div>
