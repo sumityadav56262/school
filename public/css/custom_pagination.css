@@ -1,36 +1,102 @@
-/* Pagination CSS */
-.my-pagination {
-    margin-top: 15px;
-    text-align: center;
+/* FLEXBOX Utility Classes */
+.d-flex {
+    display: flex !important;
 }
 
-.custom-pagination-list {
+.flex-fill {
+    flex: 1 1 auto !important;
+}
+
+.d-sm-none {
+    display: none !important;
+}
+
+@media (min-width: 576px) {
+    .d-sm-none {
+        display: none !important;
+    }
+    .d-sm-flex {
+        display: flex !important;
+    }
+    .flex-sm-fill {
+        flex: 1 1 auto !important;
+    }
+    .align-items-sm-center {
+        align-items: center !important;
+    }
+    .justify-content-sm-between {
+        justify-content: space-between !important;
+    }
+}
+
+/* JUSTIFY CONTENT CLASSES */
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-items-center {
+    /* Not a standard Bootstrap class. You might mean align-items-center */
+    justify-items: center;
+}
+
+/* PAGINATION STYLES */
+.pagination {
+    display: flex;
+    padding-left: 0;
     list-style: none;
-    padding: 0;
-    display: inline-flex;
+    border-radius: 0.375rem;
 }
 
-.custom-pagination-list li {
-    margin: 0 5px;
+/* PAGE ITEM (LI) */
+.page-item {
+    margin: 0 2px;
 }
 
-.custom-pagination-list li a {
-    display: inline-block;
-    padding: 6px 12px;
-    color: #fff;
-    background: #3490dc;
+/* PAGE LINK (A or SPAN) */
+.page-link {
+    position: relative;
+    display: block;
+    color: #28a745;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     text-decoration: none;
-    border-radius: 3px;
 }
 
-.custom-pagination-list li.active span {
-    background: #38c172;
+.page-link:hover {
+    color: #28a745;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    text-decoration: none;
+}
+
+/* ACTIVE STATE */
+.page-item.active .page-link {
+    z-index: 3;
     color: #fff;
-    padding: 6px 12px;
-    border-radius: 3px;
+    background-color: #28a745;
+    border-color: #28a745;
 }
 
-.custom-pagination-list li.disabled span {
-    color: #aaa;
-    padding: 6px 12px;
+/* DISABLED STATE */
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+/* TEXT UTILITY CLASSES */
+.small {
+    font-size: 0.875em;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.fw-semibold {
+    font-weight: 600 !important;
 }

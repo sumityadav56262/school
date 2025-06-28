@@ -47,9 +47,8 @@
             @endforelse
         </tbody>
     </table>
-
     <div style="margin-top: 10px;">
-        {{ $teachers->links('pagination::custom-pagination') }}
+        {{ $teachers->links() }}
     </div>
 </div>
 @endsection
