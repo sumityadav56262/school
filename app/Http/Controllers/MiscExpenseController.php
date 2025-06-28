@@ -7,8 +7,23 @@ use Illuminate\Http\Request;
 
 class MiscExpenseController extends Controller
 {
-    public function index() {
-        $expenses = MiscExpense::all();
+    public function index(Request $request) {
+
+        $query = MiscExpense::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function($q) use ($search) {
+                $q->where('particular', 'like', "%{$search}%")
+                ->orWhere('payment_by', 'like', "%{$search}%")
+                ->orWhere('payment_date', 'like', "%{$search}%");
+            });
+        }     
+
+        $expenses = $query->paginate(10)->withQueryString();
+
         return view('misc_expenses.index', compact('expenses'));
     }
 
