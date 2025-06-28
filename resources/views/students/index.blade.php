@@ -49,7 +49,7 @@
     </table>
 
     <div style="margin-top: 10px;">
-        {{ $students->links('pagination::custom-pagination') }}
+        {{ $students->links() }}
     </div>
 </div>
 @endsection
