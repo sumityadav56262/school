@@ -1,4 +1,3 @@
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,7 +5,7 @@ body {
     flex-direction: column;
     background-color: #f0f0f0;
 }
-.navbar{
+.navbar {
     background-color: #333;
     color: white;
     padding: 0px;
@@ -15,7 +14,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 0;
 }
-.h-line{
+.h-line {
     width: 100%;
     border: #28a745 2px solid;
     margin-top: 25px;
@@ -71,7 +70,7 @@ body {
     text-align: center;
     transform: translateY(2px);
 }
-.menu-item.active{
+.menu-item.active {
     background-color: #28a745;
 }
 /* Main Content */
@@ -81,7 +80,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-.nav-action{
+.nav-action {
     width: 100%;
     max-height: 40px;
     /* background-color: #5baaff; */
@@ -89,25 +88,24 @@ body {
     justify-content: space-between;
     /* padding: 10px; */
 }
-.nav-action .add-button{
+.nav-action .add-button {
     background-color: #28a745;
     padding: 10px;
     text-decoration: none;
     border-radius: 3px;
-    a{
+    a {
         text-decoration: none;
         color: white;
-
     }
 }
-.nav-action .search-group{
+.nav-action .search-group {
     display: flex;
-    .search-box{
+    .search-box {
         padding: 10px;
         border-radius: 3px 0 0 3px;
         margin: 0%;
     }
-    button{
+    button {
         margin: 0%;
         background-color: #28a745;
         padding: 10px;
@@ -124,25 +122,26 @@ body {
     margin-bottom: 20px;
     background-color: #f9f9f9;
 }
-.add-fees-section{
-    table{
+.add-fees-section {
+    table {
         width: 100%;
         border-collapse: collapse;
-        th{
+        th {
             padding: 10px 0;
         }
-        td{
+        td {
             padding: 10px;
             flex-direction: column;
         }
-        a,button{
+        a,
+        button {
             text-decoration: none;
             background-color: #28a745;
             color: white;
             padding: 5px 10px;
             border-radius: 3px;
         }
-        button{
+        button {
             outline: none;
             border: 0;
             font-size: 16px;
@@ -309,4 +308,15 @@ body {
 .amount-row.dues .amount-box {
     background-color: #ffeeba; /* Light yellow */
     color: #856404; /* Dark yellow */
+}
+
+.teacher-table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    width: 100%;
+}
+.teacher-table th,
+.teacher-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
 }

@@ -1,0 +1,36 @@
+/* Pagination CSS */
+.my-pagination {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.custom-pagination-list {
+    list-style: none;
+    padding: 0;
+    display: inline-flex;
+}
+
+.custom-pagination-list li {
+    margin: 0 5px;
+}
+
+.custom-pagination-list li a {
+    display: inline-block;
+    padding: 6px 12px;
+    color: #fff;
+    background: #3490dc;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.custom-pagination-list li.active span {
+    background: #38c172;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 3px;
+}
+
+.custom-pagination-list li.disabled span {
+    color: #aaa;
+    padding: 6px 12px;
+}

@@ -2,12 +2,16 @@
 <html>
 <head>
     <title>School Management System</title>
+
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom_pagination.css') }}">
+
     <!-- Font Awesome CDN for icons -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
+        
 </head>
 <body>
     <nav class="navbar">
