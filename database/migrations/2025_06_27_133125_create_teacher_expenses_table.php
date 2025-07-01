@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('teacher_expenses', function (Blueprint $table) {
             $table->id();
             $table->integer('id_card_no')->unique();
-            $table->string('salary_amout');
-            $table->string('paid_amt');
-            $table->string('due_amt');
+            $table->integer('salary_amout');
+            $table->integer('paid_amt');
+            $table->integer('due_amt');
             $table->string('paid_by');
             $table->date('paid_date');
             $table->string('remark')->nullable();

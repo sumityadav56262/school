@@ -10,8 +10,13 @@ class TeacherExpense extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_card_no', 'salary_amout', 'paid_amt', 'due_amt',
-        'paid_by', 'paid_date', 'remark'
+        'id_card_no',
+        'salary_amout',
+        'paid_amt',
+        'due_amt',
+        'paid_by',
+        'paid_date',
+        'remark'
     ];
 
     public function teacher()
