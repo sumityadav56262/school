@@ -10,8 +10,13 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'emis_no', 'class_name', 'stud_name', 'roll_no',
-        'father_name', 'mobile_no', 'address'
+        'emis_no',
+        'class_name',
+        'stud_name',
+        'roll_no',
+        'father_name',
+        'mobile_no',
+        'address'
     ];
 
     public function fees()
@@ -21,6 +26,6 @@ class Student extends Model
 
     public function class()
     {
-        return $this->belongsTo(StudClass::class, 'class_name', 'name');
+        return $this->belongsTo(StudClass::class, 'class_name', 'class_name');
     }
 }
