@@ -6,16 +6,9 @@
     <div class="nav-action">
         <div class="add-button">
             <a href="{{ route('misc-expenses.create') }}" class="reset-button">Add Expense</a>
-        </div>
-        <div class="search-group">
-            <form method="GET" action="{{ route('misc-expenses.index') }}">
-                <input type="text" class="search-box" name="search" value="{{ request('search') }}" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-        </div>
+        </div>        
     </div>
-
-    <table>
+    <table class="misc_expenses_datatable">
         <thead>
             <tr>
                 <th>Particular</th>
@@ -48,9 +41,5 @@
             @endforelse
         </tbody>
     </table>
-
-    <div style="margin-top: 10px;">
-        {{ $expenses->links() }}
-    </div>
 </div>
 @endsection

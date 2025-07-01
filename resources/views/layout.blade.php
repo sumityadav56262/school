@@ -11,6 +11,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
+
+    {{-- Boostrap CSS --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    {{-- Datatable CSS--}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
         
 </head>
 <body>
@@ -49,5 +55,24 @@
             @yield('content')
         </div>
     </div>
+
+
+    {{-- Jquery JS --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    {{-- Boostrap JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    {{-- Datatable Js --}}
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+    <script type="text/javascript">
+        //Initializing datatable
+        // misc_expenses_datatable
+        $(document).ready(function (){
+            $('.misc_expenses_datatable').DataTable();
+        });
+        
+    </script>
 </body>
 </html>
