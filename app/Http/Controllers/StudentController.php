@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -9,23 +10,7 @@ class StudentController extends Controller
 
     public function index(Request $request)
     {
-         $query = Student::query();
-
-        if ($request->filled('search')) {
-
-            $search = $request->search;
-            
-            $query->where(function($q) use ($search) {
-                $q->where('emis_no', 'like', "%{$search}%")
-                ->orWhere('class_name', 'like', "%{$search}%")
-                ->orWhere('stud_name', 'like', "%{$search}%")
-                ->orWhere('roll_no', 'like', "%{$search}%")
-                ->orWhere('father_name', 'like', "%{$search}%");
-            });
-        }     
-
-        $students = $query->paginate(10)->withQueryString();
-
+        $students = Student::all();
         return view('students.index', compact('students'));
     }
 

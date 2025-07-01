@@ -17,7 +17,20 @@ class StudClassFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->name()
+            'name' => fake()->unique()->randomElement([
+                'One',
+                'Two',
+                'Three',
+                'Four',
+                'Five',
+                'Six',
+                'Seven',
+                'Eight',
+                'Nine',
+                'Ten',
+                'Eleven',
+                'Twelve'
+            ]),
         ];
     }
 }

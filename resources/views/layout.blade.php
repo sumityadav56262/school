@@ -72,6 +72,10 @@
         $(document).ready(function (){
             $('.misc_expenses_datatable').DataTable();
         });
+
+        $(document).ready(function (){
+            $('.student_datatable').DataTable();
+        });
         
     </script>
 </body>
