@@ -330,3 +330,17 @@ table td {
 table tr:hover {
     background-color: #eef;
 }
+
+/* Nepali Calender START */
+.datepicker--nav-title,
+.datepicker--nav-title i,
+.datepicker--day-name,
+.datepicker--nav {
+    color: #28a745 !important ;
+}
+
+.datepicker--cell.-selected-,
+.datepicker--nav-action {
+    background: #28a745 !important ;
+}
+/* Nepali Calender END*/
