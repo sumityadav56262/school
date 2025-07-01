@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($teachers as $teacher)
+            @foreach($teachers as $teacher)
                 <tr>
                     <td>{{ $teacher->id_card_no }}</td>
                     <td>{{ $teacher->teacher_name }}</td>
@@ -34,11 +34,7 @@
                         </form>
                     </td>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="4" style="text-align: center;">No teachers found.</td>
-                </tr>
-            @endforelse
+            @endforeach
         </tbody>
     </table>    
 </div>

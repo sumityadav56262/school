@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($students as $student)
+            @foreach($students as $student)
                 <tr>
                     <td>{{ $student->emis_no }}</td>
                     <td>{{ $student->stud_name }}</td>
@@ -41,12 +41,8 @@
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4" style="text-align: center;">No students found.</td>
-                </tr>
-            @endforelse
+                </tr>            
+            @endforeach
         </tbody>
     </table>
 </div>

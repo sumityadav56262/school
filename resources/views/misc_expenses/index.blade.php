@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($expenses as $exp)
+            @foreach($expenses as $exp)
                 <tr>
                     <td>{{ $exp->particular }}</td>
                     <td>{{ $exp->amount }}</td>
@@ -33,12 +33,8 @@
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
                     </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" style="text-align: center;">No expenses found.</td>
-                </tr>
-            @endforelse
+                </tr>            
+            @endforeach
         </tbody>
     </table>
 </div>
