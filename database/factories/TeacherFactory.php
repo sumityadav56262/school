@@ -17,7 +17,17 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id_card_no' => fake()->unique()->numberBetween(1000, 9999),
+            'teacher_name' => fake()->name(),
+            'designation' => fake()->randomElement([
+                'Head Teacher',
+                'Assistant Teacher',
+                'Subject Teacher',
+                'Computer Teacher',
+                'Sports Teacher',
+            ]),
+            'mobile_no' => fake()->numerify('98########'),  // Nepali mobile format
+            'address' => fake()->address(),
         ];
     }
 }
