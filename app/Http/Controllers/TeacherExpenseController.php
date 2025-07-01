@@ -19,6 +19,17 @@ class TeacherExpenseController extends Controller
     }
 
     public function store(Request $request) {
+        $request->validate([
+            'teacher_id' => 'required|exists:teachers,id',
+            'id_card_no' => 'required|integer|unique:teacher_expenses,id_card_no,' . ($teacherExpense->id ?? 'null'),
+            'salary_amout' => 'required|numeric',
+            'paid_amt' => 'required|numeric',
+            'due_amt' => 'required|numeric',
+            'paid_by' => 'required|string|max:255',
+            'paid_date' => 'required|date',
+            'remark' => 'nullable|string',
+        ]);
+
         TeacherExpense::create($request->all());
         return redirect()->route('teacher-expenses.index')->with('success', 'Expense Added');
     }
