@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>School Management System</title>
 
@@ -7,18 +8,19 @@
     <link rel="stylesheet" href="{{ asset('css/custom_pagination.css') }}">
 
     <!-- Font Awesome CDN for icons -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
     {{-- Boostrap CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- Datatable CSS--}}
+    {{-- Datatable CSS --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
-        
+
+    {{-- Nepali datepicker CSS --}}
+    <link href="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.css" rel="stylesheet">
+
 </head>
+
 <body>
     <nav class="navbar">
         <h1>SCHOOL NAME</h1>
@@ -29,23 +31,28 @@
                 <i class="fas fa-tachometer-alt" style="margin-right: 8px;"></i>
                 <span>Dashboard</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}" href="{{ route('students.index') }}">
+            <a class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
+                href="{{ route('students.index') }}">
                 <i class="fas fa-user-graduate" style="margin-right: 8px;"></i>
                 <span>Students</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('student-fees.*') ? 'active' : '' }}" href="{{ route('student-fees.index') }}">
+            <a class="menu-item {{ request()->routeIs('student-fees.*') ? 'active' : '' }}"
+                href="{{ route('student-fees.index') }}">
                 <i class="fas fa-file-invoice-dollar" style="margin-right: 8px;"></i>
                 <span>Student Fees</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}" href="{{ route('teachers.index') }}">
+            <a class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
+                href="{{ route('teachers.index') }}">
                 <i class="fas fa-chalkboard-teacher" style="margin-right: 8px;"></i>
                 <span>Teachers</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('teacher-expenses.*') ? 'active' : '' }}" href="{{ route('teacher-expenses.index') }}">
+            <a class="menu-item {{ request()->routeIs('teacher-expenses.*') ? 'active' : '' }}"
+                href="{{ route('teacher-expenses.index') }}">
                 <i class="fas fa-money-bill-wave" style="margin-right: 8px;"></i>
                 <span>Teach Expenses</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('misc-expenses.*') ? 'active' : '' }}" href="{{ route('misc-expenses.index') }}">
+            <a class="menu-item {{ request()->routeIs('misc-expenses.*') ? 'active' : '' }}"
+                href="{{ route('misc-expenses.index') }}">
                 <i class="fas fa-coins" style="margin-right: 8px;"></i>
                 <span>Misc Expenses</span>
             </a>
@@ -66,30 +73,36 @@
     {{-- Datatable Js --}}
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 
-    <script type="text/javascript">
+    {{-- Nepali datepicker JS --}}
+    <script src="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.js"></script>
 
+    <script type="text/javascript">
         //Initializing datatable        
         // misc_expenses_datatable
-        $(document).ready(function (){
+        $(document).ready(function() {
             $('.misc_expenses_datatable').DataTable();
         });
 
         // student_datatable
-        $(document).ready(function (){
+        $(document).ready(function() {
             $('.student_datatable').DataTable();
         });
-        
+
         // teacher_datatable
-        $(document).ready(function (){
+        $(document).ready(function() {
             $('.teacher_datatable').DataTable();
         });
-        
+
         // teacher_expense_datatable
-        $(document).ready(function (){
+        $(document).ready(function() {
             $('.teacher_expense_datatable').DataTable();
         });
 
-        
+        // student_fee_datatable
+        $(document).ready(function() {
+            $('.student_fee_datatable').DataTable();
+        });
     </script>
 </body>
+
 </html>
