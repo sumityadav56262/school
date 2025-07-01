@@ -16,6 +16,10 @@
                 <th>EMIS</th>
                 <th>Name</th>
                 <th>Class</th>
+                <th>Roll No</th>
+                <th>Father Name</th>
+                <th>Mobile No</th>
+                {{-- <th>Address</th> --}}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,6 +29,10 @@
                     <td>{{ $student->emis_no }}</td>
                     <td>{{ $student->stud_name }}</td>
                     <td>{{ $student->class_name }}</td>
+                    <td>{{ $student->roll_no}}</td>
+                    <td>{{ $student->father_name }}</td>
+                    <td>{{ $student->mobile_no }}</td>
+                    {{-- <td>{{ $student->address }}</td> --}}
                     <td>
                         <a class="edit-button" href="{{ route('students.edit', $student) }}">Edit</a>
                         <form action="{{ route('students.destroy', $student) }}" method="POST" style="display:inline;">
