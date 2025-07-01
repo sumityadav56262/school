@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('teacher_expenses', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_card_no')->unique();
+            $table->integer('id_card_no');
             $table->integer('salary_amout');
             $table->integer('paid_amt');
             $table->integer('due_amt');

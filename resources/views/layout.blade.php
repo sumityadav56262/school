@@ -84,6 +84,12 @@
             $('.teacher_datatable').DataTable();
         });
         
+        // teacher_expense_datatable
+        $(document).ready(function (){
+            $('.teacher_expense_datatable').DataTable();
+        });
+
+        
     </script>
 </body>
 </html>
