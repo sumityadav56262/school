@@ -8,15 +8,9 @@
         <div class="add-button">
             <a href="{{ route('teachers.create') }}" class="reset-button">Add Teacher</a>
         </div>
-        <div class="search-group">
-            <form method="GET" action="{{ route('teachers.index') }}">
-                <input type="text" class="search-box" name="search" value="{{ request('search') }}" placeholder="Search...">
-                <button type="submit">Search</button>
-            </form>
-        </div>
     </div>
 
-    <table>
+    <table class="teacher_datatable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -46,9 +40,6 @@
                 </tr>
             @endforelse
         </tbody>
-    </table>
-    <div style="margin-top: 10px;">
-        {{ $teachers->links() }}
-    </div>
+    </table>    
 </div>
 @endsection

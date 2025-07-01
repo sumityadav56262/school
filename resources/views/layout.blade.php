@@ -67,14 +67,21 @@
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 
     <script type="text/javascript">
-        //Initializing datatable
+
+        //Initializing datatable        
         // misc_expenses_datatable
         $(document).ready(function (){
             $('.misc_expenses_datatable').DataTable();
         });
 
+        // student_datatable
         $(document).ready(function (){
             $('.student_datatable').DataTable();
+        });
+        
+        // teacher_datatable
+        $(document).ready(function (){
+            $('.teacher_datatable').DataTable();
         });
         
     </script>
