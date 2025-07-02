@@ -5,15 +5,10 @@ body {
     flex-direction: column;
     background-color: #f0f0f0;
 }
-.navbar {
+.c_nav {
     background-color: #333;
-    color: white;
-    padding: 0px;
-    text-align: center;
-    font-size: 24px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 0;
 }
+
 .h-line {
     width: 100%;
     border: #28a745 2px solid;
@@ -24,9 +19,8 @@ body {
     width: 100%;
     max-width: 1200px;
     height: 100%;
-    margin: 0 auto;
-    border-top: 3px solid #28a745;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #28a745;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Left Menu */
@@ -40,7 +34,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
 }
 
 .menu-item {
@@ -58,6 +51,7 @@ body {
 }
 
 .menu-item:hover {
+    color: white;
     background-color: #555;
 }
 
@@ -65,6 +59,9 @@ body {
     font-size: 36px;
 }
 
+.menu-item i {
+    margin-right: 8px;
+}
 .menu-item span {
     font-size: 20px;
     text-align: center;
@@ -73,12 +70,13 @@ body {
 .menu-item.active {
     background-color: #28a745;
 }
+
 /* Main Content */
 .main-content {
     flex-grow: 1;
-    padding: 20px;
     display: flex;
     flex-direction: column;
+    padding: 20px;
 }
 .nav-action {
     width: 100%;
@@ -115,6 +113,45 @@ body {
         color: white;
     }
 }
+/* Card */
+.c_card {
+    flex: 0 1 300px;
+    justify-content: flex-start;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.students {
+    background-color: #28a745;
+}
+.teachers {
+    background: #007bff;
+}
+.income {
+    background: #17a2b8;
+}
+.expenses {
+    background: #dc3545;
+}
+.dues {
+    background: #ffc107;
+}
+
+.c_para {
+    font-size: 48px;
+    margin: 15px 0;
+}
+
+.c_div {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /* Add Fees Section */
 .add-fees-section {
     border: 1px solid #ccc;
