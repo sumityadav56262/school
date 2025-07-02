@@ -27,17 +27,7 @@ class StudClassFactory extends Factory
                 'Seven',
                 'Eight',
                 'Nine',
-                'Ten',
-                'Eleven',
-                'Twelve',
-                'Thirteen',
-                'Fourteen',
-                'Fifteen',
-                'Sixteen',
-                'Seventeen',
-                'Eighteen',
-                'Nineteen',
-                'Twenty'
+                'Ten'
             ]),
         ];
     }

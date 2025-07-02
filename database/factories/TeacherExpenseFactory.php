@@ -29,7 +29,7 @@ class TeacherExpenseFactory extends Factory
             'salary_amout' => $salary,
             'paid_amt' => $paid,
             'due_amt' => $due,
-            'paid_by' => fake()->randomElement(['Cash', 'Bank Transfer', 'Cheque']),
+            'paid_by' => fake()->name(),
             'paid_date' => fake()->date(),
             'remark' => fake()->optional()->sentence(),
         ];

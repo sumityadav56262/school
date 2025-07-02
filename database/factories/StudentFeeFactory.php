@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Student;
+use App\Models\StudClass;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\odel=StudentFee>
@@ -17,7 +19,33 @@ class StudentFeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'emis_no' => Student::inRandomOrder()->value('emis_no')
+                ?? fake()->unique()->regexify('EMIS_[0-9]{5}'),
+
+            'payment_date' => fake()->date(),
+            'admission_date' => fake()->date(),
+
+            'month_name' => fake()->monthName(),
+
+            'yearly_fee' => fake()->numberBetween(500, 5000),
+            'eca_fee' => fake()->numberBetween(0, 500),
+            'game_fee' => fake()->numberBetween(0, 500),
+            'misc_fee' => fake()->numberBetween(0, 500),
+            'exam_fee' => fake()->numberBetween(0, 500),
+            'tie_belt_fee' => fake()->numberBetween(0, 200),
+            'vest_fee' => fake()->numberBetween(0, 200),
+            'computer_fee' => fake()->numberBetween(0, 500),
+            'traouser_fee' => fake()->numberBetween(0, 300),
+
+            'total_amt' => fake()->numberBetween(2000, 15000),
+            'disc_amt' => fake()->numberBetween(0, 1000),
+            'payment' => fake()->numberBetween(500, 10000),
+            'dues' => fake()->numberBetween(0, 5000),
+
+            'payment_by' => fake()->randomElement(['Cash', 'Cheque', 'Online']),
+            'received_by' => fake()->name(),
+
+            'recurring_dues' => fake()->optional()->numberBetween(100, 1000),
         ];
     }
 }

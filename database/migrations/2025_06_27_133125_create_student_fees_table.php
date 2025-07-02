@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
             $table->string('emis_no');
-            $table->string('class_name');
             $table->date('payment_date');
             $table->date('admission_date');
             $table->string('month_name');
@@ -37,7 +36,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');
-            $table->foreign('class_name')->references('class_name')->on('stud_classes')->onDelete('cascade');
         });
     }
 

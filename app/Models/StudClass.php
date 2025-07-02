@@ -17,9 +17,4 @@ class StudClass extends Model
     {
         return $this->hasMany(Student::class, 'class_name', 'name');
     }
-
-    public function fees()
-    {
-        return $this->hasMany(StudentFee::class, 'class_name', 'name');
-    }
 }

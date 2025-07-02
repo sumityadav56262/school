@@ -37,9 +37,4 @@ class StudentFee extends Model
     {
         return $this->belongsTo(Student::class, 'emis_no', 'emis_no');
     }
-
-    public function class()
-    {
-        return $this->belongsTo(StudClass::class, 'class_name', 'class_name');
-    }
 }
