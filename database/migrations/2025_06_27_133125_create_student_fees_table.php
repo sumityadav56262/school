@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('emis_no');
             $table->date('payment_date');
-            $table->date('admission_date');
+            $table->date('admission_date')->nullable();
             $table->string('month_name');
             $table->integer('yearly_fee')->default(0);
+            $table->integer('monthly_fee')->default(0);
             $table->integer('eca_fee')->default(0);
             $table->integer('game_fee')->default(0);
             $table->integer('misc_fee')->default(0);
@@ -25,11 +26,11 @@ return new class extends Migration
             $table->integer('tie_belt_fee')->default(0);
             $table->integer('vest_fee')->default(0);
             $table->integer('computer_fee')->default(0);
-            $table->integer('traouser_fee')->default(0);
+            $table->integer('trouser_fee')->default(0);
             $table->integer('total_amt')->default(0);
-            $table->integer('disc_amt')->default(0);
-            $table->integer('payment')->default(0);
-            $table->integer('dues')->default(0);
+            $table->integer('discount_amt')->default(0);
+            $table->integer('payment_amt')->default(0);
+            $table->integer('dues_amt')->default(0);
             $table->string('payment_by');
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();

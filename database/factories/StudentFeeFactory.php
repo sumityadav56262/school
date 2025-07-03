@@ -24,10 +24,9 @@ class StudentFeeFactory extends Factory
 
             'payment_date' => fake()->date(),
             'admission_date' => fake()->date(),
-
             'month_name' => fake()->monthName(),
-
             'yearly_fee' => fake()->numberBetween(500, 5000),
+            'monthly_fee' => fake()->numberBetween(500, 5000),
             'eca_fee' => fake()->numberBetween(0, 500),
             'game_fee' => fake()->numberBetween(0, 500),
             'misc_fee' => fake()->numberBetween(0, 500),
@@ -35,14 +34,14 @@ class StudentFeeFactory extends Factory
             'tie_belt_fee' => fake()->numberBetween(0, 200),
             'vest_fee' => fake()->numberBetween(0, 200),
             'computer_fee' => fake()->numberBetween(0, 500),
-            'traouser_fee' => fake()->numberBetween(0, 300),
+            'trouser_fee' => fake()->numberBetween(0, 300),
 
             'total_amt' => fake()->numberBetween(2000, 15000),
-            'disc_amt' => fake()->numberBetween(0, 1000),
-            'payment' => fake()->numberBetween(500, 10000),
-            'dues' => fake()->numberBetween(0, 5000),
+            'discount_amt' => fake()->numberBetween(0, 1000),
+            'payment_amt' => fake()->numberBetween(500, 10000),
+            'dues_amt' => fake()->numberBetween(0, 5000),
 
-            'payment_by' => fake()->randomElement(['Cash', 'Cheque', 'Online']),
+            'payment_by' => fake()->name(),
             'received_by' => fake()->name(),
 
             'recurring_dues' => fake()->optional()->numberBetween(100, 1000),

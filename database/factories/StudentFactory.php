@@ -23,12 +23,7 @@ class StudentFactory extends Factory
                 'Two',
                 'Three',
                 'Four',
-                'Five',
-                'Six',
-                'Seven',
-                'Eight',
-                'Nine',
-                'Ten'
+                'Five'
             ]),
             'stud_name' => fake()->name(),
             'roll_no' => fake()->numberBetween(1, 100),

@@ -13,7 +13,8 @@ use App\Http\Controllers\MiscExpenseController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/get-student', [StudentFeeController::class, 'getStudent']);
 
 Route::resource('students', StudentController::class);
 Route::resource('student-fees', StudentFeeController::class);

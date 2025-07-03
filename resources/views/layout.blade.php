@@ -72,14 +72,14 @@
     {{-- Jquery JS --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    {{-- Nepali datepicker JS --}}
+    <script src="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.js"></script>
+
     {{-- Boostrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     {{-- Datatable Js --}}
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
-
-    {{-- Nepali datepicker JS --}}
-    <script src="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.js"></script>
 
     <script type="text/javascript">
         //Initializing datatable        
@@ -110,6 +110,82 @@
         // student_classes_datatable
         $(document).ready(function() {
             $('.student_classes_datatable').DataTable();
+        });
+
+        // Load Studetn detail based on emis no
+        $(document).ready(function() {
+            $('#searchStudBtn').on('click', function() {
+                var emis_no = $('#emis_no').val();
+
+                if (emis_no) {
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/get-student',
+                        type: 'GET',
+                        data: {
+                            emis_no: emis_no
+                        },
+                        success: function(response) {
+                            if (response.student) {
+                                $('#class_name').val(response.student.class_name || '');
+                                $('#roll_no').val(response.student.roll_no || '');
+                                $('#student_name').val(response.student.stud_name || '');
+                            } else {
+                                $('#class_name').val('');
+                                $('#roll_no').val('');
+                                $('#student_name').val('');
+
+                                alert("No student found!");
+                            }
+                        },
+                        error: function() {
+                            alert("Error fetching data!");
+                        }
+                    });
+                } else {
+                    $('#class_name').val('');
+                    $('#roll_no').val('');
+                    $('#student_name').val('');
+                }
+            });
+        });
+
+        // Calculate total amounts
+        $(document).ready(function() {
+            function calculateAmounts() {
+                var total = 0;
+
+                // Sum all fees
+                $('.fee-field').each(function() {
+                    var val = parseInt($(this).val()) || 0;
+                    total += val;
+                });
+
+                // Update Total field
+                $('#total_amt').val(total);
+
+                // Get discount and payment values
+                var discount = parseInt($('#discount_amt').val()) || 0;
+                var payment = parseInt($('#payment_amt').val()) || 0;
+
+                // Calculate grand total after discount
+                var grandTotal = total - discount;
+                if (grandTotal < 0) grandTotal = 0;
+
+                // Calculate dues
+                var dues = grandTotal - payment;
+                if (dues < 0) dues = 0;
+
+                // Update Dues field
+                $('#dues_amt').val(dues);
+            }
+
+            // Recalculate when any relevant field changes
+            $('.fee-field, #discount_amt, #payment_amt').on('keyup change', function() {
+                calculateAmounts();
+            });
+
+            // Initial calculation on page load
+            calculateAmounts();
         });
     </script>
 </body>

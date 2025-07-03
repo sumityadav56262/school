@@ -22,12 +22,7 @@ class StudClassFactory extends Factory
                 'Two',
                 'Three',
                 'Four',
-                'Five',
-                'Six',
-                'Seven',
-                'Eight',
-                'Nine',
-                'Ten'
+                'Five'
             ]),
         ];
     }
