@@ -41,6 +41,11 @@
                 <i class="fas fa-file-invoice-dollar"></i>
                 <span>Student Fees</span>
             </a>
+            <a class="menu-item {{ request()->routeIs('stud-classes.*') ? 'active' : '' }}"
+                href="{{ route('stud-classes.index') }}">
+                <i class="fas fa-school"></i>
+                <span>Classes</span>
+            </a>
             <a class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
                 href="{{ route('teachers.index') }}">
                 <i class="fas fa-chalkboard-teacher"></i>
@@ -101,6 +106,10 @@
         // student_fee_datatable
         $(document).ready(function() {
             $('.student_fee_datatable').DataTable();
+        });
+        // student_classes_datatable
+        $(document).ready(function() {
+            $('.student_classes_datatable').DataTable();
         });
     </script>
 </body>
