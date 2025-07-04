@@ -67,7 +67,7 @@ class StudentController extends Controller
         $latestFee = \App\Models\StudentFee::where('emis_no', $request->emis_no)
             ->latest()
             ->first();
-        $recurring_dues_amt = $latestFee->recurring_dues;
+        $recurring_dues_amt = $latestFee ? $latestFee->recurring_dues : 0;
 
         return response()->json([
             'student' => $student,

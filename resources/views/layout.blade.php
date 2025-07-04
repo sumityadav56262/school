@@ -82,163 +82,175 @@
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 
     <script type="text/javascript">
-        //Initializing datatable        
-        // misc_expenses_datatable
-        $(document).ready(function() {
-            $('.misc_expenses_datatable').DataTable();
-        });
+        $(function() {
+            // -------------------------------
+            // Initialize all DataTables
+            // -------------------------------
+            const dataTablesClasses = [
+                '.misc_expenses_datatable',
+                '.student_datatable',
+                '.teacher_datatable',
+                '.teacher_expense_datatable',
+                '.student_fee_datatable',
+                '.student_classes_datatable'
+            ];
 
-        // student_datatable
-        $(document).ready(function() {
-            $('.student_datatable').DataTable();
-        });
+            dataTablesClasses.forEach(selector => {
+                $(selector).DataTable();
+            });
 
-        // teacher_datatable
-        $(document).ready(function() {
-            $('.teacher_datatable').DataTable();
-        });
-
-        // teacher_expense_datatable
-        $(document).ready(function() {
-            $('.teacher_expense_datatable').DataTable();
-        });
-
-        // student_fee_datatable
-        $(document).ready(function() {
-            $('.student_fee_datatable').DataTable();
-        });
-        // student_classes_datatable
-        $(document).ready(function() {
-            $('.student_classes_datatable').DataTable();
-        });
-
-        // Load Studetn detail based on emis no
-        $(document).ready(function() {
-
-            function set_values(class_name = '', roll_no = '', student_name = '', recurring_dues = 0) {
-                $('#class_name').val(class_name || '');
-                $('#roll_no').val(roll_no || '');
-                $('#student_name').val(student_name || '');
-                $('#recurring_dues').val(recurring_dues || '');
+            // -------------------------------
+            // Set values into form fields
+            // -------------------------------
+            function setStudentValues(values = {}) {
+                if (values.emis_no !== undefined) {
+                    $('#emis_no').val(values.emis_no);
+                }
+                if (values.class_name !== undefined) {
+                    $('#class_name').val(values.class_name);
+                }
+                if (values.roll_no !== undefined) {
+                    $('#roll_no').val(values.roll_no);
+                }
+                if (values.student_name !== undefined) {
+                    $('#student_name').val(values.student_name);
+                }
+                if (values.recurring_dues !== undefined) {
+                    $('#recurring_dues').val(values.recurring_dues);
+                }
             }
 
+            // -------------------------------
+            // Search student by EMIS no
+            // -------------------------------
             $('#searchStudByEMISBtn').on('click', function() {
-                var emis_no = $('#emis_no').val();
+                const emis_no = $('#emis_no').val();
 
                 if (emis_no) {
                     $.ajax({
                         url: "{{ route('student.get_student') }}",
                         type: 'GET',
                         data: {
-                            emis_no: emis_no
+                            emis_no
                         },
                         success: function(response) {
                             if (response.student) {
-                                var class_name = response.student.class_name;
-                                var roll_no = response.student.roll_no;
-                                var stud_name = response.student.stud_name;
-                                var recurring_dues = response.recurring_dues;
-                                set_values(class_name, roll_no, stud_name, recurring_dues);
+                                setStudentValues({
+                                    class_name: response.student.class_name,
+                                    roll_no: response.student.roll_no,
+                                    student_name: response.student.stud_name,
+                                    recurring_dues: response.recurring_dues
+                                });
                             } else {
-                                set_values();
+                                setStudentValues({
+                                    class_name: '',
+                                    roll_no: '',
+                                    student_name: '',
+                                    recurring_dues: ''
+                                });
                                 alert("No student found!");
                             }
+                            calculateAmounts();
                         },
                         error: function() {
                             alert("Error fetching data!");
                         }
                     });
                 } else {
-                    set_values();
+                    setStudentValues({
+                        class_name: '',
+                        roll_no: '',
+                        student_name: '',
+                        recurring_dues: ''
+                    });
+                    calculateAmounts();
+                    alert("Write valid emis no..!");
                 }
             });
-        });
 
-        // Load Studetn detail based on Class Name and Roll No
-        $(document).ready(function() {
-            function set_values(emis_no = '', student_name = '', recurring_dues = 0) {
-                $('#emis_no').val(emis_no || '');
-                $('#student_name').val(student_name || '');
-                $('#recurring_dues').val(recurring_dues || '');
-            }
-
+            // -------------------------------
+            // Search student by Class and Roll No
+            // -------------------------------
             $('#searchStudByClassRollBtn').on('click', function() {
-                var class_name = $('#class_name').val();
-                var roll_no = $('#roll_no').val();
+                const class_name = $('#class_name').val();
+                const roll_no = $('#roll_no').val();
 
                 if (class_name && roll_no) {
                     $.ajax({
                         url: "{{ route('student.get_student_by_rollno_class') }}",
                         type: 'GET',
                         data: {
-                            class_name: class_name,
-                            roll_no: roll_no
-
+                            class_name,
+                            roll_no
                         },
                         success: function(response) {
                             if (response.student) {
-                                var emis_no = response.student.emis_no;
-                                var stud_name = response.student.stud_name;
-                                var recurring_dues = response.recurring_dues;
-                                console.log(recurring_dues);
-                                set_values(emis_no, stud_name, recurring_dues);
+                                setStudentValues({
+                                    emis_no: response.student.emis_no,
+                                    student_name: response.student.stud_name,
+                                    recurring_dues: response.recurring_dues
+                                });
                             } else {
-                                set_values();
+                                setStudentValues({
+                                    emis_no: '',
+                                    student_name: '',
+                                    recurring_dues: ''
+                                });
                                 alert("No student found!");
                             }
+                            calculateAmounts();
                         },
                         error: function() {
                             alert("Error fetching data!");
                         }
                     });
                 } else {
-                    set_values();
+                    setStudentValues({
+                        emis_no: '',
+                        student_name: '',
+                        recurring_dues: ''
+                    });
+                    calculateAmounts();
                     alert("Select valid class name and roll no!");
                 }
             });
-        });
 
-        // Calculate total amounts
-        $(document).ready(function() {
+            // -------------------------------
+            // Calculate total amounts
+            // -------------------------------
             function calculateAmounts() {
-                var total = 0;
-                // Sum all fees
+                let total = 0;
+
+                // Sum all individual fees
                 $('.fee-field').each(function() {
-                    var val = parseInt($(this).val()) || 0;
+                    const val = parseInt($(this).val()) || 0;
                     total += val;
                 });
 
-                //if recuring dues checkbox checked
-                if ($('#addRecuringDues').is(':checked') == true) {
-                    val = parseInt($('#recurring_dues').val()) || 0;
-                    total += val;
+                // Add recurring dues if checkbox checked
+                if ($('#addRecuringDues').is(':checked')) {
+                    const recurDues = parseInt($('#recurring_dues').val()) || 0;
+                    total += recurDues;
                 }
 
-                // Update Total field
                 $('#total_amt').val(total);
 
-                // Get discount and payment values
-                var discount = parseInt($('#discount_amt').val()) || 0;
-                var payment = parseInt($('#payment_amt').val()) || 0;
+                const discount = parseInt($('#discount_amt').val()) || 0;
+                const payment = parseInt($('#payment_amt').val()) || 0;
 
-                // Calculate grand total after discount
-                var grandTotal = total - discount;
+                let grandTotal = total - discount;
                 if (grandTotal < 0) grandTotal = 0;
 
-                // Calculate dues
-                var dues = grandTotal - payment;
+                let dues = grandTotal - payment;
                 if (dues < 0) dues = 0;
 
-                // Update Dues field
                 $('#dues_amt').val(dues);
             }
 
-            // Recalculate when any relevant field changes
-            $('.fee-field, #discount_amt, #payment_amt, #addRecuringDues').on('keyup change', function() {
-                calculateAmounts();
-            });
+            // Attach change events
+            $('.fee-field, #discount_amt, #payment_amt, #addRecuringDues').on('keyup change', calculateAmounts);
 
-            // Initial calculation on page load
+            // Initial calculation
             calculateAmounts();
         });
     </script>
