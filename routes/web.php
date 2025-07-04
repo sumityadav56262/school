@@ -14,7 +14,9 @@ use App\Http\Controllers\MiscExpenseController;
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-Route::get('/get-student', [StudentFeeController::class, 'getStudent']);
+Route::get('/get_student', [StudentController::class, 'getStudent'])->name('student.get_student');
+Route::get('/get_student_by_rollno_class', [StudentController::class, 'getStudByRollNoClass'])
+    ->name('student.get_student_by_rollno_class');
 
 Route::resource('students', StudentController::class);
 Route::resource('student-fees', StudentFeeController::class);

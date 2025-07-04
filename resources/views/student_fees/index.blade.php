@@ -13,9 +13,15 @@
             <thead>
                 <tr>
                     <th>EMIS</th>
-                    <th>Student</th>
+                    <th>Class</th>
+                    <th>Roll No</th>
+                    <th>Name</th>
                     <th>Month</th>
-                    <th>Amount</th>
+                    <th>Total</th>
+                    <th>Discount</th>
+                    <th>Payment</th>
+                    <th>Dues</th>
+                    <th>Recurring Dues</th>
                     <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
@@ -23,9 +29,15 @@
                 @foreach ($fees as $fee)
                     <tr>
                         <td>{{ $fee->emis_no }}</td>
+                        <td>{{ $fee->student->class_name ?? '' }}</td>
+                        <td>{{ $fee->student->roll_no ?? '' }}</td>
                         <td>{{ $fee->student->stud_name ?? '' }}</td>
                         <td>{{ $fee->month_name }}</td>
                         <td>{{ $fee->total_amt }}</td>
+                        <td>{{ $fee->discount_amt }}</td>
+                        <td>{{ $fee->payment_amt }}</td>
+                        <td>{{ $fee->dues_amt }}</td>
+                        <td>{{ $fee->recurring_dues }}</td>
                         <td>
                             <a href="{{ route('student-fees.edit', $fee) }}">Edit</a>
                             <form action="{{ route('student-fees.destroy', $fee) }}" method="POST" style="display:inline;">

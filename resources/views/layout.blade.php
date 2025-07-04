@@ -114,26 +114,33 @@
 
         // Load Studetn detail based on emis no
         $(document).ready(function() {
-            $('#searchStudBtn').on('click', function() {
+
+            function set_values(class_name = '', roll_no = '', student_name = '', recurring_dues = 0) {
+                $('#class_name').val(class_name || '');
+                $('#roll_no').val(roll_no || '');
+                $('#student_name').val(student_name || '');
+                $('#recurring_dues').val(recurring_dues || '');
+            }
+
+            $('#searchStudByEMISBtn').on('click', function() {
                 var emis_no = $('#emis_no').val();
 
                 if (emis_no) {
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/get-student',
+                        url: "{{ route('student.get_student') }}",
                         type: 'GET',
                         data: {
                             emis_no: emis_no
                         },
                         success: function(response) {
                             if (response.student) {
-                                $('#class_name').val(response.student.class_name || '');
-                                $('#roll_no').val(response.student.roll_no || '');
-                                $('#student_name').val(response.student.stud_name || '');
+                                var class_name = response.student.class_name;
+                                var roll_no = response.student.roll_no;
+                                var stud_name = response.student.stud_name;
+                                var recurring_dues = response.recurring_dues;
+                                set_values(class_name, roll_no, stud_name, recurring_dues);
                             } else {
-                                $('#class_name').val('');
-                                $('#roll_no').val('');
-                                $('#student_name').val('');
-
+                                set_values();
                                 alert("No student found!");
                             }
                         },
@@ -142,9 +149,51 @@
                         }
                     });
                 } else {
-                    $('#class_name').val('');
-                    $('#roll_no').val('');
-                    $('#student_name').val('');
+                    set_values();
+                }
+            });
+        });
+
+        // Load Studetn detail based on Class Name and Roll No
+        $(document).ready(function() {
+            function set_values(emis_no = '', student_name = '', recurring_dues = 0) {
+                $('#emis_no').val(emis_no || '');
+                $('#student_name').val(student_name || '');
+                $('#recurring_dues').val(recurring_dues || '');
+            }
+
+            $('#searchStudByClassRollBtn').on('click', function() {
+                var class_name = $('#class_name').val();
+                var roll_no = $('#roll_no').val();
+
+                if (class_name && roll_no) {
+                    $.ajax({
+                        url: "{{ route('student.get_student_by_rollno_class') }}",
+                        type: 'GET',
+                        data: {
+                            class_name: class_name,
+                            roll_no: roll_no
+
+                        },
+                        success: function(response) {
+                            if (response.student) {
+                                var emis_no = response.student.emis_no;
+                                var stud_name = response.student.stud_name;
+                                var recurring_dues = response.recurring_dues;
+                                console.log(recurring_dues);
+                                set_values(emis_no, stud_name, recurring_dues);
+                            } else {
+                                set_values();
+                                alert("No student found!");
+                            }
+                        },
+                        error: function() {
+                            alert("Error fetching data!");
+                        }
+                    });
+                } else {
+                    set_values();
+                    alert("Select valid class name and roll no!");
                 }
             });
         });
@@ -153,12 +202,17 @@
         $(document).ready(function() {
             function calculateAmounts() {
                 var total = 0;
-
                 // Sum all fees
                 $('.fee-field').each(function() {
                     var val = parseInt($(this).val()) || 0;
                     total += val;
                 });
+
+                //if recuring dues checkbox checked
+                if ($('#addRecuringDues').is(':checked') == true) {
+                    val = parseInt($('#recurring_dues').val()) || 0;
+                    total += val;
+                }
 
                 // Update Total field
                 $('#total_amt').val(total);
@@ -180,7 +234,7 @@
             }
 
             // Recalculate when any relevant field changes
-            $('.fee-field, #discount_amt, #payment_amt').on('keyup change', function() {
+            $('.fee-field, #discount_amt, #payment_amt, #addRecuringDues').on('keyup change', function() {
                 calculateAmounts();
             });
 

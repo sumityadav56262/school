@@ -60,4 +60,41 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('students.index')->with('success', 'Deleted');
     }
+
+    public function getStudent(Request $request)
+    {
+        $student = Student::where('emis_no', $request->emis_no)->first();
+        $latestFee = \App\Models\StudentFee::where('emis_no', $request->emis_no)
+            ->latest()
+            ->first();
+        $recurring_dues_amt = $latestFee->recurring_dues;
+
+        return response()->json([
+            'student' => $student,
+            'recurring_dues' => $recurring_dues_amt
+
+        ]);
+    }
+    public function getStudByRollNoClass(Request $request)
+    {
+        $student = Student::where('class_name', $request->class_name)
+            ->where('roll_no', $request->roll_no)
+            ->first();
+
+        $latestFee = null;
+
+        if ($student) {
+            $latestFee = \App\Models\StudentFee::where('emis_no', $student->emis_no)
+                ->latest()
+                ->first();
+        }
+
+        $recurring_dues_amt = $latestFee ? $latestFee->recurring_dues : 0;
+
+        return response()->json([
+            'student' => $student,
+            'recurring_dues' => $recurring_dues_amt
+
+        ]);
+    }
 }

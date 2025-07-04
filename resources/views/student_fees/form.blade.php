@@ -1,8 +1,9 @@
 <div class="form-row">
     <div class="form-group">
         <label for="emis_no">EMIS No:</label>
-        <input type="text" name="emis_no" id="emis_no" value="{{ old('emis_no', $studentFee->emis_no ?? '') }}">
-        <input type="button" class="btn btn-success ms-1" id="searchStudBtn" value="Search">
+        <input type="text" name="emis_no" id="emis_no" value="{{ old('emis_no', $studentFee->emis_no ?? '') }}"
+            required>
+        <input type="button" class="btn btn-success ms-1" id="searchStudByEMISBtn" value="Search">
         @error('emis_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -17,15 +18,24 @@
 <div class="form-row">
     <div class="form-group">
         <label for="class_name">Class:</label>
-        <select name="class_name" id="class_name">
-            @foreach ($classNames as $className)
-                <option value="{{ $className->class_name }}"> {{ $className->class_name }} </option>
-            @endforeach
+        <select name="class_name" id="class_name" required>
+            @if (isset($studentFee))
+                <option value="{{ $studentFee->student->class_name }}"> {{ $studentFee->student->class_name }} </option>
+            @else
+                @foreach ($classNames as $className)
+                    <option value="{{ $className->class_name }}"> {{ $className->class_name }} </option>
+                @endforeach
+            @endif
         </select>
     </div>
     <div class="form-group">
         <label for="roll_no">Roll No:</label>
-        <input type="number" name="roll_no" id="roll_no" value="{{ old('roll_no', $studentFee->roll_no ?? '') }}">
+        @if (isset($studentFee))
+            <input type="number" name="roll_no" id="roll_no" value="{{ $studentFee->student->roll_no }}" required>
+        @else
+            <input type="number" name="roll_no" id="roll_no" value="{{ old('roll_no') }}" required>
+        @endif
+        <input type="button" class="btn btn-success ms-1" id="searchStudByClassRollBtn" value="Search">
     </div>
 </div>
 
@@ -33,8 +43,13 @@
     <div class="form-group">
         <div class="form-group">
             <label for="student_name">Full Name:</label>
-            <input type="text" name="student_name" id="student_name"
-                value="{{ old('student_name', $studentFee->student->student_name ?? '') }}" disabled>
+            @if (isset($studentFee))
+                <input type="text" name="student_name" id="student_name"
+                    value="{{ $studentFee->student->stud_name }}" disabled required>
+            @else
+                <input type="text" name="student_name" id="student_name" value="{{ old('student_name') }}" disabled
+                    required>
+            @endif
         </div>
     </div>
     <div class="form-group">
@@ -50,7 +65,7 @@
 <div class="form-row">
     <div class="form-group">
         <label for="month_name">Month:</label>
-        <select name="month_name" id="month_name">
+        <select name="month_name" id="month_name" required>
             @foreach (['Baisakh', 'Jestha', 'Asar', 'Shrawan', 'Bhadra', 'Ashwin', 'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'] as $month)
                 <option value="{{ $month }}" @selected(old('month_name', $studentFee->month_name ?? '') == $month)>{{ $month }}</option>
             @endforeach
@@ -127,7 +142,11 @@
     <div class="form-group">
         <label for="recurring_dues">Recurring Dues</label>
         <input type="number" value="{{ old('recurring_dues', $studentFee->recurring_dues ?? 0) }}"
-            name="recurring_dues" class="recurring_dues" readonly>
+            name="recurring_dues" class="recurring_dues" id="recurring_dues" readonly>
+        <div class="mx-1">
+            <label class="form-check-label" for="addRecuringDues">Add Dues</label>
+            <input class="form-check-input" type="checkbox" id="addRecuringDues" name="addRecuringDues">
+        </div>
     </div>
 </div>
 
@@ -163,7 +182,7 @@
     <div class="form-group">
         <label for="payment_by">Payment By:</label>
         <input type="text" name="payment_by" id="payment_by"
-            value="{{ old('payment_by', $studentFee->payment_by ?? '') }}">
+            value="{{ old('payment_by', $studentFee->payment_by ?? '') }}" required>
         @error('payment_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -171,7 +190,7 @@
     <div class="form-group">
         <label for="received_by">Received By:</label>
         <input type="text" name="received_by" id="received_by"
-            value="{{ old('received_by', $studentFee->received_by ?? '') }}">
+            value="{{ old('received_by', $studentFee->received_by ?? '') }}" required>
         @error('received_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror
