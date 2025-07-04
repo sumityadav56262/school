@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudClass;
-use Illuminate\Http\Request;
-use App\Models\StudentFee;
 use App\Models\Student;
+use App\Models\StudentFee;
+use Illuminate\Http\Request;
 use MilanTarami\NepaliCalendar\Facades\NepaliCalendar;
 use Carbon\Carbon;
 
@@ -20,96 +20,21 @@ class StudentFeeController extends Controller
     public function create()
     {
         $classNames = StudClass::all();
-
-        // Nepali Date
-        $bsDate = NepaliCalendar::today();
-        $todayFormattedBsDate = $bsDate; //Carbon::parse($bsDate)->format('d-m-Y');
+        $todayFormattedBsDate = NepaliCalendar::today();
 
         return view('student_fees.create', compact('classNames', 'todayFormattedBsDate'));
     }
 
     public function store(Request $request)
     {
-        // Validate incoming data
-        $validated = $request->validate([
-            'emis_no' => 'required|exists:students,emis_no',
-            'payment_date' => 'required|date',
-            'month_name' => 'required',
-            'payment_by' => 'required',
-            'received_by' => 'required'
-        ]);
+        $validated = $this->validateRequest($request);
 
-        // Calculate total
-        $total = (
-            $request->yearly_fee +
-            $request->monthly_fee +
-            $request->eca_fee +
-            $request->game_fee +
-            $request->misc_fee +
-            $request->exam_fee +
-            $request->tie_belt_fee +
-            $request->vest_fee +
-            $request->computer_fee +
-            $request->trouser_fee
-        );
+        $data = $this->prepareFeeData($request);
 
-        $latestFee = \App\Models\StudentFee::where('emis_no', $request->emis_no)->latest()->first();
+        StudentFee::create($data);
 
-        // Find previous recurring dues (latest record for this student) if checkbox not checked
-        if ($request->has('addRecuringDues')) {
-            $total += $latestFee ? intval($latestFee->recurring_dues) : 0;
-        }
-
-        // Apply discount
-        $afterDiscount = $total - $request->discount_amt;
-        if ($afterDiscount < 0) $afterDiscount = 0;
-
-
-        // Calculate current dues
-        $dues = $afterDiscount - $request->payment_amt;
-        if ($dues < 0) $dues = 0;
-
-        //if add recurring checkbox not checked then total recurring = dues + previous recuring dues
-        $totalRecurringDues = 0;
-        if (!$request->has('addRecuringDues')) {
-            $previousRecurringDues = $latestFee ? intval($latestFee->recurring_dues) : 0;
-            $totalRecurringDues = $previousRecurringDues + $dues;
-        } else {
-            $totalRecurringDues = $dues;
-        }
-
-        $formatedPaymentDate = null;
-        if ($request->admission_date != null && strlen($request->admission_date) == 10) {
-            $dateArray = explode('/', $request->admission_date);
-            $formatedPaymentDate = $dateArray[2] . '-' . $dateArray[1] . '-' . $dateArray[0];
-        }
-
-        // Now save everything
-        StudentFee::create([
-            'emis_no'        =>  $request->emis_no,
-            'payment_date'   =>  $request->payment_date,
-            'admission_date' =>  $formatedPaymentDate,
-            'month_name'     =>  $request->month_name,
-            'yearly_fee'     =>  $request->yearly_fee,
-            'monthly_fee'     =>  $request->monthly_fee,
-            'eca_fee'        =>  $request->eca_fee,
-            'game_fee'       =>  $request->game_fee,
-            'misc_fee'       =>  $request->misc_fee,
-            'exam_fee'       =>  $request->exam_fee,
-            'tie_belt_fee'   =>  $request->tie_belt_fee,
-            'vest_fee'       =>  $request->vest_fee,
-            'computer_fee'   =>  $request->computer_fee,
-            'trouser_fee'    =>  $request->trouser_fee,
-            'total_amt'      =>  $total,
-            'discount_amt'   =>  $request->discount_amt,
-            'payment_amt'    =>  $request->payment_amt,
-            'dues_amt'       =>  $dues,
-            'payment_by'     =>  $request->payment_by,
-            'received_by'    =>  $request->received_by,
-            'recurring_dues' =>  $totalRecurringDues,
-        ]);
-
-        return redirect()->route('student-fees.index')->with('success', 'Student Fee Added Successfully!');
+        return redirect()->route('student-fees.index')
+            ->with('success', 'Student Fee Added Successfully!');
     }
 
     public function edit(StudentFee $studentFee)
@@ -122,89 +47,111 @@ class StudentFeeController extends Controller
 
     public function update(Request $request, StudentFee $studentFee)
     {
-        // Validate incoming data
-        $validated = $request->validate([
-            'emis_no' => 'required|exists:students,emis_no',
-            'payment_date' => 'required|date',
-            'month_name' => 'required',
-            'payment_by' => 'required',
-            'received_by' => 'required'
-        ]);
+        $validated = $this->validateRequest($request);
 
-        // Calculate total
-        $total = (
-            $request->yearly_fee +
-            $request->monthly_fee +
-            $request->eca_fee +
-            $request->game_fee +
-            $request->misc_fee +
-            $request->exam_fee +
-            $request->tie_belt_fee +
-            $request->vest_fee +
-            $request->computer_fee +
-            $request->trouser_fee
-        );
+        $data = $this->prepareFeeData($request);
 
-        $latestFee = \App\Models\StudentFee::where('emis_no', $request->emis_no)->latest()->first();
+        $studentFee->update($data);
 
-        // Find previous recurring dues (latest record for this student) if checkbox not checked
-        if ($request->has('addRecuringDues')) {
-            $total += $latestFee ? intval($latestFee->recurring_dues) : 0;
-        }
-
-        // Apply discount
-        $afterDiscount = $total - $request->discount_amt;
-        if ($afterDiscount < 0) $afterDiscount = 0;
-
-
-        // Calculate current dues
-        $dues = $afterDiscount - $request->payment_amt;
-        if ($dues < 0) $dues = 0;
-
-        //if add recurring checkbox not checked then total recurring = dues + previous recuring dues
-        $totalRecurringDues = 0;
-        if (!$request->has('addRecuringDues')) {
-            $previousRecurringDues = $latestFee ? intval($latestFee->recurring_dues) : 0;
-            $totalRecurringDues = $previousRecurringDues + $dues;
-        } else {
-            $totalRecurringDues = $dues;
-        }
-
-        $formatedPaymentDate = null;
-        if ($request->admission_date != null && strlen($request->admission_date) == 10) {
-            $dateArray = explode('/', $request->admission_date);
-            $formatedPaymentDate = $dateArray[2] . '-' . $dateArray[1] . '-' . $dateArray[0];
-        }
-
-        $studentFee->update([
-            'emis_no'        =>  $request->emis_no,
-            'payment_date'   =>  $request->payment_date,
-            'admission_date' =>  $formatedPaymentDate,
-            'month_name'     =>  $request->month_name,
-            'yearly_fee'     =>  $request->yearly_fee,
-            'monthly_fee'    =>  $request->monthly_fee,
-            'eca_fee'        =>  $request->eca_fee,
-            'game_fee'       =>  $request->game_fee,
-            'misc_fee'       =>  $request->misc_fee,
-            'exam_fee'       =>  $request->exam_fee,
-            'tie_belt_fee'   =>  $request->tie_belt_fee,
-            'vest_fee'       =>  $request->vest_fee,
-            'computer_fee'   =>  $request->computer_fee,
-            'trouser_fee'    =>  $request->trouser_fee,
-            'total_amt'      =>  $total,
-            'discount_amt'   =>  $request->discount_amt,
-            'payment_amt'    =>  $request->payment_amt,
-            'dues_amt'       =>  $dues,
-            'payment_by'     =>  $request->payment_by,
-            'received_by'    =>  $request->received_by,
-            'recurring_dues' =>  $totalRecurringDues,
-        ]);
-        return redirect()->route('student-fees.index')->with('success', 'Fee Updated');
+        return redirect()->route('student-fees.index')
+            ->with('success', 'Fee Updated');
     }
 
     public function destroy(StudentFee $studentFee)
     {
         $studentFee->delete();
-        return redirect()->route('student-fees.index')->with('success', 'Fee Deleted');
+        return redirect()->route('student-fees.index')
+            ->with('success', 'Fee Deleted');
+    }
+
+    /**
+     * Validate incoming request.
+     */
+    private function validateRequest(Request $request)
+    {
+        return $request->validate([
+            'emis_no' => 'required|exists:students,emis_no',
+            'payment_date' => 'required|date',
+            'month_name' => 'required',
+            'payment_by' => 'required',
+            'received_by' => 'required',
+        ]);
+    }
+
+    /**
+     * Prepare all fee calculations and return data array for saving.
+     */
+    private function prepareFeeData(Request $request)
+    {
+        // Convert all possible numeric fields safely
+        $fees = [
+            'yearly_fee' => (int)$request->yearly_fee,
+            'monthly_fee' => (int)$request->monthly_fee,
+            'eca_fee' => (int)$request->eca_fee,
+            'game_fee' => (int)$request->game_fee,
+            'misc_fee' => (int)$request->misc_fee,
+            'exam_fee' => (int)$request->exam_fee,
+            'tie_belt_fee' => (int)$request->tie_belt_fee,
+            'vest_fee' => (int)$request->vest_fee,
+            'computer_fee' => (int)$request->computer_fee,
+            'trouser_fee' => (int)$request->trouser_fee,
+        ];
+
+        $total = array_sum($fees);
+
+        // Check for recurring dues
+        $latestFee = StudentFee::where('emis_no', $request->emis_no)
+            ->latest()
+            ->first();
+
+        if ($request->has('addRecuringDues')) {
+            $total += $latestFee ? (int)$latestFee->recurring_dues : 0;
+        }
+
+        // Apply discount
+        $discount = (int)$request->discount_amt;
+        $afterDiscount = max($total - $discount, 0);
+
+        // Calculate dues
+        $payment = (int)$request->payment_amt;
+        $dues = max($afterDiscount - $payment, 0);
+
+        // Handle recurring dues logic
+        if (!$request->has('addRecuringDues')) {
+            $previousRecurringDues = $latestFee ? (int)$latestFee->recurring_dues : 0;
+            $totalRecurringDues = $previousRecurringDues + $dues;
+        } else {
+            $totalRecurringDues = $dues;
+        }
+
+        // Format admission date
+        $formattedAdmissionDate = null;
+        if (!empty($request->admission_date)) {
+            if (strlen($request->admission_date) === 10) {
+                try {
+                    $date = Carbon::createFromFormat('d/m/Y', $request->admission_date);
+                    $formattedAdmissionDate = $date->format('Y-m-d');
+                } catch (\Exception $e) {
+                    $formattedAdmissionDate = null;
+                }
+            }
+        }
+
+        return array_merge(
+            $fees,
+            [
+                'emis_no'        => $request->emis_no,
+                'payment_date'   => $request->payment_date,
+                'admission_date' => $formattedAdmissionDate,
+                'month_name'     => $request->month_name,
+                'total_amt'      => $total,
+                'discount_amt'   => $discount,
+                'payment_amt'    => $payment,
+                'dues_amt'       => $dues,
+                'payment_by'     => $request->payment_by,
+                'received_by'    => $request->received_by,
+                'recurring_dues' => $totalRecurringDues,
+            ]
+        );
     }
 }
