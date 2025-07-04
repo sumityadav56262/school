@@ -16,7 +16,7 @@
                     <th>Student</th>
                     <th>Month</th>
                     <th>Amount</th>
-                    <th>Actions</th>
+                    <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
             <tbody>

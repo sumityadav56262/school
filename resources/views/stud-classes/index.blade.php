@@ -13,7 +13,7 @@
                 <tr>
                     <th>S. No.</th>
                     <th>Class Name</th>
-                    <th>Actions</th>
+                    <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
             <tbody>
