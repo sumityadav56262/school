@@ -42,7 +42,8 @@
                             <a href="{{ route('student-fees.edit', $fee) }}">Edit</a>
                             <form action="{{ route('student-fees.destroy', $fee) }}" method="POST" style="display:inline;">
                                 @csrf @method('DELETE')
-                                <button type="submit">Delete</button>
+                                <button type="submit"
+                                    onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                             </form>
                         </td>
                     </tr>
