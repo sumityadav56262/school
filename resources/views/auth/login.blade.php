@@ -1,5 +1,5 @@
 @extends('auth.layouts')
-
+@section('title', 'Login')
 @section('content')
     <form class="w-100" action="{{ route('login') }}" method="POST">
         @csrf

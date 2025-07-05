@@ -1,5 +1,5 @@
 @extends('auth.layouts')
-
+@section('title', 'Reset Password')
 @section('content')
     <form class="w-100" action="{{ route('password.update') }}" method="POST">
         @csrf

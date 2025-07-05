@@ -1,4 +1,5 @@
 @extends('auth.layouts')
+@section('title', 'Register')
 
 @section('content')
     <form class="w-100" action="{{ route('register') }}" method="POST">
@@ -47,7 +48,7 @@
         <button type="submit" class="btn btn-success w-100">Submit</button>
 
         <div class="text-center mt-3">
-            <a href="/login" class="text-danger text-decoration-none">Already have an account? Login</a>
+            <a href="/login" class="text-success text-decoration-none">Already have an account? Login</a>
         </div>
     </form>
 @endsection
