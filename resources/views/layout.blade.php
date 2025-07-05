@@ -26,7 +26,7 @@
         <h1>Sapience Academy</h1>
 
         <div class="dropdown">
-            <button class="btn d-flex align-items-center text-success" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn d-flex align-items-center text-light" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user-circle fa-2x me-2"></i> {{-- Font Awesome user icon --}}
             </button>
 
