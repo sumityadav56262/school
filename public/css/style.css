@@ -34,6 +34,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .menu-item {
@@ -53,6 +54,7 @@ body {
 .menu-item:hover {
     color: white;
     background-color: #555;
+    translate: 2px 0;
 }
 
 .menu-item .material-icons {
@@ -120,8 +122,12 @@ body {
     color: white;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
+}
+
+.c_card:hover {
+    box-shadow: 0 0px 15px rgba(0, 0, 0, 0.3);
+    translate: 0 5px;
 }
 
 .students {
