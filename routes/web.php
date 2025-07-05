@@ -46,6 +46,6 @@ Route::middleware(['auth'])->group(function () {
 
     //change password
     Route::view('/change-password', 'auth.change-password')->name('password.change');
-    Route::post('/change-password', [AuthController::class, 'update'])->name('password.update');
+    Route::post('/change-password', [AuthController::class, 'update'])->name('password.change.update');
 
 });
