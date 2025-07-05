@@ -71,7 +71,7 @@ class AuthController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
+            ? back()->with('status', __($status))->with('old_email', $request->email)
             : back()->withErrors(['email' => __($status)]);
     }
     public function showResetForm(Request $request, $token)
