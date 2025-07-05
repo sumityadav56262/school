@@ -15,8 +15,8 @@ class HomeController extends Controller
     {
         $totalStudents  =   Student::count();
         $totalTeachers  =   Teacher::count();
-        $totalIncome    =   StudentFee::sum('payment_amt');
-        $totalDues      =   StudentFee::sum('dues_amt');
+        $totalIncome    =   StudentFee::sum('payment');
+        $totalDues      =   StudentFee::sum('dues');
         $totalExpenses  =   TeacherExpense::sum('paid_amt') +  MiscExpense::sum('amount'); // or \App\Models\Expense if available
 
         return view('dashboard', compact(

@@ -22,8 +22,12 @@
 </head>
 
 <body>
-    <nav class="text-center text-white c_nav">
+    <nav class="text-center text-white c_nav d-flex justify-content-around align-items-center">
         <h1>Sapience Academy</h1>
+        <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
     </nav>
     <div class="container">
         <div class="menu">
