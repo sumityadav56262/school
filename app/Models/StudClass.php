@@ -11,7 +11,7 @@ class StudClass extends Model
 
     protected $table = 'stud_classes';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['class_name'];
 
     public function students()
     {

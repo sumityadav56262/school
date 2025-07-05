@@ -33,9 +33,7 @@ class StudClassController extends Controller
             'class_name' => 'required|string|max:255|unique:stud_classes,class_name',
         ]);
 
-        StudClass::create([
-            'class_name' => $request->class_name,
-        ]);
+        StudClass::create($request->all());
 
         return redirect()->route('stud-classes.index')->with('success', 'Class created successfully.');
     }
