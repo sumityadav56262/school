@@ -387,3 +387,7 @@ table tr:hover {
     background: #28a745 !important ;
 }
 /* Nepali Calender END*/
+.dropdown-item:active {
+    background-color: #198754 !important; /* Bootstrap's green (`.bg-success`) */
+    color: #fff !important;              /* Text color white */
+}
