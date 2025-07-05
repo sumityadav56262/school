@@ -20,6 +20,13 @@ class MiscExpenseController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'particular' => 'required',
+            'amount' => 'required',
+            'payment_by' => 'required',
+            'payment_date' => 'required|date',
+        ]);
+
         MiscExpense::create($request->all());
         return redirect()->route('misc-expenses.index')->with('success', 'Expense Added');
     }
@@ -31,6 +38,13 @@ class MiscExpenseController extends Controller
 
     public function update(Request $request, MiscExpense $miscExpense)
     {
+        $request->validate([
+            'particular' => 'required',
+            'amount' => 'required',
+            'payment_by' => 'required',
+            'payment_date' => 'required|date',
+        ]);
+
         $miscExpense->update($request->all());
         return redirect()->route('misc-expenses.index')->with('success', 'Updated');
     }
