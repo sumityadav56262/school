@@ -29,9 +29,9 @@ class AuthController extends Controller
         ]);
 
         // Auto-login after registration
-        Auth::login($user);
+        //Auth::login($user);
 
-        return redirect()->intended('/'); // Or wherever you want
+        return redirect()->route('login')->with('status', 'Registered Sucessfully'); // Or wherever you want
     }
 
     // Handle Login

@@ -11,6 +11,10 @@
             <div class="alert alert-danger">
                 {{ $errors->first('email') }}
             </div>
+        @elseif(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
         @endif
 
         <div class="mb-3">
