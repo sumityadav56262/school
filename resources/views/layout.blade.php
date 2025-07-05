@@ -24,11 +24,26 @@
 <body>
     <nav class="text-center text-white c_nav d-flex justify-content-around align-items-center">
         <h1>Sapience Academy</h1>
-        <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
+
+        <div class="dropdown">
+            <button class="btn d-flex align-items-center text-success" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user-circle fa-2x me-2"></i> {{-- Font Awesome user icon --}}
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
+                <li>
+                    <a class="dropdown-item" href="{{ route('password.change') }}">Change Password</a>
+                </li>
+                <li>
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="dropdown-item text-danger">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </nav>
+
     <div class="container">
         <div class="menu">
             <a class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
@@ -71,6 +86,11 @@
             @yield('content')
         </div>
     </div>
+    @if (session('status'))
+        <div class="alert alert-success alert-dismissible fade show position-fixed bottom-0 end-0 m-3 z-3" role="alert" id="autoDismissAlert">
+            {{ session('status') }}
+        </div>
+    @endif
 
 
     {{-- Jquery JS --}}
@@ -257,6 +277,17 @@
             // Initial calculation
             calculateAmounts();
         });
+        
+        // Auto-hide alert after 3 seconds
+        setTimeout(function () {
+            const alertBox = document.getElementById('autoDismissAlert');
+            if (alertBox) {
+                // Use Bootstrap's fade-out
+                alertBox.classList.remove('show');
+                alertBox.classList.add('fade');
+                setTimeout(() => alertBox.remove(), 500); // Remove from DOM after fade
+            }
+        }, 3000);
     </script>
 </body>
 

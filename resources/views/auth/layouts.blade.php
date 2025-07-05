@@ -18,7 +18,7 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <!-- Login Form -->
-        <div class="w-25 card p-3 d-flex justify-content-center align-items-center flex-column">
+        <div class="w-25 card shadow rounded p-3 d-flex justify-content-center align-items-center flex-column">
             @yield('content')
         </div>
     </div>

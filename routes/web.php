@@ -44,4 +44,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('teacher-expenses', TeacherExpenseController::class);
     Route::resource('misc-expenses', MiscExpenseController::class);
 
+    //change password
+    Route::view('/change-password', 'auth.change-password')->name('password.change');
+    Route::post('/change-password', [AuthController::class, 'update'])->name('password.update');
+
 });
