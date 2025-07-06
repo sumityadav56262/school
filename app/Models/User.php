@@ -45,4 +45,38 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function subscription()
+    {
+        return $this->hasOne(Subscriptions::class);
+    }
+
+    public function stud_class()
+    {
+        return $this->hasMany(\App\Models\StudClass::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(\App\Models\Student::class);
+    }
+
+    public function teachers()
+    {
+        return $this->hasMany(\App\Models\Teacher::class);
+    }
+
+    public function studentFees()
+    {
+        return $this->hasMany(\App\Models\StudentFee::class);
+    }
+
+    public function teacherExpenses()
+    {
+        return $this->hasMany(\App\Models\TeacherExpense::class);
+    }
+
+    public function miscExpenses()
+    {
+        return $this->hasMany(\App\Models\MiscExpense::class);
+    }
 }

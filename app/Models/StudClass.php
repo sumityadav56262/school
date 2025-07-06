@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\UserScopedModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class StudClass extends Model
+class StudClass extends UserScopedModel
 {
     use HasFactory;
 
