@@ -32,17 +32,29 @@
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="regPassword" class="form-label">New Password</label>
-            <input type="password" name="password" class="form-control success-focus @error('password') is-invalid @enderror" id="regPassword">
+            <div class="input-group">
+                <input type="password"
+                    name="password"
+                    class="form-control success-focus @error('password') is-invalid @enderror"
+                    id="regPassword">
+                <i class="fas fa-eye" id="toggleRegPasswordIcon"></i>
+            </div>
             @error('password')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" name="password_confirmation" class="form-control success-focus" id="confirmPassword">
+            <div class="input-group">
+                <input type="password"
+                    name="password_confirmation"
+                    class="form-control success-focus"
+                    id="confirmPassword">
+                <i class="fas fa-eye" id="toggleConfirmPasswordIcon"></i>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-success w-100">Submit</button>

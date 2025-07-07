@@ -24,23 +24,26 @@
                    class="form-control success-focus @error('email') is-invalid @enderror"
                    id="loginEmail"
                    value="{{ old('email') }}"
-                   required>
+                   required autofocus>
             @error('email')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
-
-        <div class="mb-3">
+        <div class="mb-3 position-relative">
             <label for="loginPassword" class="form-label">Password</label>
-            <input type="password"
-                   name="password"
-                   class="form-control success-focus @error('password') is-invalid @enderror"
-                   id="loginPassword"
-                   required>
+            <div class="input-group">
+                <input type="password"
+                    name="password"
+                    class="form-control success-focus @error('password') is-invalid @enderror"
+                    id="loginPassword"
+                    required>
+                <i class="fas fa-eye" id="togglePasswordIcon"></i>
+            </div>
             @error('password')
                 <div class="text-danger small">{{ $message }}</div>
             @enderror
         </div>
+
 
         <button type="submit" class="btn btn-success w-100">Submit</button>
 
