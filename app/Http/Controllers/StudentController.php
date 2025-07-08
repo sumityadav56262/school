@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -21,7 +22,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'emis_no' => 'required|unique:students',
             'class_name' => 'required',
             'stud_name' => 'required',
@@ -30,8 +31,8 @@ class StudentController extends Controller
             'mobile_no' => 'required',
             'address' => 'required',
         ]);
-
-        Student::create($data);
+        $validated['user_id'] = Auth::id();
+        Student::create($validated);
         return redirect()->route('students.index')->with('success', 'Student added');
     }
 

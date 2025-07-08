@@ -11,7 +11,7 @@ class StudClass extends UserScopedModel
 
     protected $table = 'stud_classes';
 
-    protected $fillable = ['class_name'];
+    protected $fillable = ['user_id','class_name'];
 
     public function students()
     {

@@ -25,8 +25,8 @@ class SubscriptionController extends Controller
         $request->validate([
             'months' => 'required|integer|min:1|max:12'
         ]);
-
-        $user = User::class(Auth::user());
+        /** @var User $user */
+        $user = Auth::user();
         $current = $user->subscription;
         
         $startDate = $current && $current->end_date > now() ? $current->end_date : now();

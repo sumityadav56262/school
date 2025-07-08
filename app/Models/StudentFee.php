@@ -10,6 +10,7 @@ class StudentFee extends UserScopedModel
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'emis_no',
         'class_name',
         'payment_date',

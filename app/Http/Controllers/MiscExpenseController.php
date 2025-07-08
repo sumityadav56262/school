@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MiscExpense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MiscExpenseController extends Controller
 {
@@ -20,14 +21,14 @@ class MiscExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'particular' => 'required',
             'amount' => 'required',
             'payment_by' => 'required',
             'payment_date' => 'required|date',
         ]);
-
-        MiscExpense::create($request->all());
+        $validated['user_id'] = Auth::id();
+        MiscExpense::create( $validated);
         return redirect()->route('misc-expenses.index')->with('success', 'Expense Added');
     }
 
@@ -38,14 +39,14 @@ class MiscExpenseController extends Controller
 
     public function update(Request $request, MiscExpense $miscExpense)
     {
-        $request->validate([
+        $validated = $request->validate([
             'particular' => 'required',
             'amount' => 'required',
             'payment_by' => 'required',
             'payment_date' => 'required|date',
         ]);
 
-        $miscExpense->update($request->all());
+        $miscExpense->update($validated);
         return redirect()->route('misc-expenses.index')->with('success', 'Updated');
     }
 

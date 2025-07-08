@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -20,7 +21,7 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        Teacher::create($request->all());
+        Teacher::create($request->merge(['user_id' => Auth::id()])->all());
         return redirect()->route('teachers.index')->with('success', 'Teacher Added');
     }
 

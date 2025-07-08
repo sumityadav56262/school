@@ -10,6 +10,7 @@ class TeacherExpense extends UserScopedModel
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'id_card_no',
         'salary_amout',
         'paid_amt',

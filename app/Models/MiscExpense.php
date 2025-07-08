@@ -11,6 +11,6 @@ class MiscExpense extends UserScopedModel
     use HasFactory;
 
     protected $fillable = [
-        'particular', 'amount', 'payment_by', 'payment_date', 'remark'
+        'user_id','particular', 'amount', 'payment_by', 'payment_date', 'remark'
     ];
 }
