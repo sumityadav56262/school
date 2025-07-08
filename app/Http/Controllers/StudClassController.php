@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\StudClass;
+use Illuminate\Support\Facades\Auth;
 
 class StudClassController extends Controller
 {
@@ -29,11 +30,11 @@ class StudClassController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validated([
             'class_name' => 'required|string|max:255|unique:stud_classes,class_name',
         ]);
-
-        StudClass::create($request->all());
+        $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user
+        StudClass::create($validated);
 
         return redirect()->route('stud-classes.index')->with('success', 'Class created successfully.');
     }
@@ -63,13 +64,11 @@ class StudClassController extends Controller
     {
         $studClass = StudClass::findOrFail($id);
 
-        $request->validate([
+        $validated = $request->validate([
             'class_name' => 'required|string|max:255|unique:stud_classes,class_name,' . $studClass->id,
         ]);
-
-        $studClass->update([
-            'class_name' => $request->class_name,
-        ]);
+        $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user
+        $studClass->update($validated);
 
         return redirect()->route('stud-classes.index')->with('success', 'Class updated successfully.');
     }

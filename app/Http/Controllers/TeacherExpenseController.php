@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TeacherExpense;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherExpenseController extends Controller
 {
@@ -22,7 +23,7 @@ class TeacherExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'teacher_id' => 'required|exists:teachers,id',
             'id_card_no' => 'required|integer|unique:teacher_expenses,id_card_no,' . ($teacherExpense->id ?? 'null'),
             'salary_amout' => 'required|numeric',
@@ -32,8 +33,8 @@ class TeacherExpenseController extends Controller
             'paid_date' => 'required|date',
             'remark' => 'nullable|string',
         ]);
-
-        TeacherExpense::create($request->all());
+        $validated['user_id'] = Auth::id(); // Set the user_id to the authenticated user
+        TeacherExpense::create($validated);
         return redirect()->route('teacher-expenses.index')->with('success', 'Expense Added');
     }
 

@@ -8,6 +8,7 @@ use App\Models\StudentFee;
 use Illuminate\Http\Request;
 use MilanTarami\NepaliCalendar\Facades\NepaliCalendar;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StudentFeeController extends Controller
 {
@@ -30,7 +31,7 @@ class StudentFeeController extends Controller
         $validated = $this->validateRequest($request);
 
         $data = $this->prepareFeeData($request);
-
+        $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         StudentFee::create($data);
 
         return redirect()->route('student-fees.index')
@@ -50,7 +51,7 @@ class StudentFeeController extends Controller
         $validated = $this->validateRequest($request);
 
         $data = $this->prepareFeeData($request);
-
+        $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         $studentFee->update($data);
 
         return redirect()->route('student-fees.index')

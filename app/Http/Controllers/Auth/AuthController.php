@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -44,6 +46,30 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+             // Set session for subscription days
+            $subscription = Subscriptions::where('user_id', Auth::id())
+                ->where('status', 'active')
+                ->orderByDesc('end_date')
+                ->first();
+
+            $daysLeft = 0;
+            $isExpired = true;
+
+            if ($subscription) {
+                $today = Carbon::today();
+                $endDate = Carbon::parse($subscription->end_date)->startOfDay();
+
+                if ($endDate->gte($today)) {
+                    $daysLeft = $today->diffInDays($endDate); // Days left
+                    $isExpired = false;
+                }
+            }
+
+            session([
+                'subscription_days_left' => $daysLeft,
+                'subscription_expired' => $isExpired,
+            ]);
+
             return redirect()->intended('/');
         }
 

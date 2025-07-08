@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\UserScopedModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TeacherExpense extends Model
+class TeacherExpense extends UserScopedModel
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'id_card_no',
         'salary_amout',
         'paid_amt',

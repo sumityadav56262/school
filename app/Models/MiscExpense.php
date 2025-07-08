@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\UserScopedModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MiscExpense extends Model
+class MiscExpense extends UserScopedModel
 {
     use HasFactory;
 
     protected $fillable = [
-        'particular', 'amount', 'payment_by', 'payment_date', 'remark'
+        'user_id','particular', 'amount', 'payment_by', 'payment_date', 'remark'
     ];
 }
