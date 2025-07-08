@@ -30,7 +30,7 @@ class StudClassController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validated([
+        $validated = $request->validate([
             'class_name' => 'required|string|max:255|unique:stud_classes,class_name',
         ]);
         $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user
