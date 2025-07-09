@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('teacher_expenses', function (Blueprint $table) {
             $table->id();
             $table->integer('id_card_no');
-            $table->integer('salary_amout');
+            $table->integer('salary_amt');
             $table->integer('paid_amt');
             $table->integer('due_amt');
             $table->string('paid_by');
-            $table->date('paid_date');
+            $table->string('paid_date');
             $table->string('remark')->nullable();
             $table->timestamps();
 

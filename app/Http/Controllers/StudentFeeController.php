@@ -21,9 +21,16 @@ class StudentFeeController extends Controller
     public function create()
     {
         $classNames = StudClass::all();
-        $todayFormattedBsDate = NepaliCalendar::today();
+        $nepaliToday = NepaliCalendar::today();
+        // Format the Nepali date to 'DD/MM/YYYY'
+        if (!empty($nepaliToday)) {
+            $parts = explode('-', $nepaliToday);
+            if (count($parts) === 3) {
+                $nepaliToday = $parts[2] . '/' . $parts[1] . '/' . $parts[0];
+            }
+        }
 
-        return view('student_fees.create', compact('classNames', 'todayFormattedBsDate'));
+        return view('student_fees.create', compact('classNames', 'nepaliToday'));
     }
 
     public function store(Request $request)
@@ -70,7 +77,7 @@ class StudentFeeController extends Controller
     {
         return $request->validate([
             'emis_no' => 'required|exists:students,emis_no',
-            'payment_date' => 'required|date',
+            'payment_date' => 'required',
             'month_name' => 'required',
             'payment_by' => 'required',
             'received_by' => 'required',
@@ -124,17 +131,17 @@ class StudentFeeController extends Controller
         }
 
         // Format admission date
-        $formattedAdmissionDate = null;
-        if (!empty($request->admission_date)) {
-            if (strlen($request->admission_date) === 10) {
-                try {
-                    $date = Carbon::createFromFormat('d/m/Y', $request->admission_date);
-                    $formattedAdmissionDate = $date->format('Y-m-d');
-                } catch (\Exception $e) {
-                    $formattedAdmissionDate = null;
-                }
-            }
-        }
+        $formattedAdmissionDate = $request->admission_date;
+        // if (!empty($request->admission_date)) {
+        //     if (strlen($request->admission_date) === 10) {
+        //         try {
+        //             $date = Carbon::createFromFormat('d/m/Y', $request->admission_date);
+        //             $formattedAdmissionDate = $date->format('Y-m-d');
+        //         } catch (\Exception $e) {
+        //             $formattedAdmissionDate = null;
+        //         }
+        //     }
+        // }
 
         return array_merge(
             $fees,

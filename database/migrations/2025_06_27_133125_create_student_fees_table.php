@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
             $table->string('emis_no');
-            $table->date('payment_date');
-            $table->date('admission_date')->nullable();
+            $table->string('payment_date');
+            $table->string('admission_date')->nullable();
             $table->string('month_name');
             $table->integer('yearly_fee')->default(0);
             $table->integer('monthly_fee')->default(0);

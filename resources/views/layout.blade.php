@@ -66,7 +66,8 @@
         </div>
     </div>
     @if (session('status'))
-        <div class="alert alert-success alert-dismissible fade show position-fixed bottom-0 end-0 m-3 z-3" role="alert" id="autoDismissAlert">
+        <div class="alert alert-success alert-dismissible fade show position-fixed bottom-0 end-0 m-3 z-3"
+            role="alert" id="autoDismissAlert">
             {{ session('status') }}
         </div>
     @endif
@@ -85,10 +86,10 @@
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 
     <script type="text/javascript">
+        // -------------------------------
+        // Initialize all DataTables
+        // -------------------------------
         $(function() {
-            // -------------------------------
-            // Initialize all DataTables
-            // -------------------------------
             const dataTablesClasses = [
                 '.misc_expenses_datatable',
                 '.student_datatable',
@@ -101,6 +102,13 @@
             dataTablesClasses.forEach(selector => {
                 $(selector).DataTable();
             });
+        });
+
+
+        // -------------------------------
+        // Student Fee
+        // -------------------------------
+        $(function() {
 
             // -------------------------------
             // Set values into form fields
@@ -256,9 +264,101 @@
             // Initial calculation
             calculateAmounts();
         });
-        
+
+        // -------------------------------
+        // Teacher Expense
+        // -------------------------------
+        $(function() {
+            // -------------------------------
+            // Calculate dues amounts
+            // -------------------------------
+            function calculateDuesAmounts() {
+                let due_amt = 0;
+                const salary_amt = parseInt($('.salary_amt').val()) || 0;
+                const paid_amt = parseInt($('.paid_amt').val()) || 0;
+                if (salary_amt < 0) {
+                    alert("Salary amount cannot be negative!");
+                    $('.salary_amt').val(0);
+                    return;
+                }
+                due_amt = salary_amt - paid_amt;
+                if (due_amt < 0) due_amt = 0;
+
+                $('#due_amt').val(due_amt);
+            }
+
+            // Attach change events
+            $('.salary_amt, .paid_amt').on('keyup change', calculateDuesAmounts);
+
+            // Initial dues calculation
+            calculateDuesAmounts();
+
+            // -------------------------------
+            // Search Teacher By Id Card No
+            // -------------------------------
+            $('#id_card_no').on('change', function() {
+                const id_card_no = $(this).val();
+                if (id_card_no) {
+                    $.ajax({
+                        url: "{{ route('teacher.get_teacher_by_id_card_no') }}",
+                        type: 'GET',
+                        data: {
+                            id_card_no
+                        },
+                        success: function(response) {
+                            if (response.teacher_name) {
+                                $('#teacher_name').val(response.teacher_name);
+                            } else {
+                                $('#teacher_name').val('');
+                                alert("No teacher found!");
+                                console.log('No teacher found!');
+                            }
+                        },
+                        error: function() {
+                            console.log("Error fetching data!");
+                        }
+                    });
+                } else {
+                    $('#teacher_name').val('');
+                    console.log("Write valid ID card no..!");
+                }
+            });
+
+
+            // -------------------------------
+            // Search Teacher By Name
+            // -------------------------------
+            $('#teacher_name').on('change', function() {
+                const teacher_name = $(this).val();
+
+                if (teacher_name) {
+                    $.ajax({
+                        url: "{{ route('teacher.get_teacher_by_name') }}",
+                        type: 'GET',
+                        data: {
+                            teacher_name
+                        },
+                        success: function(response) {
+                            if (response) {
+                                $('#id_card_no').val(response.id_card_no);
+                            } else {
+                                $('#id_card_no').val('');
+                                console.log('Invalid Teacher Name!');
+                            }
+                        },
+                        error: function() {
+                            console.log("Error fetching data!");
+                        }
+                    });
+                } else {
+                    $('#id_card_no').val('');
+                    console.log("Write valid Teacher Name..!");
+                }
+            });
+        });
+
         // Auto-hide alert after 3 seconds
-        setTimeout(function () {
+        setTimeout(function() {
             const alertBox = document.getElementById('autoDismissAlert');
             if (alertBox) {
                 // Use Bootstrap's fade-out

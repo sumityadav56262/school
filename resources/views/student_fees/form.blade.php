@@ -11,7 +11,7 @@
     <div class="form-group">
         <label for="payment_date">Date:</label>
         <input type="text" name="payment_date" id="payment_date" readonly
-            value="{{ old('payment_date', $studentFee->payment_date ?? $todayFormattedBsDate) }}" readonly>
+            value="{{ old('payment_date', $studentFee->payment_date ?? $nepaliToday) }}" readonly>
     </div>
 </div>
 

@@ -18,12 +18,20 @@ class StudentFeeFactory extends Factory
      */
     public function definition(): array
     {
+        $nepaliDate =  function () {
+            $year = rand(2075, 2085);
+            $month = str_pad(rand(1, 12), 2, '0', STR_PAD_LEFT);
+            $day = str_pad(rand(1, 32), 2, '0', STR_PAD_LEFT);
+            return "{$day}/{$month}/{$year}";
+        };
+
+
         return [
             'emis_no' => Student::inRandomOrder()->value('emis_no')
                 ?? fake()->unique()->regexify('EMIS_[0-9]{5}'),
 
-            'payment_date' => fake()->date(),
-            'admission_date' => fake()->date(),
+            'payment_date' =>  $nepaliDate(),
+            'admission_date' => $nepaliDate(),
             'month_name' => fake()->monthName(),
             'yearly_fee' => fake()->numberBetween(500, 5000),
             'monthly_fee' => fake()->numberBetween(500, 5000),

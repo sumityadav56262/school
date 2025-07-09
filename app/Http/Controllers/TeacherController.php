@@ -21,6 +21,13 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'id_card_no' => 'required|unique:teachers,id_card_no',
+            'teacher_name' => 'required|string|max:255',
+            'mobile_no' => 'required|string|max:15',
+            'designation' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
+        ]);
         Teacher::create($request->merge(['user_id' => Auth::id()])->all());
         return redirect()->route('teachers.index')->with('success', 'Teacher Added');
     }
@@ -42,8 +49,17 @@ class TeacherController extends Controller
         return redirect()->route('teachers.index')->with('success', 'Deleted');
     }
 
-    public function search($value)
+    public function getTeacherByIdCardNo(Request $request)
     {
-        $teachers = Teacher::where('teacher_name', $value);
+        $value = $request->input('id_card_no');
+        $teacher = Teacher::where('id_card_no', $value)->first();
+        return response()->json($teacher);
+    }
+
+    public function getTeacherByName(Request $request)
+    {
+        $value = $request->input('teacher_name');
+        $teacher = Teacher::where('teacher_name', $value)->first();
+        return response()->json($teacher);
     }
 }

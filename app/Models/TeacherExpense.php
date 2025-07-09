@@ -12,7 +12,7 @@ class TeacherExpense extends UserScopedModel
     protected $fillable = [
         'user_id',
         'id_card_no',
-        'salary_amout',
+        'salary_amt',
         'paid_amt',
         'due_amt',
         'paid_by',
