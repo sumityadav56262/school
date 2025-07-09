@@ -6,6 +6,7 @@ use App\Models\Subscriptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
 
 class SubscriptionController extends Controller
 {
@@ -48,7 +49,7 @@ class SubscriptionController extends Controller
             return redirect()->route('dashboard')->with('error', 'Trial already used.');
         }
 
-        Subscriptions::create([
+        $subscription = Subscriptions::create([
             'user_id' => $user->id,
             'plan_name' => 'Free Trial',
             'start_date' => now(),
@@ -59,7 +60,24 @@ class SubscriptionController extends Controller
             'transaction_id' => 'TRIAL-' . uniqid(),
             'remarks' => 'Free trial subscription',
         ]);
+        
+        $daysLeft = 0;
+        $isExpired = true;
 
+        if ($subscription) {
+            $today = Carbon::today();
+            $endDate = Carbon::parse($subscription->end_date)->startOfDay();
+
+            if ($endDate->gte($today)) {
+                $daysLeft = $today->diffInDays($endDate); // Days left
+                $isExpired = false;
+            }
+        }
+
+        session([
+            'subscription_days_left' => $daysLeft,
+            'subscription_expired' => $isExpired,
+        ]);
         return redirect()->route('dashboard')->with('status', 'Free trial started!');
     }
 
