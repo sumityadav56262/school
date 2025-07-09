@@ -6,19 +6,26 @@
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
+
     <div class="form-group">
-        <label>Student Name</label>
-        <input type="text" name="stud_name" value="{{ old('stud_name', $student->stud_name ?? '') }}" required>
-        @error('stud_name')
+        <label>Class</label>
+        <select name="class_name" id="class_name" required>
+            @foreach ($classNames as $className)
+                <option value="{{ $className->class_name }}"
+                    {{ old('class_name', $student->class_name ?? '') === $className->class_name ? 'selected' : '' }}>
+                    {{ $className->class_name }} </option>
+            @endforeach
+        </select>
+        @error('class_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 </div>
 <div class="form-row">
     <div class="form-group">
-        <label>Class</label>
-        <input type="text" name="class_name" value="{{ old('class_name', $student->class_name ?? '') }}" required>
-        @error('class_name')
+        <label>Student Name</label>
+        <input type="text" name="stud_name" value="{{ old('stud_name', $student->stud_name ?? '') }}" required>
+        @error('stud_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
@@ -33,7 +40,8 @@
 <div class="form-row">
     <div class="form-group">
         <label>Father Name</label>
-        <input type="text" name="father_name" value="{{ old('father_name', $student->father_name ?? '') }}" required>
+        <input type="text" name="father_name" value="{{ old('father_name', $student->father_name ?? '') }}"
+            required>
         @error('father_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror

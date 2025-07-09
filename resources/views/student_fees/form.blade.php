@@ -19,13 +19,11 @@
     <div class="form-group">
         <label for="class_name">Class:</label>
         <select name="class_name" id="class_name" required>
-            @if (isset($studentFee))
-                <option value="{{ $studentFee->student->class_name }}"> {{ $studentFee->student->class_name }} </option>
-            @else
-                @foreach ($classNames as $className)
-                    <option value="{{ $className->class_name }}"> {{ $className->class_name }} </option>
-                @endforeach
-            @endif
+            @foreach ($classNames as $className)
+                <option value="{{ $className->class_name }}"
+                    {{ old('class_name', $studentFee->student->class_name ?? '') === $className->class_name ? 'selected' : '' }}>
+                    {{ $className->class_name }} </option>
+            @endforeach
         </select>
     </div>
     <div class="form-group">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,8 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('students.create');
+        $classNames = StudClass::all();
+        return view('students.create', compact('classNames'));
     }
 
     public function store(Request $request)
@@ -38,7 +40,8 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        return view('students.edit', compact('student'));
+        $classNames = StudClass::all();
+        return view('students.edit', compact('student', 'classNames'));
     }
 
     public function update(Request $request, Student $student)

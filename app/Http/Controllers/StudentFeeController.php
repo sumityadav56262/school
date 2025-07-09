@@ -40,10 +40,8 @@ class StudentFeeController extends Controller
 
     public function edit(StudentFee $studentFee)
     {
-        $students = Student::all();
         $classNames = StudClass::all();
-
-        return view('student_fees.edit', compact('studentFee', 'students', 'classNames'));
+        return view('student_fees.edit', compact('studentFee', 'classNames'));
     }
 
     public function update(Request $request, StudentFee $studentFee)
