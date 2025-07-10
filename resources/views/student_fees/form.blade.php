@@ -52,7 +52,7 @@
     </div>
     <div class="form-group">
         <label for="admission_date">Adm. Date:</label>
-        <input class="datepicker-here" type="text" data-language="nep" name="admission_date"
+        <input class="datepicker-here" type="text" data-language="nep" name="admission_date" id="admission_date"
             value="{{ old('admission_date', $studentFee->admission_date ?? '') }}">
         @error('admission_date')
             <span class="text-danger">{{ $message }}</span>

@@ -104,257 +104,381 @@
             });
         });
 
+        // -------------------------------
+        // STUDENT FEE
+        // -------------------------------
 
         // -------------------------------
-        // Student Fee
+        // Set values into form fields
         // -------------------------------
+        function setStudentValues(values = {}) {
+            if (values.emis_no !== undefined) {
+                document.getElementById('emis_no').value = values.emis_no;
+            }
+            if (values.class_name !== undefined) {
+                document.getElementById('class_name').value = values.class_name;
+            }
+            if (values.roll_no !== undefined) {
+                document.getElementById('roll_no').value = values.roll_no;
+            }
+            if (values.student_name !== undefined) {
+                document.getElementById('student_name').value = values.student_name;
+            }
+            if (values.recurring_dues !== undefined) {
+                document.getElementById('recurring_dues').value = values.recurring_dues;
+            }
+        }
+
+        // -------------------------------
+        // Calculate total amounts
+        // -------------------------------
+        function calculateAmounts() {
+            let total = 0;
+
+            // Sum all individual fees
+            $('.fee-field').each(function() {
+                const val = parseInt($(this).val()) || 0;
+                total += val;
+            });
+
+            // Add recurring dues if checkbox checked
+            if ($('#addRecuringDues').is(':checked')) {
+                const recurDues = parseInt($('#recurring_dues').val()) || 0;
+                total += recurDues;
+            }
+
+            $('#total_amt').val(total);
+
+            const discount = parseInt($('#discount_amt').val()) || 0;
+            const payment = parseInt($('#payment_amt').val()) || 0;
+
+            let grandTotal = total - discount;
+            if (grandTotal < 0) grandTotal = 0;
+
+            let dues = grandTotal - payment;
+            if (dues < 0) dues = 0;
+
+            $('#dues_amt').val(dues);
+        }
+
         $(function() {
-
             // -------------------------------
-            // Set values into form fields
-            // -------------------------------
-            function setStudentValues(values = {}) {
-                if (values.emis_no !== undefined) {
-                    $('#emis_no').val(values.emis_no);
-                }
-                if (values.class_name !== undefined) {
-                    $('#class_name').val(values.class_name);
-                }
-                if (values.roll_no !== undefined) {
-                    $('#roll_no').val(values.roll_no);
-                }
-                if (values.student_name !== undefined) {
-                    $('#student_name').val(values.student_name);
-                }
-                if (values.recurring_dues !== undefined) {
-                    $('#recurring_dues').val(values.recurring_dues);
-                }
-            }
-
-            // -------------------------------
-            // Search student by EMIS no
-            // -------------------------------
-            $('#searchStudByEMISBtn').on('click', function() {
-                const emis_no = $('#emis_no').val();
-
-                if (emis_no) {
-                    $.ajax({
-                        url: "{{ route('student.get_student') }}",
-                        type: 'GET',
-                        data: {
-                            emis_no
-                        },
-                        success: function(response) {
-                            if (response.student) {
-                                setStudentValues({
-                                    class_name: response.student.class_name,
-                                    roll_no: response.student.roll_no,
-                                    student_name: response.student.stud_name,
-                                    recurring_dues: response.recurring_dues
-                                });
-                            } else {
-                                setStudentValues({
-                                    class_name: '',
-                                    roll_no: '',
-                                    student_name: '',
-                                    recurring_dues: ''
-                                });
-                                alert("No student found!");
-                            }
-                            calculateAmounts();
-                        },
-                        error: function() {
-                            alert("Error fetching data!");
-                        }
-                    });
-                } else {
-                    setStudentValues({
-                        class_name: '',
-                        roll_no: '',
-                        student_name: '',
-                        recurring_dues: ''
-                    });
-                    calculateAmounts();
-                    alert("Write valid emis no..!");
-                }
-            });
-
-            // -------------------------------
-            // Search student by Class and Roll No
-            // -------------------------------
-            $('#searchStudByClassRollBtn').on('click', function() {
-                const class_name = $('#class_name').val();
-                const roll_no = $('#roll_no').val();
-
-                if (class_name && roll_no) {
-                    $.ajax({
-                        url: "{{ route('student.get_student_by_rollno_class') }}",
-                        type: 'GET',
-                        data: {
-                            class_name,
-                            roll_no
-                        },
-                        success: function(response) {
-                            if (response.student) {
-                                setStudentValues({
-                                    emis_no: response.student.emis_no,
-                                    student_name: response.student.stud_name,
-                                    recurring_dues: response.recurring_dues
-                                });
-                            } else {
-                                setStudentValues({
-                                    emis_no: '',
-                                    student_name: '',
-                                    recurring_dues: ''
-                                });
-                                alert("No student found!");
-                            }
-                            calculateAmounts();
-                        },
-                        error: function() {
-                            alert("Error fetching data!");
-                        }
-                    });
-                } else {
-                    setStudentValues({
-                        emis_no: '',
-                        student_name: '',
-                        recurring_dues: ''
-                    });
-                    calculateAmounts();
-                    alert("Select valid class name and roll no!");
-                }
-            });
-
-            // -------------------------------
-            // Calculate total amounts
-            // -------------------------------
-            function calculateAmounts() {
-                let total = 0;
-
-                // Sum all individual fees
-                $('.fee-field').each(function() {
-                    const val = parseInt($(this).val()) || 0;
-                    total += val;
-                });
-
-                // Add recurring dues if checkbox checked
-                if ($('#addRecuringDues').is(':checked')) {
-                    const recurDues = parseInt($('#recurring_dues').val()) || 0;
-                    total += recurDues;
-                }
-
-                $('#total_amt').val(total);
-
-                const discount = parseInt($('#discount_amt').val()) || 0;
-                const payment = parseInt($('#payment_amt').val()) || 0;
-
-                let grandTotal = total - discount;
-                if (grandTotal < 0) grandTotal = 0;
-
-                let dues = grandTotal - payment;
-                if (dues < 0) dues = 0;
-
-                $('#dues_amt').val(dues);
-            }
-
             // Attach change events
+            // -------------------------------
             $('.fee-field, #discount_amt, #payment_amt, #addRecuringDues').on('keyup change', calculateAmounts);
 
             // Initial calculation
             calculateAmounts();
         });
 
+
+        // -------------------------------
+        // Student Fee
+        // -------------------------------
+
+        // Wait for DOM to be fully loaded before attaching event listeners
+        // This ensures all elements are available in the DOM
+        // Using 'DOMContentLoaded' to ensure the script runs after the HTML is fully parsed
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // -------------------------------
+            // Search student by EMIS no
+            // -------------------------------        
+            async function searchStudentByEMIS(emis_no) {
+                const url = "{{ route('student.get_student') }}" + '?emis_no=' + encodeURIComponent(emis_no);
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+
+                    if (data.student) {
+                        setStudentValues({
+                            class_name: data.student.class_name,
+                            roll_no: data.student.roll_no,
+                            student_name: data.student.stud_name,
+                            recurring_dues: data.recurring_dues
+                        });
+                    } else {
+                        setStudentValues({
+                            class_name: '',
+                            roll_no: '',
+                            student_name: '',
+                            recurring_dues: ''
+                        });
+                        alert("No student found!");
+                    }
+
+                    calculateAmounts();
+
+                } catch (error) {
+                    alert("Error fetching data!");
+                    console.error(error);
+                }
+            }
+
+            // Event listener: Search by EMIS
+            // This will be triggered when the button is clicked                
+            const searchStudByEMISBtn = document.getElementById('searchStudByEMISBtn');
+            if (!searchStudByEMISBtn) {
+                //console.error("Element searchStudByEMISBtn not found in DOM.");
+                return;
+            } else {
+                searchStudByEMISBtn.addEventListener('click', () => {
+                    const emis_no = document.getElementById('emis_no').value;
+
+                    if (emis_no) {
+                        searchStudentByEMIS(emis_no);
+                    } else {
+                        setStudentValues({
+                            class_name: '',
+                            roll_no: '',
+                            student_name: '',
+                            recurring_dues: ''
+                        });
+                        calculateAmounts();
+                        alert("Write valid EMIS no..!");
+                    }
+                });
+            }
+
+            // -------------------------------
+            // Search student by Class and Roll No
+            // -------------------------------
+            async function searchStudentByClassAndRoll(class_name, roll_no) {
+                const url = "{{ route('student.get_student_by_rollno_class') }}" +
+                    `?class_name=${encodeURIComponent(class_name)}&roll_no=${encodeURIComponent(roll_no)}`;
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+
+                    if (data.student) {
+                        setStudentValues({
+                            emis_no: data.student.emis_no,
+                            student_name: data.student.stud_name,
+                            recurring_dues: data.recurring_dues
+                        });
+                    } else {
+                        setStudentValues({
+                            emis_no: '',
+                            student_name: '',
+                            recurring_dues: ''
+                        });
+                        alert("No student found!");
+                    }
+
+                    calculateAmounts();
+
+                } catch (error) {
+                    alert("Error fetching data!");
+                    console.error(error);
+                }
+            }
+
+            // ✅ DOM is ready, attach listener safely
+            const searchStudByClassRollBtn = document.getElementById('searchStudByClassRollBtn');
+            if (!searchStudByClassRollBtn) {
+                console.error("Element #searchStudByClassRollBtn not found in DOM.");
+                return;
+            } else {
+                searchStudByClassRollBtn.addEventListener('click', () => {
+                    const class_name = document.getElementById('class_name').value;
+                    const roll_no = document.getElementById('roll_no').value;
+
+                    if (class_name && roll_no) {
+                        searchStudentByClassAndRoll(class_name, roll_no);
+                    } else {
+                        setStudentValues({
+                            emis_no: '',
+                            student_name: '',
+                            recurring_dues: ''
+                        });
+                        calculateAmounts();
+                        alert("Select valid class name and roll no!");
+                    }
+                });
+            }
+        });
+
+
         // -------------------------------
         // Teacher Expense
         // -------------------------------
-        $(function() {
+
+        // Wait for DOM to be fully loaded before attaching event listeners
+        // This ensures all elements are available in the DOM
+        // Using 'DOMContentLoaded' to ensure the script runs after the HTML is fully parsed
+        document.addEventListener('DOMContentLoaded', function() {
+
             // -------------------------------
             // Calculate dues amounts
             // -------------------------------
             function calculateDuesAmounts() {
-                let due_amt = 0;
-                const salary_amt = parseInt($('.salary_amt').val()) || 0;
-                const paid_amt = parseInt($('.paid_amt').val()) || 0;
-                if (salary_amt < 0) {
-                    alert("Salary amount cannot be negative!");
-                    $('.salary_amt').val(0);
+                const salaryField = document.querySelector('.salary_amt');
+                const paidField = document.querySelector('.paid_amt');
+                const dueField = document.getElementById('due_amt');
+
+                if (!salaryField || !paidField || !dueField) {
+                    console.log("Some fields for calculation are missing in DOM.");
                     return;
                 }
-                due_amt = salary_amt - paid_amt;
+
+                const salary_amt = parseInt(salaryField.value) || 0;
+                const paid_amt = parseInt(paidField.value) || 0;
+
+                if (salary_amt < 0) {
+                    alert("Salary amount cannot be negative!");
+                    salaryField.value = 0;
+                    return;
+                }
+
+                let due_amt = salary_amt - paid_amt;
                 if (due_amt < 0) due_amt = 0;
 
-                $('#due_amt').val(due_amt);
+                dueField.value = due_amt;
             }
 
-            // Attach change events
-            $('.salary_amt, .paid_amt').on('keyup change', calculateDuesAmounts);
-
-            // Initial dues calculation
-            calculateDuesAmounts();
+            // Attach change events for salary and paid amounts
+            const salaryFields = document.querySelectorAll('.salary_amt, .paid_amt');
+            if (salaryFields.length > 0) {
+                salaryFields.forEach(field => {
+                    field.addEventListener('keyup', calculateDuesAmounts);
+                    field.addEventListener('change', calculateDuesAmounts);
+                });
+                // Initial calculation
+                calculateDuesAmounts();
+            } else {
+                console.log("No salary or paid amount fields found in DOM.");
+            }
 
             // -------------------------------
             // Search Teacher By Id Card No
             // -------------------------------
-            $('#id_card_no').on('change', function() {
-                const id_card_no = $(this).val();
-                if (id_card_no) {
-                    $.ajax({
-                        url: "{{ route('teacher.get_teacher_by_id_card_no') }}",
-                        type: 'GET',
-                        data: {
-                            id_card_no
-                        },
-                        success: function(response) {
-                            if (response.teacher_name) {
-                                $('#teacher_name').val(response.teacher_name);
-                            } else {
-                                $('#teacher_name').val('');
-                                alert("No teacher found!");
-                                console.log('No teacher found!');
-                            }
-                        },
-                        error: function() {
-                            console.log("Error fetching data!");
+            async function searchTeacherByIdCard(id_card_no) {
+                const url = "{{ route('teacher.get_teacher_by_id_card_no') }}" +
+                    '?id_card_no=' + encodeURIComponent(id_card_no);
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
                         }
                     });
-                } else {
-                    $('#teacher_name').val('');
-                    console.log("Write valid ID card no..!");
-                }
-            });
 
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+
+                    const teacherNameField = document.getElementById('teacher_name');
+                    if (teacherNameField) {
+                        if (data.teacher) {
+                            teacherNameField.value = data.teacher.name;
+                        } else {
+                            teacherNameField.value = '';
+                            console.log("No teacher found!");
+                        }
+                    }
+                } catch (error) {
+                    console.log("Error fetching data!", error);
+                }
+            }
+
+            // Attach event listener to ID card field
+            const idCardField = document.getElementById('id_card_no');
+            if (idCardField) {
+                idCardField.addEventListener('change', function() {
+                    const id_card_no = this.value;
+
+                    if (id_card_no) {
+                        searchTeacherByIdCard(id_card_no);
+                    } else {
+                        const teacherNameField = document.getElementById('teacher_name');
+                        if (teacherNameField) {
+                            teacherNameField.value = '';
+                        }
+                        console.log("Write valid ID card no..!");
+                    }
+                });
+            } else {
+                console.log("Element #id_card_no not found in DOM.");
+            }
 
             // -------------------------------
             // Search Teacher By Name
             // -------------------------------
-            $('#teacher_name').on('change', function() {
-                const teacher_name = $(this).val();
+            async function searchTeacherByName(teacher_name) {
+                const url = "{{ route('teacher.get_teacher_by_name') }}" +
+                    '?teacher_name=' + encodeURIComponent(teacher_name);
 
-                if (teacher_name) {
-                    $.ajax({
-                        url: "{{ route('teacher.get_teacher_by_name') }}",
-                        type: 'GET',
-                        data: {
-                            teacher_name
-                        },
-                        success: function(response) {
-                            if (response) {
-                                $('#id_card_no').val(response.id_card_no);
-                            } else {
-                                $('#id_card_no').val('');
-                                console.log('Invalid Teacher Name!');
-                            }
-                        },
-                        error: function() {
-                            console.log("Error fetching data!");
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
                         }
                     });
-                } else {
-                    $('#id_card_no').val('');
-                    console.log("Write valid Teacher Name..!");
+
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+
+                    const data = await response.json();
+
+                    const idCardField = document.getElementById('id_card_no');
+                    if (idCardField) {
+                        if (data.teacher) {
+                            idCardField.value = data.teacher.id_card_no;
+                        } else {
+                            idCardField.value = '';
+                            console.log("No teacher found!");
+                        }
+                    }
+                } catch (error) {
+                    console.log("Error fetching data!", error);
                 }
-            });
+            }
+
+            const teacherNameField = document.getElementById('teacher_name');
+            if (teacherNameField) {
+                teacherNameField.addEventListener('change', function() {
+                    const teacher_name = this.value;
+
+                    if (teacher_name) {
+                        searchTeacherByName(teacher_name);
+                    } else {
+                        const idCardField = document.getElementById('id_card_no');
+                        if (idCardField) {
+                            idCardField.value = '';
+                        }
+                        console.log("Write valid Teacher Name..!");
+                    }
+                });
+            } else {
+                console.log("Element #teacher_name not found in DOM.");
+            }
+
         });
 
         // Auto-hide alert after 3 seconds
