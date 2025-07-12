@@ -110,7 +110,7 @@ class StudentFeeController extends Controller
             ->latest()
             ->first();
 
-        if ($request->has('addRecuringDues')) {
+        if ($request->has('recuring_dues_checkbox')) {
             $total += $latestFee ? (int)$latestFee->recurring_dues : 0;
         }
 
@@ -123,32 +123,19 @@ class StudentFeeController extends Controller
         $dues = max($afterDiscount - $payment, 0);
 
         // Handle recurring dues logic
-        if (!$request->has('addRecuringDues')) {
+        if (!$request->has('recuring_dues_checkbox')) {
             $previousRecurringDues = $latestFee ? (int)$latestFee->recurring_dues : 0;
             $totalRecurringDues = $previousRecurringDues + $dues;
         } else {
             $totalRecurringDues = $dues;
         }
 
-        // Format admission date
-        $formattedAdmissionDate = $request->admission_date;
-        // if (!empty($request->admission_date)) {
-        //     if (strlen($request->admission_date) === 10) {
-        //         try {
-        //             $date = Carbon::createFromFormat('d/m/Y', $request->admission_date);
-        //             $formattedAdmissionDate = $date->format('Y-m-d');
-        //         } catch (\Exception $e) {
-        //             $formattedAdmissionDate = null;
-        //         }
-        //     }
-        // }
-
         return array_merge(
             $fees,
             [
                 'emis_no'        => $request->emis_no,
                 'payment_date'   => $request->payment_date,
-                'admission_date' => $formattedAdmissionDate,
+                'admission_date' => $request->admission_date,
                 'month_name'     => $request->month_name,
                 'total_amt'      => $total,
                 'discount_amt'   => $discount,
@@ -157,6 +144,7 @@ class StudentFeeController extends Controller
                 'payment_by'     => $request->payment_by,
                 'received_by'    => $request->received_by,
                 'recurring_dues' => $totalRecurringDues,
+                'recurring_dues_included_amt' => $request->has('recuring_dues_checkbox') ? $request->recurring_dues : null,
             ]
         );
     }

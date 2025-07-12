@@ -32,7 +32,8 @@ class StudentFee extends UserScopedModel
         'dues_amt',
         'payment_by',
         'received_by',
-        'recurring_dues'
+        'recurring_dues',
+        'recurring_dues_included_amt'
     ];
 
     public function student()

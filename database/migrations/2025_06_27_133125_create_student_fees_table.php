@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('payment_by');
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();
+            $table->string('recurring_dues_included_amt')->nullable();
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');
