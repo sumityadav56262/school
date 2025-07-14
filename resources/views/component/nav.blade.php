@@ -9,7 +9,7 @@
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton">
 
             {{-- Subscription Status --}}
-            @if(session()->has('subscription_expired'))
+            @if(0 && session()->has('subscription_expired'))
                 @if(session('subscription_expired'))
                     <li>
                         <span class="dropdown-item text-danger">Subscription expired</span>
