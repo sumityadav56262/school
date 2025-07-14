@@ -26,13 +26,21 @@
                         <td>{{ $teacher->teacher_name }}</td>
                         <td>{{ $teacher->designation }}</td>
                         <td>
-                            <a class="edit-button" href="{{ route('teachers.edit', $teacher) }}">Edit</a>
-                            <form action="{{ route('teachers.destroy', $teacher) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="delete-button"
-                                    onclick="return confirm('Are you sure you want to delete this teacher?')">Delete</button>
-                            </form>
+                            <div class="d-flex gap-1">
+                                <form action="{{ route('teachers.edit', $teacher) }}" method="GET" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                                </form>
+
+                                <form action="{{ route('teachers.destroy', $teacher) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this teacher?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach

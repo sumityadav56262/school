@@ -40,19 +40,19 @@
                         <td>{{ $fee->recurring_dues }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <from action="{{ route('student-fees.show', $fee->id) }}" method="GET" style="display:inline;">
+                                <form action="{{ route('student-fees.show', $fee->id) }}" method="GET" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-success">View</button>
-                                </from>
+                                    <button type="submit" class="btn btn-sm btn-success">View</button>
+                                </form>
                                 
-                                <from action="{{ route('student-fees.edit', $fee->id) }}" method="GET" style="display:inline;">
+                                <form action="{{ route('student-fees.edit', $fee->id) }}" method="GET" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">Edit</button>
-                                </from>
+                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                                </form>
                                 
                                 <form action="{{ route('student-fees.destroy', $fee) }}" method="POST" style="display:inline;">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
+                                    <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                                 </form>
                             </div>

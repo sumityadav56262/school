@@ -28,13 +28,21 @@
                         <td>{{ $exp->due_amt }}</td>
                         <td>{{ $exp->paid_date }}</td>
                         <td>
-                            <a href="{{ route('teacher-expenses.edit', $exp) }}">Edit</a>
-                            <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST"
-                                style="display:inline;">
-                                @csrf @method('DELETE')
-                                <button type="submit"
-                                    onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
-                            </form>
+                            <div class="d-flex gap-1">
+                                <form action="{{ route('teacher-expenses.edit', $exp) }}" method="GET" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                                </form>
+
+                                <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this record?')">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
