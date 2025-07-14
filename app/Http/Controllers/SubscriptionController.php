@@ -9,11 +9,6 @@ use App\Models\User;
 
 class SubscriptionController extends Controller
 {
-    public function expired()
-    {
-        return view('subscription.expired');
-    }
-
     public function index()
     {
         $subscription = Auth::user()->subscription;
@@ -41,18 +36,23 @@ class SubscriptionController extends Controller
     }
     public function startTrial()
     {
-        $user = Auth::user();
+        $user_id = Auth::id();
 
         // Prevent multiple trials
-        if (Subscriptions::where('user_id', $user->id)->exists()) {
+        if (Subscriptions::where('user_id', $user_id)->exists()) {
             return redirect()->route('dashboard')->with('error', 'Trial already used.');
         }
 
+<<<<<<< Updated upstream
         Subscriptions::create([
             'user_id' => $user->id,
+=======
+        $subscription = Subscriptions::create([
+            'user_id' => $user_id,
+>>>>>>> Stashed changes
             'plan_name' => 'Free Trial',
             'start_date' => now(),
-            'end_date' => now()->addDays(30),
+            'end_date' => now()->addDays(7),
             'status' => 'active',
             'price' => 0,
             'paid_via' => 'free',
@@ -65,7 +65,7 @@ class SubscriptionController extends Controller
 
     public function purchase($months)
     {
-        $user = Auth::user();
+        $months = (int) $months;
 
         $pricePerMonth = 200;
         $total = $pricePerMonth * $months;
@@ -78,7 +78,7 @@ class SubscriptionController extends Controller
         }
 
         Subscriptions::create([
-            'user_id' => $user->id,
+            'user_id' => Auth::id(),
             'plan_name' => "{$months} Month Plan",
             'start_date' => now(),
             'end_date' => now()->addMonths($months),
