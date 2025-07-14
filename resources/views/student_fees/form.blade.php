@@ -141,7 +141,7 @@
         <label for="recurring_dues">Recurring Dues</label>
         <input type="number"
             value="{{ old('recurring_dues', $studentFee->recurring_dues_included_amt ?? ($studentFee->recurring_dues ?? 0)) }}"
-            name="recurring_dues" class="recurring_dues" id="recurring_dues">
+            name="recurring_dues" class="recurring_dues" id="recurring_dues" readonly>
         <div class="mx-1">
             <label class="form-check-label" for="addRecuringDues">Add Dues</label>
             <input class="form-check-input" type="checkbox" id="addRecuringDues" name="recuring_dues_checkbox"

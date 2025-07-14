@@ -24,7 +24,11 @@ function setStudentValues(values = {}) {
 
 function updateRecurringDuesCheckbox() {
     const recurringDues = parseInt($("#recurring_dues").val()) || 0;
-    $("#addRecuringDues").attr("disabled", recurringDues <= 0);
+    const $checkbox = $("#addRecuringDues");
+    $checkbox.attr("disabled", recurringDues <= 0);
+    if (recurringDues <= 0 && $checkbox.is(":checked")) {
+        $checkbox.prop("checked", false);
+    }
 }
 
 // -------------------------------
@@ -85,9 +89,6 @@ $(function () {
 
         calculateAmounts();
     });
-
-    // Enable recurring dues checkbox only if recurring dues amount is greater than 0
-    $("#recurring_dues").on("keyup change", updateRecurringDuesCheckbox);
 
     // Initial calculation
     calculateAmounts();
