@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/subscription/start-trial', [SubscriptionController::class, 'startTrial'])->name('subscription.startTrial');
     Route::get('/subscription/purchase/{months}', [SubscriptionController::class, 'purchase'])->name('subscription.purchase');
 });
-Route::middleware(['auth', Subscription::class])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/get_student', [StudentController::class, 'getStudent'])->name('student.get_student');
