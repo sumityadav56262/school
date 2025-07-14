@@ -1,0 +1,126 @@
+.invoice-print-page * {
+    all: revert;
+}
+
+.invoice-print-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.invoice-container {
+    font-family: 'Times New Roman', serif;
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 20px 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-size: 13px;
+}
+
+.invoice-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.invoice-header h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.invoice-header p {
+    font-size: 12px;
+    margin: 2px 0;
+}
+.invoice-line {
+    border-top: 2px solid #000;
+    margin: 10px 0;
+}
+
+.invoice-meta, .student-info {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.invoice-table th, .invoice-table td {
+    border: 1px solid #000;
+    padding: 4px 6px;
+}
+
+.summary-table {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.summary-table td {
+    padding: 3px;
+}
+
+.summary-table td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+.signature-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+.signature-block {
+    text-align: center;
+    width: 45%;
+}
+
+.signature-line {
+    border-bottom: 1px solid #000;
+    width: 100px;
+    margin: 8px auto 4px auto;
+}
+
+.no-print {
+    margin: 20px auto;
+    text-align: center;
+}
+p {
+    margin: 0 !important;
+}
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    .invoice-print-page, .invoice-print-page * {
+        visibility: visible;
+    }
+
+    .invoice-print-page {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 10mm;
+    }
+}

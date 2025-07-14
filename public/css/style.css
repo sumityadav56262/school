@@ -176,20 +176,6 @@ body {
             padding: 10px;
             flex-direction: column;
         }
-        a,
-        button {
-            text-decoration: none;
-            background-color: #28a745;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-        }
-        button {
-            outline: none;
-            border: 0;
-            font-size: 16px;
-            background-color: red;
-        }
     }
 }
 .add-fees-header {

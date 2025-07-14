@@ -17,6 +17,19 @@ class StudentFeeController extends Controller
         $fees = StudentFee::with('student')->get();
         return view('student_fees.index', compact('fees'));
     }
+    public function show($id)
+    {
+        // Eager load 'student' and 'feeParticulars' relationships
+        $studentFee = StudentFee::with(['student'])->find($id);
+
+        if (!$studentFee) {
+            // Handle case where student fee record is not found
+            // For example, redirect back with an error or return a 404
+            abort(404, 'Student fee record not found.');
+        }
+
+        return view('student_fees.show', compact('studentFee'));
+    }
 
     public function create()
     {
