@@ -13,6 +13,20 @@ use App\Http\Controllers\MiscExpenseController;
 use App\Http\Controllers\SubscriptionController;
 
 use App\Http\Middleware\Subscription;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PlanController;
+
+Route::middleware(['auth', IsAdmin::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/users', [AdminController::class, 'users'])->name('users');
+    Route::get('/subscriptions', [AdminController::class, 'subscriptions'])->name('subscriptions');
+    Route::post('/subscriptions/{id}/extend', [AdminController::class, 'extendSubscription'])->name('subscriptions.extend');
+    Route::post('/subscriptions/{id}/cancel', [AdminController::class, 'cancelSubscription'])->name('subscriptions.cancel');
+
+    // Plan Management
+    Route::resource('plans', PlanController::class);
+});
 
 Route::middleware('guest')->group(function () {
     // Authentication Routes
@@ -33,13 +47,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     
-    Route::get('/subscription/expired', [SubscriptionController::class, 'expired'])->name('subscription.expired');
+    Route::view('/subscription/expired', 'subscription.expired')->name('subscription.expired');
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
     Route::view('/subscription/renew','subscription.renew')->name('subscription.renew');
     Route::post('/subscription/renew', [SubscriptionController::class, 'renew'])->name('subscription.renew');
 
     Route::get('/subscription/start-trial', [SubscriptionController::class, 'startTrial'])->name('subscription.startTrial');
     Route::get('/subscription/purchase/{months}', [SubscriptionController::class, 'purchase'])->name('subscription.purchase');
+
+    Route::view('/subscription/payment-qrcodes', 'subscription.qrcodes')->name('subscription.qrcodes');
+    Route::view('/subscription/pending', 'subscription.pending')->name('subscription.pending');
 });
 Route::middleware(['auth',Subscription::class])->group(function () {
     
