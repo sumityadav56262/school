@@ -24,7 +24,7 @@
                 <div class="student-info d-flex flex-column margin: 0;">
                     <p><strong>Name:</strong> {{ optional($studentFee->student)->stud_name ?? 'N/A' }}</p>
                     <div class="d-flex justify-content-between">
-                        <p><strong>Class:</strong> {{ $studentFee->student->class_name ?? 'N/A' }}</p>
+                        <p><strong>Class:</strong> {{ $studentFee->student->class->class_name ?? 'N/A' }}</p>
                         <p><strong>Roll No:</strong> {{ optional($studentFee->student)->roll_no ?? 'N/A' }}</p>
                     </div>
                 </div>

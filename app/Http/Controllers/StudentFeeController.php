@@ -22,6 +22,7 @@ class StudentFeeController extends Controller
         // Eager load 'student' and 'feeParticulars' relationships
         $studentFee = StudentFee::with(['student'])->find($id);
 
+        // dd($studentFee);
         if (!$studentFee) {
             // Handle case where student fee record is not found
             // For example, redirect back with an error or return a 404
@@ -152,7 +153,9 @@ class StudentFeeController extends Controller
         // Handle recurring dues logic
         if (!$request->has('recuring_dues_checkbox')) {
             $previousRecurringDues = $latestFee ? (int)$latestFee->recurring_dues : 0;
-            $totalRecurringDues = $previousRecurringDues + $dues;
+            // If this is an update, we need to adjust the recurring dues
+            $rout = request()->routeIs('student-fees.update');
+            $totalRecurringDues = $previousRecurringDues + $dues - ($rout ? $latestFee->dues_amt : 0);
         } else {
             $totalRecurringDues = $dues;
         }
