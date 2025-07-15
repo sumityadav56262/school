@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{ $student->emis_no }}</td>
                         <td>{{ $student->stud_name }}</td>
-                        <td>{{ $student->class_name }}</td>
+                        <td>{{ $student->class->class_name ?? '' }}</td>
                         <td>{{ $student->roll_no }}</td>
                         <td>{{ $student->father_name }}</td>
                         <td>{{ $student->mobile_no }}</td>
@@ -40,7 +40,8 @@
                                     <button type="submit" class="btn btn-sm btn-primary">Edit</button>
                                 </form>
 
-                                <form action="{{ route('students.destroy', $student) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('students.destroy', $student) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"

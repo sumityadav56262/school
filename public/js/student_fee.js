@@ -180,12 +180,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // -------------------------------
     // Search student by Class and Roll No
     // -------------------------------
-    async function searchStudentByClassAndRoll(class_name, roll_no) {
+    async function searchStudentByClassAndRoll(class_id, roll_no) {
         const url =
             typeof getStudentByRollNoClassUrl !== undefined
                 ? getStudentByRollNoClassUrl +
-                  `?class_name=${encodeURIComponent(
-                      class_name
+                  `?class_id=${encodeURIComponent(
+                      class_id
                   )}&roll_no=${encodeURIComponent(roll_no)}`
                 : "";
         if (!url) {
@@ -237,11 +237,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     } else {
         searchStudByClassRollBtn.addEventListener("click", () => {
-            const class_name = document.getElementById("class_name").value;
+            const class_id = document.getElementById("class_name").value;
             const roll_no = document.getElementById("roll_no").value;
 
-            if (class_name && roll_no) {
-                searchStudentByClassAndRoll(class_name, roll_no);
+            if (class_id && roll_no) {
+                searchStudentByClassAndRoll(class_id, roll_no);
             } else {
                 setStudentValues({
                     emis_no: "",

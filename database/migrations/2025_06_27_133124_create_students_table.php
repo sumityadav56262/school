@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('emis_no')->unique();
-            $table->string('class_name');
+            $table->unsignedBigInteger('class_id');
             $table->string('stud_name');
             $table->integer('roll_no');
             $table->string('father_name');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->timestamps();
 
-            $table->foreign('class_name')->references('class_name')->on('stud_classes')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('stud_classes')->onDelete('cascade');
         });
     }
 

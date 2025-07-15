@@ -26,7 +26,7 @@ class StudentController extends Controller
     {
         $validated = $request->validate([
             'emis_no' => 'required|unique:students',
-            'class_name' => 'required',
+            'class_id' => 'required|exists:stud_classes,id',
             'stud_name' => 'required',
             'roll_no' => 'required|integer',
             'father_name' => 'required',
@@ -47,8 +47,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $data = $request->validate([
-            'class_name' => 'required',
-            'stud_name' => 'required',
+            'class_id' => 'required|exists:stud_classes,id',
             'roll_no' => 'required|integer',
             'father_name' => 'required',
             'mobile_no' => 'required',
@@ -81,7 +80,7 @@ class StudentController extends Controller
     }
     public function getStudByRollNoClass(Request $request)
     {
-        $student = Student::where('class_name', $request->class_name)
+        $student = Student::where('class_id', $request->class_id)
             ->where('roll_no', $request->roll_no)
             ->first();
 

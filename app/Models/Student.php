@@ -12,7 +12,7 @@ class Student extends UserScopedModel
     protected $fillable = [
         'user_id',
         'emis_no',
-        'class_name',
+        'class_id',
         'stud_name',
         'roll_no',
         'father_name',
@@ -27,6 +27,6 @@ class Student extends UserScopedModel
 
     public function class()
     {
-        return $this->belongsTo(StudClass::class, 'class_name', 'class_name');
+        return $this->belongsTo(StudClass::class, 'class_id', 'id');
     }
 }

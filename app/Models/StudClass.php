@@ -11,10 +11,10 @@ class StudClass extends UserScopedModel
 
     protected $table = 'stud_classes';
 
-    protected $fillable = ['user_id','class_name'];
+    protected $fillable = ['user_id', 'class_name'];
 
     public function students()
     {
-        return $this->hasMany(Student::class, 'class_name', 'name');
+        return $this->hasMany(Student::class, 'class_id', 'id');
     }
 }

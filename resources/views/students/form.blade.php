@@ -9,14 +9,14 @@
 
     <div class="form-group">
         <label>Class</label>
-        <select name="class_name" id="class_name" required>
+        <select name="class_id" id="class_name" required>
             @foreach ($classNames as $className)
-                <option value="{{ $className->class_name }}"
-                    {{ old('class_name', $student->class_name ?? '') === $className->class_name ? 'selected' : '' }}>
+                <option value="{{ $className->id }}"
+                    {{ old('class_id', $student->class_id ?? '') === $className->id ? 'selected' : '' }}>
                     {{ $className->class_name }} </option>
             @endforeach
         </select>
-        @error('class_name')
+        @error('class_id')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>

@@ -94,6 +94,20 @@ class StudentFeeController extends Controller
             'month_name' => 'required',
             'payment_by' => 'required',
             'received_by' => 'required',
+            'yearly_fee' => 'required|numeric',
+            'monthly_fee' => 'required|numeric',
+            'eca_fee' => 'required|numeric',
+            'game_fee' => 'required|numeric',
+            'misc_fee' => 'required|numeric',
+            'exam_fee' => 'required|numeric',
+            'tie_belt_fee' => 'required|numeric',
+            'vest_fee' => 'required|numeric',
+            'computer_fee' => 'required|numeric',
+            'trouser_fee' => 'required|numeric',
+            'admission_date' => 'nullable|date',
+            'discount_amt' => 'nullable|numeric|min:0',
+            'payment_amt' => 'nullable|numeric|min:0',
+            'recurring_dues' => 'nullable|numeric|min:0',
         ]);
     }
 

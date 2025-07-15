@@ -18,10 +18,10 @@
                     <th>Name</th>
                     <th>Month</th>
                     <th>Total</th>
-                    <th>Discount</th>
-                    <th>Payment</th>
+                    <th>Disc.</th>
+                    <th>Pymt</th>
                     <th>Dues</th>
-                    <th>Recurring Dues</th>
+                    <th>Rec Dues</th>
                     <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
@@ -29,7 +29,7 @@
                 @foreach ($fees as $fee)
                     <tr>
                         <td>{{ $fee->emis_no }}</td>
-                        <td>{{ $fee->student->class_name ?? '' }}</td>
+                        <td>{{ $fee->student->class->class_name ?? '' }}</td>
                         <td>{{ $fee->student->roll_no ?? '' }}</td>
                         <td>{{ $fee->student->stud_name ?? '' }}</td>
                         <td>{{ $fee->month_name }}</td>
@@ -40,17 +40,20 @@
                         <td>{{ $fee->recurring_dues }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('student-fees.show', $fee->id) }}" method="GET" style="display:inline;">
+                                <form action="{{ route('student-fees.show', $fee->id) }}" method="GET"
+                                    style="display:inline;">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-success">View</button>
                                 </form>
-                                
-                                <form action="{{ route('student-fees.edit', $fee->id) }}" method="GET" style="display:inline;">
+
+                                <form action="{{ route('student-fees.edit', $fee->id) }}" method="GET"
+                                    style="display:inline;">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-primary">Edit</button>
                                 </form>
-                                
-                                <form action="{{ route('student-fees.destroy', $fee) }}" method="POST" style="display:inline;">
+
+                                <form action="{{ route('student-fees.destroy', $fee) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>

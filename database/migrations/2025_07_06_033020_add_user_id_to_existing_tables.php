@@ -10,6 +10,7 @@ class AddUserIdToExistingTables extends Migration
     {
         Schema::table('stud_classes', function (Blueprint $table) {
             $table->foreignId('user_id')->after('id')->constrained()->onDelete('cascade');
+            $table->unique(['user_id', 'class_name']); // Ensure unique class names per user
         });
 
         Schema::table('students', function (Blueprint $table) {
