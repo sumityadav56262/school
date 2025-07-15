@@ -11,6 +11,7 @@ class TeacherExpense extends UserScopedModel
 
     protected $fillable = [
         'user_id',
+        'teacher_id',
         'id_card_no',
         'salary_amt',
         'paid_amt',
@@ -22,6 +23,6 @@ class TeacherExpense extends UserScopedModel
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'id_card_no', 'id_card_no');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
 }

@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('emis_no')->unique();
             $table->unsignedBigInteger('class_id');
+            $table->boolean('active')->default(false);
+            $table->boolean('is_archived')->default(false);
             $table->string('stud_name');
             $table->integer('roll_no');
             $table->string('father_name');

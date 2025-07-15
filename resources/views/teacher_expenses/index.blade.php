@@ -23,7 +23,7 @@
                 @foreach ($expenses as $exp)
                     <tr>
                         <td>{{ $exp->teacher->teacher_name ?? '' }}</td>
-                        <td>{{ $exp->salary_amout }}</td>
+                        <td>{{ $exp->salary_amt }}</td>
                         <td>{{ $exp->paid_amt }}</td>
                         <td>{{ $exp->due_amt }}</td>
                         <td>{{ $exp->paid_date }}</td>

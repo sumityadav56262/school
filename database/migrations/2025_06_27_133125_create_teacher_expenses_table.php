@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('teacher_expenses', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_card_no');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('teacher_id');
+            $table->boolean('is_archived')->default(false);
             $table->integer('salary_amt');
             $table->integer('paid_amt');
             $table->integer('due_amt');
@@ -22,7 +24,7 @@ return new class extends Migration
             $table->string('remark')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_card_no')->references('id_card_no')->on('teachers')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });
     }
 

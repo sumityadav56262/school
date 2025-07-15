@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('stud_classes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('class_name');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+            
+            $table->unique(['user_id', 'class_name']); // Ensure unique class names per user
         });
     }
 

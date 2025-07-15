@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('plan_name')->default('Basic');
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->enum('status', ['active', 'expired', 'cancelled'])->default('active');
+            $table->enum('status', ['active', 'pending', 'expired', 'cancelled'])->default('pending');
             $table->decimal('price', 8, 2)->nullable();
             $table->string('paid_via')->nullable();
             $table->string('transaction_id')->nullable();

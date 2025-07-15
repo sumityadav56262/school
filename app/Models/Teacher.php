@@ -15,6 +15,6 @@ class Teacher extends UserScopedModel
 
     public function expenses()
     {
-        return $this->hasMany(TeacherExpense::class, 'id_card_no', 'id_card_no');
+        return $this->hasMany(TeacherExpense::class, 'teacher_id', 'id');
     }
 }

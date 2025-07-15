@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_card_no')->unique();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->integer('id_card_no');
             $table->string('teacher_name');
+            $table->boolean('active')->default(false);
+            $table->boolean('is_archived')->default(false);
             $table->string('designation');
             $table->string('mobile_no');
             $table->string('address');
             $table->timestamps();
+
+            $table->unique(['user_id', 'id_card_no']);
         });
     }
 

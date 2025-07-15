@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('emis_no');
+            $table->boolean('is_archived')->default(false);
             $table->string('payment_date');
             $table->string('admission_date')->nullable();
             $table->string('month_name');
