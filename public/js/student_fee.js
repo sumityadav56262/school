@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (data.student) {
                 setStudentValues({
-                    class_name: data.student.class_name,
+                    class_name: data.student.class_id,
                     roll_no: data.student.roll_no,
                     student_name: data.student.stud_name,
                     recurring_dues: data.recurring_dues,
