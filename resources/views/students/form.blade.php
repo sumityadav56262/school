@@ -49,11 +49,17 @@
     <div class="form-group">
         <label>Mobile No</label>
         <input type="text" name="mobile_no" value="{{ old('mobile_no', $student->mobile_no ?? '') }}" required>
+        @error('mobile_no')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
 </div>
 <div class="form-row">
     <div class="form-group">
         <label>Address</label>
         <input type="text" name="address" value="{{ old('address', $student->address ?? '') }}" required>
+        @error('address')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
 </div>
