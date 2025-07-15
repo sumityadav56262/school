@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\StudClass;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,13 +19,7 @@ class StudentFactory extends Factory
     {
         return [
             'emis_no' => fake()->unique()->numerify('EMIS_#####'),
-            'class_name' => fake()->randomElement([
-                'One',
-                'Two',
-                'Three',
-                'Four',
-                'Five'
-            ]),
+            'class_id' =>  StudClass::inRandomOrder()->value('id'),
             'stud_name' => fake()->name(),
             'roll_no' => fake()->numberBetween(1, 100),
             'father_name' => fake()->name('male'),

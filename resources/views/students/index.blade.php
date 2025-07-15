@@ -16,10 +16,10 @@
                     <th>EMIS</th>
                     <th>Name</th>
                     <th>Class</th>
-                    <th>Roll No</th>
-                    <th>Father Name</th>
-                    <th>Mobile No</th>
-                    {{-- <th>Address</th> --}}
+                    <th>RNo</th>
+                    <th>Father</th>
+                    <th>Phone</th>
+                    <th>Address</th>
                     <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                         <td>{{ $student->roll_no }}</td>
                         <td>{{ $student->father_name }}</td>
                         <td>{{ $student->mobile_no }}</td>
-                        {{-- <td>{{ $student->address }}</td> --}}
+                        <td>{{ $student->address }}</td>
                         <td>
                             <div class="d-flex gap-1">
                                 <form action="{{ route('students.edit', $student) }}" method="GET" style="display:inline;">
