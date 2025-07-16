@@ -12,11 +12,22 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::all();
+        $students = Student::where('is_archived', false)
+            ->with('class')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('students.index', compact('students'));
     }
+    public function show(string $action)
+    {
+        $students = Student::where('is_archived', true)
+            ->with('class')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
+        return view('students.archive', compact('students'));
+    }
     public function create()
     {
         $classNames = StudClass::all();
@@ -43,7 +54,14 @@ class StudentController extends Controller
 
         return view('students.edit', compact('student', 'classNames'));
     }
+    public function restore(Student $student)
+    {
+        $student->update(['is_archived' => false]);
 
+        return redirect()
+            ->route('students.show', 'archive')
+            ->with('success', 'Student restored succesfully.');
+    }
     public function update(Request $request, Student $student)
     {
         $rules = $this->validationRules(update: true);
@@ -59,12 +77,13 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
-        $student->delete();
+        $student->update(['is_archived' => true]);
 
         return redirect()
             ->route('students.index')
-            ->with('success', 'Student deleted.');
+            ->with('archive', 'Student moved to archived.');
     }
+
 
     public function getStudent(Request $request)
     {

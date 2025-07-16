@@ -12,6 +12,8 @@ class Student extends UserScopedModel
     protected $fillable = [
         'user_id',
         'emis_no',
+        'is_archived',
+        'is_active',
         'class_id',
         'stud_name',
         'roll_no',

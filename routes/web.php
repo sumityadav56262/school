@@ -60,6 +60,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('teacher-expenses', TeacherExpenseController::class);
     Route::resource('misc-expenses', MiscExpenseController::class);
 
+    //restore archived student
+    Route::get('/students/archive/restore/{student}', [StudentController::class, 'restore'])
+        ->name('students.restore');
+
     //change password
     Route::view('/change-password', 'auth.change-password')->name('password.change');
     Route::post('/change-password', [AuthController::class, 'update'])->name('password.change.update');
