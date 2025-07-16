@@ -10,8 +10,8 @@
 
     <div class="form-group">
         <label>Payment Date:</label>
-        <input type="date" class="form-control" name="payment_date"
-            value="{{ old('payment_date', $miscExpense->payment_date ?? date('Y-m-d')) }}">
+        <input class="datepicker-here" type="text" data-language="nep" name="payment_date" id="payment_date"
+            value="{{ old('payment_date', $miscExpense->payment_date ?? $nepaliToday) }}" required>
         @error('payment_date')
             <span class="text-danger">{{ $message }}</span>
         @enderror

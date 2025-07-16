@@ -85,7 +85,7 @@ class TeacherExpenseController extends Controller
                 'paid_amt'   => 'required|numeric|min:0|lte:salary_amt',
                 'due_amt'    => 'required|numeric|min:0',
                 'paid_by'    => 'required|string|max:50',
-                'paid_date'  => 'required',
+                'paid_date'  => 'required|',
                 'remark'     => 'nullable|string|max:500',
                 'id_card_no' => [
                     'required',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->boolean('is_archived')->default(false);
             $table->string('payment_by');
-            $table->date('payment_date');
+            $table->string('payment_date');
             $table->string('remark')->nullable();
             $table->timestamps();
         });
