@@ -50,10 +50,9 @@ class TeacherExpenseController extends Controller
         $validated['user_id'] = Auth::id();
         $validated['teacher_id'] = $teacher->id;
         unset($validated['id_card_no']);
-        // dd($validated);
         TeacherExpense::create($validated);
 
-        return redirect()->route('teacher-expenses.index')->with('success', 'Expense Added');
+        return redirect()->route('teacher-expenses.index')->with('success', 'Expense added successfully!');
     }
 
 
@@ -68,13 +67,13 @@ class TeacherExpenseController extends Controller
         $validated = $this->validateRequestData($request);
         unset($validated['id_card_no']);
         $teacherExpense->update($validated);
-        return redirect()->route('teacher-expenses.index')->with('success', 'Updated');
+        return redirect()->route('teacher-expenses.index')->with('success', 'Record updated successfully!');
     }
 
     public function destroy(TeacherExpense $teacherExpense)
     {
         $teacherExpense->delete();
-        return redirect()->route('teacher-expenses.index')->with('success', 'Deleted');
+        return redirect()->route('teacher-expenses.index')->with('success', 'Record deleted successfully!');
     }
 
     private function validateRequestData($request)

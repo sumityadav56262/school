@@ -24,7 +24,7 @@ class TeacherController extends Controller
     {
         $request->validate($this->validationRules());
         Teacher::create($request->merge(['user_id' => Auth::id()])->all());
-        return redirect()->route('teachers.index')->with('success', 'Teacher Added');
+        return redirect()->route('teachers.index')->with('success', 'Teacher added successfully!');
     }
 
     public function edit(Teacher $teacher)
@@ -37,13 +37,13 @@ class TeacherController extends Controller
         $mergeRulesMessage = array_merge($this->validationRules($teacher->id), $this->validationMessages());
         $validated = $request->validate($mergeRulesMessage);
         $teacher->update($validated);
-        return redirect()->route('teachers.index')->with('success', 'Updated');
+        return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');
     }
 
     public function destroy(Teacher $teacher)
     {
         $teacher->delete();
-        return redirect()->route('teachers.index')->with('success', 'Deleted');
+        return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully!');
     }
 
     public function getTeacherByIdCardNo(Request $request)

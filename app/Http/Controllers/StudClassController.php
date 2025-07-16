@@ -94,6 +94,6 @@ class StudClassController extends Controller
         $studClass = StudClass::findOrFail($id);
         $studClass->delete();
 
-        return redirect()->route('stud-classes.index')->with('success', 'Class deleted successfully.');
+        return redirect()->route('stud-classes.index')->with('success', 'Class archived successfully.');
     }
 }

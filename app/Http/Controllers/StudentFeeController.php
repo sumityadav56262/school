@@ -56,7 +56,7 @@ class StudentFeeController extends Controller
         StudentFee::create($data);
 
         return redirect()->route('student-fees.index')
-            ->with('success', 'Student Fee Added Successfully!');
+            ->with('success', 'Student fee added successfully!');
     }
 
     public function edit(StudentFee $studentFee)
@@ -67,21 +67,20 @@ class StudentFeeController extends Controller
 
     public function update(Request $request, StudentFee $studentFee)
     {
-        $validated = $this->validateRequest($request);
-
+        $this->validateRequest($request);
         $data = $this->prepareFeeData($request);
         $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         $studentFee->update($data);
 
         return redirect()->route('student-fees.index')
-            ->with('success', 'Fee Updated');
+            ->with('success', 'Student fee updated successfully!');
     }
 
     public function destroy(StudentFee $studentFee)
     {
         $studentFee->delete();
         return redirect()->route('student-fees.index')
-            ->with('success', 'Fee Deleted');
+            ->with('success', 'Student fee deleted successfully!');
     }
 
     /**

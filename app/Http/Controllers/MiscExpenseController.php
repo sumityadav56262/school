@@ -33,7 +33,7 @@ class MiscExpenseController extends Controller
         $validated = $this->validateRequestData($request);
         $validated['user_id'] = Auth::id();
         MiscExpense::create($validated);
-        return redirect()->route('misc-expenses.index')->with('success', 'Expense Added');
+        return redirect()->route('misc-expenses.index')->with('success', 'Expense Added successfully');
     }
 
     public function edit(MiscExpense $miscExpense)
@@ -45,13 +45,13 @@ class MiscExpenseController extends Controller
     {
         $validated = $this->validateRequestData($request);
         $miscExpense->update($validated);
-        return redirect()->route('misc-expenses.index')->with('success', 'Updated');
+        return redirect()->route('misc-expenses.index')->with('success', 'Record Updated successfully');
     }
 
     public function destroy(MiscExpense $miscExpense)
     {
         $miscExpense->delete();
-        return redirect()->route('misc-expenses.index')->with('success', 'Deleted');
+        return redirect()->route('misc-expenses.index')->with('success', 'Record archived successfully');
     }
     private function validateRequestData($request)
     {

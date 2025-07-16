@@ -45,7 +45,7 @@ class StudentController extends Controller
 
         return redirect()
             ->route('students.index')
-            ->with('success', 'Student added.');
+            ->with('success', 'Student added successfully.');
     }
 
     public function edit(Student $student)
@@ -72,7 +72,7 @@ class StudentController extends Controller
 
         return redirect()
             ->route('students.index')
-            ->with('success', 'Student updated.');
+            ->with('success', 'Student updated successfully.');
     }
 
     public function destroy(Student $student)
@@ -81,9 +81,8 @@ class StudentController extends Controller
 
         return redirect()
             ->route('students.index')
-            ->with('archive', 'Student moved to archived.');
+            ->with('archive', 'Student moved to archived successfully.');
     }
-
 
     public function getStudent(Request $request)
     {
@@ -117,7 +116,6 @@ class StudentController extends Controller
     protected function validateStudent(Request $request)
     {
         $rules = $this->validationRules();
-
         return $request->validate($rules, $this->validationMessages());
     }
 
