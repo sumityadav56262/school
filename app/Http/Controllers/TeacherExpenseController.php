@@ -34,20 +34,12 @@ class TeacherExpenseController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'salary_amt' => 'required|numeric',
-            'paid_amt'   => 'required|numeric',
-            'due_amt'    => 'required|numeric',
-            'paid_by'    => 'required|string|max:255',
-            'paid_date'  => 'required', // Added date validation
-            'remark'     => 'nullable|string',
-            'id_card_no' => [
-                'required',
-                Rule::exists('teachers')->where(fn ($query) =>
-                    $query->where('user_id', Auth::id())
-                ),
-            ],
-        ]);
+        $validated = $this->validateRequestData($request);
+
+        // Optional: Validate due_amt math relationship
+        if ((float)$validated['due_amt'] !== (float)$validated['salary_amt'] - (float)$validated['paid_amt']) {
+            return back()->withErrors(['due_amt' => 'Due amount must be equal to Salary amount minus Paid amount.'])->withInput();
+        }
 
         $teacher = Teacher::where('id_card_no', $validated['id_card_no'])->first();
 
@@ -73,7 +65,9 @@ class TeacherExpenseController extends Controller
 
     public function update(Request $request, TeacherExpense $teacherExpense)
     {
-        $teacherExpense->update($request->all());
+        $validated = $this->validateRequestData($request);
+        unset($validated['id_card_no']);
+        $teacherExpense->update($validated);
         return redirect()->route('teacher-expenses.index')->with('success', 'Updated');
     }
 
@@ -81,5 +75,56 @@ class TeacherExpenseController extends Controller
     {
         $teacherExpense->delete();
         return redirect()->route('teacher-expenses.index')->with('success', 'Deleted');
+    }
+
+    private function validateRequestData($request)
+    {
+        $validated = $request->validate(
+            [
+                'salary_amt' => 'required|numeric|min:0',
+                'paid_amt'   => 'required|numeric|min:0|lte:salary_amt',
+                'due_amt'    => 'required|numeric|min:0',
+                'paid_by'    => 'required|string|max:50',
+                'paid_date'  => 'required',
+                'remark'     => 'nullable|string|max:500',
+                'id_card_no' => [
+                    'required',
+                    Rule::exists('teachers', 'id_card_no')->where(
+                        fn($query) =>
+                        $query->where('user_id', Auth::id())
+                    ),
+                ],
+            ],
+            [
+                'salary_amt.required' => 'Salary amount is required.',
+                'salary_amt.numeric'  => 'Salary amount must be a number.',
+                'salary_amt.min'      => 'Salary amount cannot be negative.',
+
+                'paid_amt.required' => 'Paid amount is required.',
+                'paid_amt.numeric'  => 'Paid amount must be a number.',
+                'paid_amt.min'      => 'Paid amount cannot be negative.',
+                'paid_amt.lte'      => 'Paid amount cannot be greater than the salary amount.',
+
+                'due_amt.required' => 'Due amount is required.',
+                'due_amt.numeric'  => 'Due amount must be a number.',
+                'due_amt.min'      => 'Due amount cannot be negative.',
+
+                'paid_by.required' => 'Paid by field is required.',
+                'paid_by.string'   => 'Paid by must be a valid text.',
+                'paid_by.max'      => 'Paid by must not exceed 255 characters.',
+
+                'paid_date.required'    => 'Paid date is required.',
+                'paid_date.date'        => 'Paid date must be a valid date.',
+                'paid_date.date_format' => 'Paid date must be in the format YYYY-MM-DD.',
+
+                'remark.string' => 'Remark must be a valid text.',
+                'remark.max'    => 'Remark must not exceed 500 characters.',
+
+                'id_card_no.required' => 'ID Card No is required.',
+                'id_card_no.exists'   => 'The selected ID Card No is invalid for your account.',
+            ]
+        );
+
+        return $validated;
     }
 }

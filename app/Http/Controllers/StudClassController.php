@@ -78,10 +78,6 @@ class StudClassController extends Controller
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('stud_classes')->where(
-                    fn($query) =>
-                    $query->where('user_id', Auth::id())
-                ),
             ],
         ]);
         $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user

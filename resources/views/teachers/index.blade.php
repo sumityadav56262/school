@@ -16,6 +16,8 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Designation</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
                     <th data-dt-order="disable">Actions</th>
                 </tr>
             </thead>
@@ -25,6 +27,8 @@
                         <td>{{ $teacher->id_card_no }}</td>
                         <td>{{ $teacher->teacher_name }}</td>
                         <td>{{ $teacher->designation }}</td>
+                        <td>{{ $teacher->mobile_no }}</td>
+                        <td>{{ $teacher->address }}</td>
                         <td>
                             <div class="d-flex gap-1">
                                 <form action="{{ route('teachers.edit', $teacher) }}" method="GET" style="display:inline;">
@@ -32,7 +36,8 @@
                                     <button type="submit" class="btn btn-sm btn-primary">Edit</button>
                                 </form>
 
-                                <form action="{{ route('teachers.destroy', $teacher) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('teachers.destroy', $teacher) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"

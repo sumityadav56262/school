@@ -2,7 +2,7 @@
     <div class="form-group">
         <label for="id_card_no">ID Card No:</label>
         <input type="number" name="id_card_no" id="id_card_no"
-            value="{{ old('id_card_no', $teacherExpense->id_card_no ?? '') }}" required>
+            value="{{ old('id_card_no', $teacherExpense->teacher->id_card_no ?? '') }}" required>
         @error('id_card_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
