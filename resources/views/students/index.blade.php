@@ -7,11 +7,8 @@
         </div>
 
         <div class="nav-action">
-            <div class="add-button">
-                <a href="{{ route('students.create') }}" class="reset-button">Add Student</a>
-            </div>
-            <a href="{{ route('students.show', 'archived') }}"
-                class="btn text-white text-underline-none btn-danger reset-button">Archived</a>
+            <a href="{{ route('students.create') }}" class="btn btn-sm btn-success">Add Student</a>
+            <a href="{{ route('students.show', 'archived') }}" class="btn btn-sm btn-danger">Archived</a>
         </div>
 
         <table class="student_datatable">
