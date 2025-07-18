@@ -12,21 +12,15 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::where('is_archived', false)
-            ->with('class')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $students = Student::all();
 
         return view('students.index', compact('students'));
     }
     public function show(string $action)
     {
-        $students = Student::where('is_archived', true)
-            ->with('class')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $students = Student::onlyTrashed()->get();
 
-        return view('students.archive', compact('students'));
+        return view('students.trash', compact('students'));
     }
     public function create()
     {
@@ -54,14 +48,13 @@ class StudentController extends Controller
 
         return view('students.edit', compact('student', 'classNames'));
     }
-    public function restore(Student $student)
+    public function restore($id)
     {
-        $student->update(['is_archived' => false]);
-
-        return redirect()
-            ->route('students.show', 'archive')
-            ->with('success', 'Student restored succesfully.');
+        $student = Student::withTrashed()->findOrFail($id);
+        $student->restore();
+        return redirect()->back()->with('success', 'Student restored successfully.');
     }
+
     public function update(Request $request, Student $student)
     {
         $rules = $this->validationRules(update: true);
@@ -77,11 +70,11 @@ class StudentController extends Controller
 
     public function destroy(Student $student)
     {
-        $student->update(['is_archived' => true]);
+        $student->delete();
 
         return redirect()
             ->route('students.index')
-            ->with('archive', 'Student moved to archived successfully.');
+            ->with('archive', 'Student moved to Trash successfully.');
     }
 
     public function getStudent(Request $request)

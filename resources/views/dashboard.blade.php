@@ -5,7 +5,7 @@
 
     <div class="c_div">
         <!-- Total Students -->
-        <div class="students c_card">
+        <div class="students bg-success c_card">
             <h3>Students</h3>
             <p class="c_para">{{ $totalStudents ?? 0 }}</p>
         </div>

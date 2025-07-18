@@ -13,7 +13,10 @@ use App\Http\Controllers\MiscExpenseController;
 use App\Http\Controllers\SubscriptionController;
 
 use App\Http\Middleware\Subscription;
+use App\Models\MiscExpense;
+use App\Models\StudentFee;
 use App\Models\Teacher;
+use App\Models\TeacherExpense;
 
 Route::middleware('guest')->group(function () {
     // Authentication Routes
@@ -60,9 +63,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('teacher-expenses', TeacherExpenseController::class);
     Route::resource('misc-expenses', MiscExpenseController::class);
 
-    //restore archived student
-    Route::get('/students/archive/restore/{student}', [StudentController::class, 'restore'])
-        ->name('students.restore');
+    //restore trashed records
+    Route::post('/students/trash/restore/{student}', [StudentController::class, 'restore'])->name('students.restore');
+    Route::post('/students-fees/trash/restore/{student}', [StudentFeeController::class, 'restore'])->name('student-fees.restore');
+    Route::post('/stud-classes/trashes/restore/{class}', [StudClassController::class, 'restore'])->name('stud-classes.restore');
+    Route::post('/teachers/trashes/restore/{class}', [TeacherController::class, 'restore'])->name('teachers.restore');
+    Route::post('/teacher-expenses/trashes/restore/{class}', [TeacherExpenseController::class, 'restore'])->name('teacher-expenses.restore');
+    Route::post('/misc-expenses/trashes/restore/{class}', [MiscExpenseController::class, 'restore'])->name('misc-expenses.restore');
 
     //change password
     Route::view('/change-password', 'auth.change-password')->name('password.change');

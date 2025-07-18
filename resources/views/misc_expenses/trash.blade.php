@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header bg-success">Misc Expenses</div>
-        <div class="nav-action">
-            <a href="{{ route('misc-expenses.create') }}" class="btn btn-sm btn-success">Add Expense</a>
-            <a href="{{ route('misc-expenses.show', 'trash') }}" class="btn btn-sm btn-danger">Trash</a>
-        </div>
+        <div class="add-fees-header bg-danger">Misc Expenses</div>
         <table class="misc_expenses_datatable">
             <thead>
                 <tr>
@@ -26,18 +22,11 @@
                         <td>{{ $exp->payment_date }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('misc-expenses.edit', $exp->id) }}" method="GET"
+                                <form action="{{ route('misc-expenses.restore', $exp) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                                </form>
-
-                                <form action="{{ route('misc-expenses.destroy', $exp) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to trash this record?')">Trash</button>
+                                    <button type="submit" class="btn btn-sm btn-success"
+                                        onclick="return confirm('Are you sure you want to restore this record?')">Restore</button>
                                 </form>
                             </div>
                         </td>

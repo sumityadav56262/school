@@ -24,36 +24,37 @@
 
     <div class="container">
         <div class="menu">
-            <a class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+            <a class="menu-item {{ request()->routeIs('dashboard') ? 'bg-success' : '' }}"
+                href="{{ route('dashboard') }}">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('students.*') ? 'active' : '' }}"
-                href="{{ route('students.index') }}">
-                <i class="fas fa-user-graduate"></i>
-                <span>Students</span>
-            </a>
-            <a class="menu-item {{ request()->routeIs('student-fees.*') ? 'active' : '' }}"
-                href="{{ route('student-fees.index') }}">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <span>Student Fees</span>
-            </a>
-            <a class="menu-item {{ request()->routeIs('stud-classes.*') ? 'active' : '' }}"
+            <a class="menu-item {{ request()->routeIs('stud-classes.*') ? 'bg-success' : '' }}"
                 href="{{ route('stud-classes.index') }}">
                 <i class="fas fa-school"></i>
                 <span>Classes</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('teachers.*') ? 'active' : '' }}"
+            <a class="menu-item {{ request()->routeIs('students.*') ? 'bg-success' : '' }}"
+                href="{{ route('students.index') }}">
+                <i class="fas fa-user-graduate"></i>
+                <span>Students</span>
+            </a>
+            <a class="menu-item {{ request()->routeIs('student-fees.*') ? 'bg-success' : '' }}"
+                href="{{ route('student-fees.index') }}">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Student Fees</span>
+            </a>
+            <a class="menu-item {{ request()->routeIs('teachers.*') ? 'bg-success' : '' }}"
                 href="{{ route('teachers.index') }}">
                 <i class="fas fa-chalkboard-teacher"></i>
                 <span>Teachers</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('teacher-expenses.*') ? 'active' : '' }}"
+            <a class="menu-item {{ request()->routeIs('teacher-expenses.*') ? 'bg-success' : '' }}"
                 href="{{ route('teacher-expenses.index') }}">
                 <i class="fas fa-money-bill-wave"></i>
                 <span>Teacher Exps</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('misc-expenses.*') ? 'active' : '' }}"
+            <a class="menu-item {{ request()->routeIs('misc-expenses.*') ? 'bg-success' : '' }}"
                 href="{{ route('misc-expenses.index') }}">
                 <i class="fas fa-coins"></i>
                 <span>Misc Exps</span>

@@ -16,14 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('particular');
             $table->integer('amount');
-            $table->boolean('is_archived')->default(false);
             $table->string('payment_by');
             $table->string('payment_date');
             $table->string('remark')->nullable();
+            $table->softDeletes(); // This will add a deleted_at column for soft deletes
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.

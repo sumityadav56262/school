@@ -19,6 +19,11 @@ class StudentFeeController extends Controller
     }
     public function show($id)
     {
+        if ($id === 'trash') {
+            $fees = StudentFee::onlyTrashed()->with('student')->get();
+            return view('student_fees.trash', compact('fees'));
+        }
+
         // Eager load 'student' and 'feeParticulars' relationships
         $studentFee = StudentFee::with(['student'])->find($id);
 
@@ -83,6 +88,13 @@ class StudentFeeController extends Controller
             ->with('success', 'Student fee deleted successfully!');
     }
 
+    public function restore($id)
+    {
+        $studentFee = StudentFee::withTrashed()->findOrFail($id);
+        $studentFee->restore();
+        return redirect()->route('student-fees.show', 'trash')
+            ->with('success', 'Student fee restored successfully!');
+    }
     /**
      * Validate incoming request.
      */
@@ -104,7 +116,7 @@ class StudentFeeController extends Controller
             'vest_fee' => 'required|numeric',
             'computer_fee' => 'required|numeric',
             'trouser_fee' => 'required|numeric',
-            'admission_date' => 'nullable|date',
+            'admission_date' => 'nullable',
             'discount_amt' => 'nullable|numeric|min:0',
             'payment_amt' => 'nullable|numeric|min:0',
             'recurring_dues' => 'nullable|numeric|min:0',

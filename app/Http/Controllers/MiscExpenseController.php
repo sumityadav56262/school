@@ -15,6 +15,17 @@ class MiscExpenseController extends Controller
         return view('misc_expenses.index', compact('expenses'));
     }
 
+    public function show($id)
+    {
+        if ($id === 'trash') {
+            $expenses = MiscExpense::onlyTrashed()->get();
+            return view('misc_expenses.trash', compact('expenses'));
+        }
+
+        $expense = MiscExpense::findOrFail($id);
+        return view('misc_expenses.show', compact('expense'));
+    }
+
     public function create()
     {
         $nepaliToday = NepaliCalendar::today();
@@ -52,6 +63,12 @@ class MiscExpenseController extends Controller
     {
         $miscExpense->delete();
         return redirect()->route('misc-expenses.index')->with('success', 'Record archived successfully');
+    }
+    public function restore($id)
+    {
+        $miscExpense = MiscExpense::withTrashed()->findOrFail($id);
+        $miscExpense->restore();
+        return redirect()->route('misc-expenses.show', 'trash')->with('success', 'Record restored successfully');
     }
     private function validateRequestData($request)
     {

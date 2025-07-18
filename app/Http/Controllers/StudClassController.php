@@ -51,10 +51,10 @@ class StudClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        $studClass = StudClass::findOrFail($id);
-        return view('stud-classes.show', compact('studClass'));
+        $classes = StudClass::onlyTrashed()->get();
+        return view('stud-classes.trash', compact('classes'));
     }
 
     /**
@@ -86,6 +86,13 @@ class StudClassController extends Controller
         return redirect()->route('stud-classes.index')->with('success', 'Class updated successfully.');
     }
 
+    public function restore(string $id)
+    {
+        $studClass = StudClass::withTrashed()->findOrFail($id);
+        $studClass->restore();
+
+        return redirect()->route('stud-classes.index')->with('success', 'Class restored successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      */

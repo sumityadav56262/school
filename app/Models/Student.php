@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends UserScopedModel
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
@@ -29,6 +30,20 @@ class Student extends UserScopedModel
 
     public function class()
     {
-        return $this->belongsTo(StudClass::class, 'class_id', 'id');
+        return $this->belongsTo(StudClass::class, 'class_id', 'id')->withTrashed();
+    }
+    protected static function booted()
+    {
+        static::deleting(function ($student) {
+            if (! $student->isForceDeleting()) {
+                $student->fees()->delete(); // soft delete related posts
+            } else {
+                $student->fees()->forceDelete(); // hard delete
+            }
+        });
+
+        static::restoring(function ($student) {
+            $student->fees()->withTrashed()->restore(); // restore related posts
+        });
     }
 }

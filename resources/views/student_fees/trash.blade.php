@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header bg-success">Student Fees</div>
-        <div class="nav-action">
-            <a href="{{ route('student-fees.create') }}" class="btn btn-success btn-sm">Add Fee</a>
-            <a href="{{ route('student-fees.show', 'trash') }}" class="btn btn-danger btn-sm">Trash</a>
-        </div>
+        <div class="add-fees-header bg-danger">Trashed Student Fees</div>
 
         <table class="student_fee_datatable">
             <thead>
@@ -39,23 +35,11 @@
                         <td>{{ $fee->recurring_dues }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('student-fees.show', $fee->id) }}" method="GET"
+                                <form action="{{ route('student-fees.restore', $fee) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-success">View</button>
-                                </form>
-
-                                <form action="{{ route('student-fees.edit', $fee->id) }}" method="GET"
-                                    style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                                </form>
-
-                                <form action="{{ route('student-fees.destroy', $fee) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to trash this record?')">Trash</button>
+                                        onclick="return confirm('Are you sure you want to restore this record?')">Restore</button>
                                 </form>
                             </div>
                         </td>

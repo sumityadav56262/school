@@ -16,13 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('emis_no')->unique();
             $table->unsignedBigInteger('class_id');
-            $table->boolean('active')->default(false);
-            $table->boolean('is_archived')->default(false);
             $table->string('stud_name');
             $table->integer('roll_no');
             $table->string('father_name');
             $table->string('mobile_no');
             $table->string('address');
+            $table->softDeletes(); // Add soft delete functionality
             $table->timestamps();
 
             $table->foreign('class_id')->references('id')->on('stud_classes')->onDelete('cascade');

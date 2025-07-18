@@ -2,11 +2,7 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header bg-success">Classes</div>
-        <div class="nav-action">
-            <a href="{{ route('stud-classes.create') }}" class="btn btn-success btn-sm">Add Class</a>
-            <a href="{{ route('stud-classes.show', 'trash') }}" class="btn btn-danger btn-sm">Trash</a>
-        </div>
+        <div class="add-fees-header bg-danger">Trashed Classes</div>
         <table class="student_classes_datatable">
             <thead>
                 <tr>
@@ -22,19 +18,12 @@
                         <td>{{ $class->class_name }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('stud-classes.edit', $class->id) }}" method="GET"
+                                <form action="{{ route('stud-classes.restore', $class->id) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                                </form>
-
-                                <form action="{{ route('stud-classes.destroy', $class->id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to trash this class?')">
-                                        Trash
+                                        onclick="return confirm('Are you sure you want to restore this class?')">
+                                        Restore
                                     </button>
                                 </form>
                             </div>

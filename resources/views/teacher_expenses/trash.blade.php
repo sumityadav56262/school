@@ -2,10 +2,8 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header bg-success">Teacher Expenses</div>
+        <div class="add-fees-header bg-danger">Trashed Expenses</div>
         <div class="nav-action">
-            <a href="{{ route('teacher-expenses.create') }}" class="btn btn-success btn-sm">Add Expense</a>
-            <a href="{{ route('teacher-expenses.show', 'trash') }}" class="btn btn-danger btn-sm">Trash</a>
         </div>
         <table class="teacher_expense_datatable">
             <thead>
@@ -28,19 +26,12 @@
                         <td>{{ $exp->paid_date }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('teacher-expenses.edit', $exp) }}" method="GET"
+                                <form action="{{ route('teacher-expenses.restore', $exp) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-primary">Edit</button>
-                                </form>
-
-                                <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to trash this record?')">
-                                        Trash
+                                    <button type="submit" class="btn btn-sm btn-success"
+                                        onclick="return confirm('Are you sure you want to restore this record?')">
+                                        Restore
                                     </button>
                                 </form>
                             </div>

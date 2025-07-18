@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('teacher_id');
-            $table->boolean('is_archived')->default(false);
             $table->integer('salary_amt');
             $table->integer('paid_amt');
             $table->integer('due_amt');
             $table->string('paid_by');
             $table->string('paid_date');
             $table->string('remark')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');

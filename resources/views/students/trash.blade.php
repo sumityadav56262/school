@@ -3,7 +3,7 @@
 @section('content')
     <div class="add-fees-section">
         <div class="add-fees-header bg-danger">
-            Archived Students
+            Trashed Students
         </div>
 
         <table class="student_datatable">
@@ -31,10 +31,11 @@
                         <td>{{ $student->address }}</td>
                         <td>
                             <div class="d-flex gap-1">
-                                <form action="{{ route('students.restore', $student) }}" method="GET"
+                                <form action="{{ route('students.restore', $student) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-success">Restore</button>
+                                    <button type="submit" class="btn btn-sm btn-success"
+                                        onclick="return confirm('Are you sure you want to restore this record?')">Restore</button>
                                 </form>
                             </div>
                         </td>

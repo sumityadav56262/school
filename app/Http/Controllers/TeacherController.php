@@ -15,6 +15,14 @@ class TeacherController extends Controller
         return view('teachers.index', compact('teachers'));
     }
 
+    public function show(string $action)
+    {
+        if ($action === 'trash') {
+            $teachers = Teacher::onlyTrashed()->get();
+            return view('teachers.trash', compact('teachers'));
+        }
+    }
+
     public function create()
     {
         return view('teachers.create');
@@ -44,6 +52,13 @@ class TeacherController extends Controller
     {
         $teacher->delete();
         return redirect()->route('teachers.index')->with('success', 'Teacher deleted successfully!');
+    }
+
+    public function restore($id)
+    {
+        $teacher = Teacher::withTrashed()->findOrFail($id);
+        $teacher->restore();
+        return redirect()->back()->with('success', 'Teacher restored successfully.');
     }
 
     public function getTeacherByIdCardNo(Request $request)

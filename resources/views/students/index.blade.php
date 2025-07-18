@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header">
+        <div class="add-fees-header bg-success">
             Manage Students
         </div>
 
         <div class="nav-action">
             <a href="{{ route('students.create') }}" class="btn btn-sm btn-success">Add Student</a>
-            <a href="{{ route('students.show', 'archived') }}" class="btn btn-sm btn-danger">Archived</a>
+            <a href="{{ route('students.show', 'trash') }}" class="btn btn-sm btn-danger">Trash</a>
         </div>
 
         <table class="student_datatable">
@@ -47,8 +47,8 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger"
-                                        onclick="return confirm('Are you sure you want to archive this student?')">
-                                        Archive
+                                        onclick="return confirm('Are you sure you want to trash this student?')">
+                                        Trash
                                     </button>
                                 </form>
                             </div>

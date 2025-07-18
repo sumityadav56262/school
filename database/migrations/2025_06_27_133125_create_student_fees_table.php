@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('emis_no');
-            $table->boolean('is_archived')->default(false);
             $table->string('payment_date');
             $table->string('admission_date')->nullable();
             $table->string('month_name');
@@ -37,6 +36,7 @@ return new class extends Migration
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();
             $table->string('recurring_dues_included_amt')->nullable();
+            $table->softDeletes(); // Add soft delete column
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');

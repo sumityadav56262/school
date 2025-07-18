@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('class_name');
-            $table->boolean('is_archived')->default(false);
+            $table->softDeletes(); // Add soft delete functionality
             $table->timestamps();
-            
+
             $table->unique(['user_id', 'class_name']); // Ensure unique class names per user
         });
     }
-
 
     /**
      * Reverse the migrations.

@@ -18,6 +18,14 @@ class TeacherExpenseController extends Controller
         return view('teacher_expenses.index', compact('expenses'));
     }
 
+    public function show($id)
+    {
+        if ($id === 'trash') {
+            $expenses = TeacherExpense::onlyTrashed()->get();
+            return view('teacher_expenses.trash', compact('expenses'));
+        }
+        return redirect()->route('teacher-expenses.index');
+    }
     public function create()
     {
         $teachers = Teacher::all();
@@ -76,6 +84,12 @@ class TeacherExpenseController extends Controller
         return redirect()->route('teacher-expenses.index')->with('success', 'Record deleted successfully!');
     }
 
+    public function restore($id)
+    {
+        $teacherExpense = TeacherExpense::withTrashed()->findOrFail($id);
+        $teacherExpense->restore();
+        return redirect()->route('teacher-expenses.show', 'trash')->with('success', 'Record restored successfully!');
+    }
     private function validateRequestData($request)
     {
         $validated = $request->validate(
