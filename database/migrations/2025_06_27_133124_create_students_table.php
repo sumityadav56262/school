@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('father_name');
             $table->string('mobile_no');
             $table->string('address');
+            $table->unique(['class_id', 'roll_no'], 'unique_student_class_roll'); // Ensure unique combination of emis_no, class_id, and roll_no
             $table->softDeletes(); // Add soft delete functionality
             $table->timestamps();
 

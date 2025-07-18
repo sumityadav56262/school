@@ -7,6 +7,7 @@ use App\Models\StudClass;
 use App\Models\StudentFee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class StudentController extends Controller
 {
@@ -57,7 +58,7 @@ class StudentController extends Controller
 
     public function update(Request $request, Student $student)
     {
-        $rules = $this->validationRules(update: true);
+        $rules = $this->validationRules($request, update: true);
 
         $validated = $request->validate($rules, $this->validationMessages());
 
@@ -108,18 +109,24 @@ class StudentController extends Controller
      */
     protected function validateStudent(Request $request)
     {
-        $rules = $this->validationRules();
+        $rules = $this->validationRules($request);
         return $request->validate($rules, $this->validationMessages());
     }
 
     /**
      * Returns student validation rules.
      */
-    protected function validationRules(bool $update = false): array
+    protected function validationRules(Request $request, bool $update = false): array
     {
         $rules = [
             'class_id' => ['required', 'exists:stud_classes,id'],
-            'roll_no' => ['required', 'integer', 'min:1'],
+            'roll_no' => [
+                'required',
+                'integer',
+                Rule::unique('students')->where(function ($query) use ($request) {
+                    return $query->where('class_id', $request->class_id);
+                }),
+            ],
             'father_name' => ['required', 'string', 'max:100'],
             'mobile_no' => ['required', 'regex:/^[0-9]{10}$/'],
             'address' => ['required', 'string', 'max:255'],
