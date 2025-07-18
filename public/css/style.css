@@ -11,7 +11,7 @@ body {
 
 .h-line {
     width: 100%;
-    border: #28a745 2px solid;
+    border: #198754 2px solid;
     margin-top: 25px;
 }
 .container {
@@ -19,7 +19,7 @@ body {
     width: 100%;
     max-width: 1200px;
     height: 100%;
-    border-top: 1px solid #28a745;
+    border-top: 1px solid #198754;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -89,7 +89,7 @@ body {
     /* padding: 10px; */
 }
 .nav-action .add-button {
-    background-color: #28a745;
+    background-color: #198754;
     padding: 10px;
     text-decoration: none;
     border-radius: 3px;
@@ -107,7 +107,7 @@ body {
     }
     button {
         margin: 0%;
-        background-color: #28a745;
+        background-color: #198754;
         padding: 10px;
         outline: none;
         border-radius: 0 5px 5px 0;
@@ -131,7 +131,7 @@ body {
 }
 
 .students {
-    background-color: #28a745;
+    background-color: #198754;
 }
 .teachers {
     background: #007bff;
@@ -179,7 +179,7 @@ body {
     }
 }
 .add-fees-header {
-    background-color: #28a745;
+    background-color: #198754;
     color: white;
     padding: 10px;
     text-align: center;
@@ -233,7 +233,7 @@ body {
 }
 
 .add-fees-footer button {
-    background-color: #28a745;
+    background-color: #198754;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -365,12 +365,12 @@ table tr:hover {
 .datepicker--nav-title i,
 .datepicker--day-name,
 .datepicker--nav {
-    color: #28a745 !important ;
+    color: #198754 !important ;
 }
 
 .datepicker--cell.-selected-,
 .datepicker--nav-action {
-    background: #28a745 !important ;
+    background: #198754 !important ;
 }
 /* Nepali Calender END*/
 .dropdown-item:active {

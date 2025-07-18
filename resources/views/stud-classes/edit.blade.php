@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header">Edit Class</div>
+        <div class="add-fees-header bg-success">Edit Class</div>
 
         <form method="POST" action="{{ route('stud-classes.update', $studClass->id) }}">
             @csrf

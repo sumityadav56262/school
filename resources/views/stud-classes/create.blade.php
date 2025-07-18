@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="add-fees-section">
-        <div class="add-fees-header">Add Class</div>
+        <div class="add-fees-header bg-success">Add Class</div>
 
         <form method="POST" action="{{ route('stud-classes.store') }}">
             @csrf
