@@ -70,7 +70,7 @@ body {
     transform: translateY(2px);
 }
 .menu-item.active {
-    background-color: #28a745;
+    background-color: #a76128;
 }
 
 /* Main Content */
@@ -375,5 +375,10 @@ table tr:hover {
 /* Nepali Calender END*/
 .dropdown-item:active {
     background-color: #198754 !important; /* Bootstrap's green (`.bg-success`) */
-    color: #fff !important;              /* Text color white */
+    color: #fff !important; /* Text color white */
+}
+
+/* Form Group End for error messages */
+.form-group-end {
+    justify-content: flex-end;
 }

@@ -17,13 +17,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('emis_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('class_id')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -41,12 +41,12 @@
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('stud_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('roll_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -65,12 +65,12 @@
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('father_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('mobile_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -85,7 +85,7 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('address')
             <span class="text-danger">{{ $message }}</span>
         @enderror

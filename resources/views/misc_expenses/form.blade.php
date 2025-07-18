@@ -13,13 +13,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-grow">
+    <div class="form-grow form-group-end">
         @error('particular')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-grow">
+    <div class="form-grow form-group-end">
         @error('payment_date')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -40,13 +40,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-grow">
+    <div class="form-grow form-group-end">
         @error('amount')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-grow">
+    <div class="form-grow form-group-end">
         @error('payment_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror

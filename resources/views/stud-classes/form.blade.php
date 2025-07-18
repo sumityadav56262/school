@@ -5,7 +5,7 @@
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('class_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror

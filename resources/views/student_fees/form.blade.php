@@ -15,13 +15,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('emis_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
 
         @error('payment_by')
             <span class="text-danger">{{ $message }}</span>
@@ -50,13 +50,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('class_id')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('roll_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -78,13 +78,13 @@
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('student_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('admission_date')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -107,13 +107,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('month_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('exam_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -134,13 +134,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('yearly_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('monthly_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -161,13 +161,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('vest_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('tie_belt_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -189,13 +189,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('eca_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('computer_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -216,13 +216,13 @@
     </div>
 </div>
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('game_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('trouser_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -249,12 +249,12 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('misc_fee')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('recurring_dues')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -277,12 +277,12 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('total_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('payment_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -303,12 +303,12 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('discount_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('dues_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -329,12 +329,12 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('payment_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('received_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror

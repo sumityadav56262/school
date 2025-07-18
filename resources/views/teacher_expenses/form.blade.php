@@ -13,13 +13,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('id_card_no')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('paid_date')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -47,13 +47,13 @@
 
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('teacher_name')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('salary_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -76,13 +76,13 @@
 
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('paid_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('due_amt')
             <span class="text-danger">{{ $message }}</span>
         @enderror
@@ -103,13 +103,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('paid_by')
             <span class="text-danger">{{ $message }}</span>
         @enderror
     </div>
 
-    <div class="form-group">
+    <div class="form-group form-group-end">
         @error('remark')
             <span class="text-danger">{{ $message }}</span>
         @enderror
