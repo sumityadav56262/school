@@ -30,7 +30,7 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate($this->validationRules());
+        $request->validate($this->validationRules(), $this->validationMessages());
         Teacher::create($request->merge(['user_id' => Auth::id()])->all());
         return redirect()->route('teachers.index')->with('success', 'Teacher added successfully!');
     }
