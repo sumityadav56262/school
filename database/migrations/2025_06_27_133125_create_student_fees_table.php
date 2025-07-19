@@ -36,10 +36,12 @@ return new class extends Migration
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();
             $table->string('recurring_dues_included_amt')->nullable();
+            $table->unsignedBigInteger('invoice_no');
             $table->softDeletes(); // Add soft delete column
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');
+            $table->unique(['user_id', 'invoice_no']);
         });
     }
 
