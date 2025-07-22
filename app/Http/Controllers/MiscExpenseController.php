@@ -29,13 +29,6 @@ class MiscExpenseController extends Controller
     public function create()
     {
         $nepaliToday = NepaliCalendar::today();
-        if (!empty($nepaliToday)) {
-            $parts = explode('-', $nepaliToday);
-            if (count($parts) === 3) {
-                $nepaliToday = $parts[2] . '/' . $parts[1] . '/' . $parts[0];
-            }
-        }
-
         return view('misc_expenses.create', compact('nepaliToday'));
     }
 

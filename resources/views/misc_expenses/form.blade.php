@@ -7,7 +7,7 @@
 
     <div class="form-group">
         <label>Payment Date:</label>
-        <input class="datepicker-here" type="text" data-language="nep" name="payment_date" id="payment_date"
+        <input type="text" name="payment_date" id="nepali-datepicker"
             value="{{ old('payment_date', $miscExpense->payment_date ?? $nepaliToday) }}" required>
     </div>
 </div>

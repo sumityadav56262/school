@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 
     {{-- Nepali datepicker CSS --}}
-    <link href="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.css" rel="stylesheet">
+    <link href="https://nepalidatepicker.sajanmaharjan.com.np/v5/nepali.datepicker/css/nepali.datepicker.v5.0.4.min.css"
+        rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -78,8 +79,9 @@
     {{-- Jquery JS --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    {{-- Nepali datepicker JS --}}
-    <script src="https://cdn.rohan.info.np/NepaliDatePicker/Nepali-datepicker.min.js"></script>
+    <!-- Nepali datepicker -->
+    <<script src="https://nepalidatepicker.sajanmaharjan.com.np/v5/nepali.datepicker/js/nepali.datepicker.v5.0.4.min.js"
+        type="text/javascript"></script>
 
     {{-- Boostrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -98,6 +100,16 @@
     <script src="{{ asset('js/teacher_expense.js') }}"></script>
 
     <script type="text/javascript">
+        $(function() {
+            var stud_admission_date = document.getElementById("nepali-datepicker");
+            stud_admission_date.NepaliDatePicker();
+
+            var paid_date = document.getElementById("paid_date");
+            paid_date.NepaliDatePicker();
+
+        });
+
+        console.log(NepaliFunctions.BS.GetCurrentDate());
         // -------------------------------
         // Initialize all DataTables
         // -------------------------------

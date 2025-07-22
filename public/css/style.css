@@ -69,9 +69,6 @@ body {
     text-align: center;
     transform: translateY(2px);
 }
-.menu-item.active {
-    background-color: #a76128;
-}
 
 /* Main Content */
 .main-content {
@@ -187,6 +184,22 @@ body {
     margin: -20px -20px 20px -20px; /* Adjust to full width of the section */
 }
 
+.add-fees-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-fees-footer button {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: 0 10px;
+}
 .form-row {
     display: flex;
     justify-content: space-between;
@@ -226,153 +239,29 @@ body {
     background-color: #e9e9e9;
 }
 
-.add-fees-footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.add-fees-footer button {
-    background-color: #198754;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    margin: 0 10px;
-}
-
-.add-fees-footer .reset-button {
-    background-color: #ffc107;
-    font-size: 14px;
-    border-radius: 4px;
-}
-
-.add-fees-footer .reset-button img {
-    width: 24px; /* Adjust icon size */
-    vertical-align: middle;
-}
-
-.previous-dues {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    justify-content: flex-end;
-    margin-left: auto; /* Push to the right */
-}
-
-.previous-dues input[type="checkbox"] {
-    margin-right: 5px;
-    transform: scale(1.2);
-}
-
-.previous-dues input[type="text"] {
-    width: 80px;
-    text-align: center;
-}
-
-/* Total Amount Section */
-.total-amount-section {
-    width: 250px;
-    border: 1px solid #ccc;
-    margin-left: 20px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.total-amount-header {
-    background-color: #6c757d;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.amount-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.amount-row:last-child {
-    border-bottom: none;
-}
-
-.amount-row label {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.amount-box {
-    background-color: #e0e0e0;
-    padding: 8px 12px;
-    border-radius: 4px;
-    min-width: 80px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.amount-row.received .amount-box {
-    background-color: #d4edda; /* Light green */
-    color: #155724; /* Dark green */
-}
-
-.amount-row.expenses .amount-box {
-    background-color: #f8d7da; /* Light red */
-    color: #721c24; /* Dark red */
-}
-
-.amount-row.dues .amount-box {
-    background-color: #ffeeba; /* Light yellow */
-    color: #856404; /* Dark yellow */
-}
-
-table {
-    border-collapse: collapse;
-    margin-top: 10px;
-    width: 100%;
-    font-family: sans-serif;
-}
-
-table th {
-    background-color: #f5f5f5;
-    font-size: 15px;
-}
-
-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-}
-
-table tr:hover {
-    background-color: #eef;
-}
-
 /* Nepali Calender START */
-.datepicker--nav-title,
-.datepicker--nav-title i,
-.datepicker--day-name,
-.datepicker--nav {
-    color: #198754 !important ;
+.ndp-table th {
+    background-color: white;
+}
+.ndp-table td,
+.ndp-table th {
+    border: none;
 }
 
-.datepicker--cell.-selected-,
-.datepicker--nav-action {
-    background: #198754 !important ;
+.ndp-table .ndp-today {
+    color: #198754 !important;
 }
-/* Nepali Calender END*/
+
+.ndp-container.ndp-light .ndp-table td.ndp-selected {
+    background: #198754 !important;
+    color: white !important;
+}
+
+.ndp-table tbody tr:nth-of-type(odd),
+.ndp-table tbody tr:nth-of-type(even) {
+    background-color: transparent !important;
+}
+
 .dropdown-item:active {
     background-color: #198754 !important; /* Bootstrap's green (`.bg-success`) */
     color: #fff !important; /* Text color white */

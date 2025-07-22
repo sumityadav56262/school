@@ -35,7 +35,7 @@
         <label for="class_name">Class:</label>
         <select name="class_id" id="class_name" required>
             @foreach ($classNames as $className)
-                <option value="{{ $className->id }}"
+                <option class="dropdown-item" value="{{ $className->id }}"
                     {{ old('class_id', $studentFee->student->class_id ?? '') === $className->id ? 'selected' : '' }}>
                     {{ $className->class_name }} </option>
             @endforeach
@@ -73,7 +73,7 @@
     </div>
     <div class="form-group">
         <label for="admission_date">Adm. Date:</label>
-        <input class="datepicker-here" type="text" data-language="nep" name="admission_date" id="admission_date"
+        <input type="text" id="nepali-datepicker" name="admission_date" placeholder="Select nepali date"
             value="{{ old('admission_date', $studentFee->admission_date ?? '') }}">
     </div>
 </div>
