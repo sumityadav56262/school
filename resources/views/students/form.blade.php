@@ -9,7 +9,7 @@
         <select name="class_id" id="class_name" required>
             @foreach ($classNames as $className)
                 <option value="{{ $className->id }}"
-                    {{ old('class_id', $student->class_id ?? '') === $className->id ? 'selected' : '' }}>
+                    {{ old('class_id', $student->class_id ?? '') == $className->id ? 'selected' : '' }}>
                     {{ $className->class_name }} </option>
             @endforeach
         </select>
