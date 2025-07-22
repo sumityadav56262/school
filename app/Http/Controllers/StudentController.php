@@ -118,6 +118,8 @@ class StudentController extends Controller
      */
     protected function validationRules(Request $request, bool $update = false): array
     {
+        $studentId = $request->route('student')?->id; // Get the current student's ID if updating
+
         $rules = [
             'class_id' => ['required', 'exists:stud_classes,id'],
             'roll_no' => [
@@ -125,7 +127,7 @@ class StudentController extends Controller
                 'integer',
                 Rule::unique('students')->where(function ($query) use ($request) {
                     return $query->where('class_id', $request->class_id);
-                }),
+                })->ignore($studentId), // Ignore current student on update
             ],
             'father_name' => ['required', 'string', 'max:100'],
             'mobile_no' => ['required', 'regex:/^[0-9]{10}$/'],
