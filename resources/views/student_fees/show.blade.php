@@ -51,7 +51,7 @@
                                 'Computer Fee' => $studentFee->computer_fee,
                                 'ECA Fee' => $studentFee->eca_fee,
                                 'Misc. Fee' => $studentFee->misc_fee,
-                                'Previous Dues' => $studentFee->recurring_dues,
+                                'Recurring Dues' => $studentFee->recurring_dues,
                             ];
                             $sr = 1;
                         @endphp
