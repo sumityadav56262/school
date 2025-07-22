@@ -30,7 +30,7 @@ class Student extends UserScopedModel
 
     public function class()
     {
-        return $this->belongsTo(StudClass::class, 'class_id', 'id')->withTrashed();
+        return $this->belongsTo(StudClass::class, 'class_id', 'id');
     }
     protected static function booted()
     {

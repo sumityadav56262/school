@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('students', StudentController::class);
     Route::resource('student-fees', StudentFeeController::class);
-    Route::resource('stud-classes', StudClassController::class);
+    //Route::resource('stud-classes', StudClassController::class);
     Route::resource('teachers', TeacherController::class);
     Route::resource('teacher-expenses', TeacherExpenseController::class);
     Route::resource('misc-expenses', MiscExpenseController::class);
@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     //restore trashed records
     Route::post('/students/trash/restore/{student}', [StudentController::class, 'restore'])->name('students.restore');
     Route::post('/students-fees/trash/restore/{student}', [StudentFeeController::class, 'restore'])->name('student-fees.restore');
-    Route::post('/stud-classes/trashes/restore/{class}', [StudClassController::class, 'restore'])->name('stud-classes.restore');
+    //Route::post('/stud-classes/trashes/restore/{class}', [StudClassController::class, 'restore'])->name('stud-classes.restore');
     Route::post('/teachers/trashes/restore/{class}', [TeacherController::class, 'restore'])->name('teachers.restore');
     Route::post('/teacher-expenses/trashes/restore/{class}', [TeacherExpenseController::class, 'restore'])->name('teacher-expenses.restore');
     Route::post('/misc-expenses/trashes/restore/{class}', [MiscExpenseController::class, 'restore'])->name('misc-expenses.restore');

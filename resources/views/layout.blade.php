@@ -29,11 +29,6 @@
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
-            <a class="menu-item {{ request()->routeIs('stud-classes.*') ? 'bg-success' : '' }}"
-                href="{{ route('stud-classes.index') }}">
-                <i class="fas fa-school"></i>
-                <span>Classes</span>
-            </a>
             <a class="menu-item {{ request()->routeIs('students.*') ? 'bg-success' : '' }}"
                 href="{{ route('students.index') }}">
                 <i class="fas fa-user-graduate"></i>

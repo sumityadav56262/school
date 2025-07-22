@@ -25,7 +25,7 @@ return new class extends Migration
             $table->softDeletes(); // Add soft delete functionality
             $table->timestamps();
 
-            $table->foreign('class_id')->references('id')->on('stud_classes')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('stud_classes');
         });
     }
 
