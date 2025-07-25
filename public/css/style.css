@@ -15,7 +15,8 @@ body {
 
 .h-line {
     width: 100%;
-    border: #198754 2px solid;
+    height: 2px;
+    background-image: linear-gradient(#10b981 0%, #059669 100%);
     margin-top: 25px;
 }
 .container {

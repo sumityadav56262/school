@@ -104,6 +104,8 @@
         type="text/javascript"></script>
 
     {{-- Boostrap JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Nepali datepicker -->
     <script src="https://nepalidatepicker.sajanmaharjan.com.np/v5/nepali.datepicker/js/nepali.datepicker.v5.0.4.min.js"
         type="text/javascript"></script>
