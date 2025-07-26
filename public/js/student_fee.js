@@ -19,16 +19,6 @@ function setStudentValues(values = {}) {
     if (values.recurring_dues !== undefined) {
         document.getElementById("recurring_dues").value = values.recurring_dues;
     }
-    updateRecurringDuesCheckbox();
-}
-
-function updateRecurringDuesCheckbox() {
-    const recurringDues = parseInt($("#recurring_dues").val()) || 0;
-    const $checkbox = $("#addRecuringDues");
-    $checkbox.attr("disabled", recurringDues <= 0);
-    if (recurringDues <= 0 && $checkbox.is(":checked")) {
-        $checkbox.prop("checked", false);
-    }
 }
 
 // -------------------------------
@@ -42,12 +32,6 @@ function calculateAmounts() {
         const val = parseInt($(this).val()) || 0;
         total += val;
     });
-
-    // Add recurring dues if checkbox checked
-    if ($("#addRecuringDues").is(":checked")) {
-        const recurDues = parseInt($("#recurring_dues").val()) || 0;
-        total += recurDues;
-    }
 
     $("#total_amt").val(total);
 
@@ -67,10 +51,7 @@ $(function () {
     // -------------------------------
     // Attach change events
     // -------------------------------
-    $(".fee-field, #discount_amt, #addRecuringDues").on(
-        "keyup change",
-        calculateAmounts
-    );
+    $(".fee-field, #discount_amt").on("keyup change", calculateAmounts);
 
     // Ensure payment amount is not greater than total amount
     $("#payment_amt").on("keyup change", () => {

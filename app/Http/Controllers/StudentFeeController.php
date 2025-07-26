@@ -61,7 +61,17 @@ class StudentFeeController extends Controller
     public function edit(StudentFee $studentFee)
     {
         $classNames = StudClass::all();
-        return view('student_fees.edit', compact('studentFee', 'classNames'));
+
+        // Find the most recent payment *before* this one (to get past dues)
+        $previousFee = StudentFee::where('emis_no', $studentFee->emis_no)
+            ->where('id', '!=', $studentFee->id)
+            ->orderByDesc('id')
+            ->first();
+
+        // Pass previous dues (if any) to the view
+        $recurringDues = $previousFee ? $previousFee->dues_amt : 0;
+
+        return view('student_fees.edit', compact('studentFee', 'classNames', "recurringDues"));
     }
 
     public function update(Request $request, StudentFee $studentFee)
@@ -138,14 +148,11 @@ class StudentFeeController extends Controller
 
         $total = array_sum($fees);
 
-        // Check for recurring dues
-        $latestFee = StudentFee::where('emis_no', $request->emis_no)
-            ->latest()
-            ->first();
+        // Add recurring dues from input field (readonly)
+        $recurringFromPrevious = (int)$request->recurring_dues;
 
-        if ($request->has('recuring_dues_checkbox')) {
-            $total += $latestFee ? (int)$latestFee->recurring_dues : 0;
-        }
+        // Add recurring dues to total
+        $total += $recurringFromPrevious;
 
         // Apply discount
         $discount = (int)$request->discount_amt;
@@ -154,16 +161,6 @@ class StudentFeeController extends Controller
         // Calculate dues
         $payment = (int)$request->payment_amt;
         $dues = max($afterDiscount - $payment, 0);
-
-        // Handle recurring dues logic
-        if (!$request->has('recuring_dues_checkbox')) {
-            $previousRecurringDues = $latestFee ? (int)$latestFee->recurring_dues : 0;
-            // If this is an update, we need to adjust the recurring dues
-            $rout = request()->routeIs('student-fees.update');
-            $totalRecurringDues = $previousRecurringDues + $dues - ($rout ? $latestFee->dues_amt : 0);
-        } else {
-            $totalRecurringDues = $dues;
-        }
 
         return array_merge(
             $fees,
@@ -178,8 +175,8 @@ class StudentFeeController extends Controller
                 'dues_amt'       => $dues,
                 'payment_by'     => $request->payment_by,
                 'received_by'    => $request->received_by,
-                'recurring_dues' => $totalRecurringDues,
-                'recurring_dues_included_amt' => $request->has('recuring_dues_checkbox') ? $request->recurring_dues : null,
+                'recurring_dues' => $dues,
+                'recurring_dues_included_amt' => $recurringFromPrevious,
             ]
         );
     }

@@ -12,11 +12,11 @@
 }
 
 .invoice-container {
-    font-family: 'Times New Roman', serif;
+    font-family: "Times New Roman", serif;
     background-color: #fff;
     border: 1px solid #000;
     padding: 20px 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     font-size: 13px;
 }
 
@@ -39,7 +39,8 @@
     margin: 10px 0;
 }
 
-.invoice-meta, .student-info {
+.invoice-meta,
+.student-info {
     font-size: 13px;
     margin-bottom: 5px;
 }
@@ -51,7 +52,8 @@
     margin-bottom: 10px;
 }
 
-.invoice-table th, .invoice-table td {
+.invoice-table th,
+.invoice-table td {
     border: 1px solid #000;
     padding: 4px 6px;
 }
@@ -105,7 +107,8 @@ p {
         visibility: hidden;
     }
 
-    .invoice-print-page, .invoice-print-page * {
+    .invoice-print-page,
+    .invoice-print-page * {
         visibility: visible;
     }
 
