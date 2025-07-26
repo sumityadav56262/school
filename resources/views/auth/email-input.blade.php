@@ -1,7 +1,10 @@
-<label for="forgotEmail" class="form-label">Enter your email address</label>
+<label for="forgotEmail" class="form-label">
+    <i class="fas fa-envelope me-2"></i>Email Address
+</label>
 <input type="email"
     name="email"
-    class="form-control success-focus @error('email') is-invalid @enderror"
+    class="form-control @error('email') is-invalid @enderror"
     id="forgotEmail"
     value="{{ old('email', session('old_email')) }}"
+    placeholder="Enter your email address"
     required>
