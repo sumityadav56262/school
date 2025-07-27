@@ -121,16 +121,17 @@
     <script src="{{ asset('js/teacher_expense.js') }}"></script>
 
     <script type="text/javascript">
-        $(function() {
-            var stud_admission_date = document.getElementById("nepali-datepicker");
-            stud_admission_date.NepaliDatePicker();
+        // Nepali date picker initialization
+        const input = document.getElementById("nepali-datepicker");
+        if (input && input.NepaliDatePicker) {
+            input.NepaliDatePicker();
+        }
 
-            var paid_date = document.getElementById("paid_date");
+        const paid_date = document.getElementById("paid_date");
+        if (paid_date && paid_date.NepaliDatePicker) {
             paid_date.NepaliDatePicker();
+        }
 
-        });
-
-        console.log(NepaliFunctions.BS.GetCurrentDate());
         // -------------------------------
         // Initialize all DataTables
         // -------------------------------
