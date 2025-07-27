@@ -106,6 +106,6 @@
     </div>
 
     <div class="no-print">
-        <button onclick="window.print()" class="btn btn-success">Print Invoice</button>
+        <button onclick="window.print()" class="btn btn-success"> <i class="fas fa-print"></i>Print</button>
     </div>
 @endsection
