@@ -28,17 +28,20 @@
         <table class="table table-hover teacher_expense_datatable">
             <thead>
                 <tr>
+                    <th><i class="fas fa-calendar me-1"></i>Payment Date</th>
                     <th><i class="fas fa-user me-1"></i>Teacher</th>
                     <th><i class="fas fa-dollar-sign me-1"></i>Salary</th>
                     <th><i class="fas fa-money-check me-1"></i>Paid Amount</th>
                     <th><i class="fas fa-exclamation-triangle me-1"></i>Due Amount</th>
-                    <th><i class="fas fa-calendar me-1"></i>Payment Date</th>
                     <th class="no-sort"><i class="fas fa-cogs me-1"></i>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($expenses as $exp)
                     <tr>
+                        <td>
+                            <span class="badge bg-primary">{{ $exp->paid_date }}</span>
+                        </td>
                         <td>
                             <div class="fw-semibold">{{ $exp->teacher->teacher_name ?? 'N/A' }}</div>
                         </td>
@@ -49,21 +52,20 @@
                             <span class="text-success fw-bold">₹{{ number_format($exp->paid_amt) }}</span>
                         </td>
                         <td>
-                            @if($exp->due_amt > 0)
+                            @if ($exp->due_amt > 0)
                                 <span class="text-danger fw-bold">₹{{ number_format($exp->due_amt) }}</span>
                             @else
                                 <span class="text-success">₹0</span>
                             @endif
                         </td>
                         <td>
-                            <span class="badge bg-primary">{{ $exp->paid_date }}</span>
-                        </td>
-                        <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('teacher-expenses.edit', $exp) }}" class="btn btn-sm btn-primary" title="Edit Expense">
+                                <a href="{{ route('teacher-expenses.edit', $exp) }}" class="btn btn-sm btn-primary"
+                                    title="Edit Expense">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST" class="d-inline">
+                                <form action="{{ route('teacher-expenses.destroy', $exp) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" title="Move to Trash"

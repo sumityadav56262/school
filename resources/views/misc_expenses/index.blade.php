@@ -28,16 +28,19 @@
         <table class="table table-hover misc_expenses_datatable">
             <thead>
                 <tr>
+                    <th><i class="fas fa-calendar me-1"></i>Payment Date</th>
                     <th><i class="fas fa-list me-1"></i>Particular</th>
                     <th><i class="fas fa-dollar-sign me-1"></i>Amount</th>
                     <th><i class="fas fa-user me-1"></i>Paid By</th>
-                    <th><i class="fas fa-calendar me-1"></i>Payment Date</th>
                     <th class="no-sort"><i class="fas fa-cogs me-1"></i>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($expenses as $exp)
                     <tr>
+                        <td>
+                            <span class="badge bg-primary">{{ $exp->payment_date }}</span>
+                        </td>
                         <td>
                             <div class="fw-semibold">{{ $exp->particular }}</div>
                         </td>
@@ -48,11 +51,9 @@
                             <span class="badge bg-secondary">{{ $exp->payment_by }}</span>
                         </td>
                         <td>
-                            <span class="badge bg-primary">{{ $exp->payment_date }}</span>
-                        </td>
-                        <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('misc-expenses.edit', $exp->id) }}" class="btn btn-sm btn-primary" title="Edit Expense">
+                                <a href="{{ route('misc-expenses.edit', $exp->id) }}" class="btn btn-sm btn-primary"
+                                    title="Edit Expense">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('misc-expenses.destroy', $exp) }}" method="POST" class="d-inline">

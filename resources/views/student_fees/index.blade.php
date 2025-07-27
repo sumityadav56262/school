@@ -28,6 +28,7 @@
         <table class="table table-hover student_fee_datatable">
             <thead>
                 <tr>
+                    <th><i class="fas fa-calendar-days me-1"></i>Date</th>
                     <th><i class="fas fa-id-card me-1"></i>EMIS</th>
                     <th><i class="fas fa-school me-1"></i>Class</th>
                     <th><i class="fas fa-hashtag me-1"></i>Roll No</th>
@@ -44,6 +45,9 @@
             <tbody>
                 @foreach ($fees as $fee)
                     <tr>
+                        <td>
+                            <span class="badge bg-primary">{{ $fee->payment_date }}</span>
+                        </td>
                         <td>
                             <span class="badge bg-secondary">{{ $fee->emis_no }}</span>
                         </td>
