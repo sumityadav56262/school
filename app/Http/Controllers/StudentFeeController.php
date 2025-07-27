@@ -48,7 +48,7 @@ class StudentFeeController extends Controller
     {
         $validated = $this->validateRequest($request);
 
-        $invoiceNo = StudentFee::max('invoice_no') + 1;
+        $invoiceNo = StudentFee::withTrashed()->max('invoice_no') + 1;
         $data = $this->prepareFeeData($request);
         $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         $data['invoice_no'] = $invoiceNo; // Set the invoice number
