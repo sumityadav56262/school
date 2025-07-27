@@ -58,6 +58,10 @@
     padding: 4px 6px;
 }
 
+.invoice-table tbody tr:last-child td {
+    border-bottom: 1px solid #000 !important; /* force border if missing */
+}
+
 .summary-table {
     width: 100%;
     margin-top: 10px;

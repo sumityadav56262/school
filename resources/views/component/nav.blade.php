@@ -1,4 +1,4 @@
-<nav class="c_nav d-flex justify-content-between align-items-center px-4 py-3 shadow-sm">
+<nav class="c_nav d-flex sticky-top justify-content-between align-items-center px-4 py-3 shadow-sm">
     <div class="d-flex align-items-center">
         <h1 class="mb-0 text-white fw-bold fs-4">🎓 Sapience Academy</h1>
         <span class="badge bg-success ms-3 px-2 py-1">School Management</span>

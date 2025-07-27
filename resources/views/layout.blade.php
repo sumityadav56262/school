@@ -99,16 +99,14 @@
     {{-- Jquery JS --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Nepali datepicker -->
-    <script src="https://nepalidatepicker.sajanmaharjan.com.np/v5/nepali.datepicker/js/nepali.datepicker.v5.0.4.min.js"
-        type="text/javascript"></script>
-
     {{-- Boostrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Nepali datepicker -->
     <script src="https://nepalidatepicker.sajanmaharjan.com.np/v5/nepali.datepicker/js/nepali.datepicker.v5.0.4.min.js"
         type="text/javascript"></script>
+
+    {{-- Data-Table --}}
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.3.2/js/dataTables.bootstrap5.min.js"></script>
 

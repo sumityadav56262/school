@@ -75,12 +75,12 @@
                             <td>{{ number_format($studentFee->total_amt ?? 0, 0) }}</td>
                         </tr>
                         <tr>
-                            <td>Discount:</td>
-                            <td>{{ number_format($studentFee->discount_amt ?? 0, 0) }}</td>
-                        </tr>
-                        <tr>
                             <td>Paid:</td>
                             <td>{{ number_format($studentFee->payment_amt ?? 0, 0) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Discount:</td>
+                            <td>{{ number_format($studentFee->discount_amt ?? 0, 0) }}</td>
                         </tr>
                         <tr>
                             <td>Dues:</td>

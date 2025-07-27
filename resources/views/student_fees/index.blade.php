@@ -34,9 +34,9 @@
                     <th><i class="fas fa-user me-1"></i>Student Name</th>
                     <th><i class="fas fa-calendar me-1"></i>Month</th>
                     <th><i class="fas fa-dollar-sign me-1"></i>Total</th>
-                    <th><i class="fas fa-percentage me-1"></i>Discount</th>
                     <th><i class="fas fa-money-bill me-1"></i>Payment</th>
-                    <th><i class="fas fa-exclamation-triangle me-1"></i>Dues</th>
+                    <th><i class="fas fa-percentage me-1"></i>Discount</th>
+                    {{-- <th><i class="fas fa-exclamation-triangle me-1"></i>Dues</th> --}}
                     <th><i class="fas fa-redo me-1"></i>Rec. Dues</th>
                     <th class="no-sort"><i class="fas fa-cogs me-1"></i>Actions</th>
                 </tr>
@@ -61,35 +61,38 @@
                             <span class="text-success fw-bold">₹{{ number_format($fee->total_amt) }}</span>
                         </td>
                         <td>
-                            @if($fee->discount_amt > 0)
-                                <span class="text-warning fw-bold">₹{{ number_format($fee->discount_amt) }}</span>
+                            <span class="text-primary fw-bold">₹{{ number_format($fee->payment_amt) }}</span>
+                        </td>
+                        <td>
+                            @if ($fee->discount_amt > 0)
+                                <span class="text-info fw-bold">₹{{ number_format($fee->discount_amt) }}</span>
                             @else
                                 <span class="text-muted">₹0</span>
                             @endif
                         </td>
-                        <td>
-                            <span class="text-primary fw-bold">₹{{ number_format($fee->payment_amt) }}</span>
-                        </td>
-                        <td>
-                            @if($fee->dues_amt > 0)
+
+                        {{-- <td>
+                            @if ($fee->dues_amt > 0)
                                 <span class="text-danger fw-bold">₹{{ number_format($fee->dues_amt) }}</span>
                             @else
                                 <span class="text-success">₹0</span>
                             @endif
-                        </td>
+                        </td> --}}
                         <td>
-                            @if($fee->recurring_dues > 0)
-                                <span class="text-warning fw-bold">₹{{ number_format($fee->recurring_dues) }}</span>
+                            @if ($fee->recurring_dues > 0)
+                                <span class="text-info fw-bold">₹{{ number_format($fee->recurring_dues) }}</span>
                             @else
                                 <span class="text-muted">₹0</span>
                             @endif
                         </td>
                         <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('student-fees.show', $fee->id) }}" class="btn btn-sm btn-success" title="View Details">
+                                <a href="{{ route('student-fees.show', $fee->id) }}" class="btn btn-sm btn-success"
+                                    title="View Details">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('student-fees.edit', $fee->id) }}" class="btn btn-sm btn-primary" title="Edit Fee">
+                                <a href="{{ route('student-fees.edit', $fee->id) }}" class="btn btn-sm btn-primary"
+                                    title="Edit Fee">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('student-fees.destroy', $fee) }}" method="POST" class="d-inline">

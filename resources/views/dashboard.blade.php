@@ -44,7 +44,7 @@
                 <i class="fas fa-receipt fa-2x opacity-75"></i>
             </div>
             <p class="c_para mb-0 fw-bold">₹{{ number_format($totalExpenses ?? 0) }}</p>
-            <small class="opacity-75">Total spent</small>
+            <small class="opacity-75">Total spent (salary + misc exp)</small>
         </div>
 
         <!-- Total Dues -->
