@@ -121,6 +121,7 @@ class StudentController extends Controller
         $studentId = $request->route('student')?->id; // Get the current student's ID if updating
 
         $rules = [
+            'stud_name' => ['required', 'string', 'max:100'],
             'class_id' => ['required', 'exists:stud_classes,id'],
             'roll_no' => [
                 'required',
@@ -137,7 +138,6 @@ class StudentController extends Controller
         if (!$update) {
             $rules = array_merge($rules, [
                 'emis_no' => ['required', 'unique:students,emis_no'],
-                'stud_name' => ['required', 'string', 'max:100'],
             ]);
         }
 
