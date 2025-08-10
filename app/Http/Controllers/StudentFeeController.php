@@ -27,6 +27,11 @@ class StudentFeeController extends Controller
         // Eager load 'student' and 'feeParticulars' relationships
         $studentFee = StudentFee::with(['student'])->find($id);
 
+        // Convert created_at to Nepali date format
+        // If created_at is null, use current date
+        $nepDate = $studentFee->created_at->format('Y-m-d') ?? now()->format('Y-m-d');
+        $createdAt = AD2BS($nepDate);
+
         // dd($studentFee);
         if (!$studentFee) {
             // Handle case where student fee record is not found
@@ -34,7 +39,7 @@ class StudentFeeController extends Controller
             abort(404, 'Student fee record not found.');
         }
 
-        return view('student_fees.show', compact('studentFee'));
+        return view('student_fees.show', compact('studentFee', 'createdAt'));
     }
 
     public function create()

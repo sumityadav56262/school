@@ -18,7 +18,7 @@
                 <div class="invoice-meta d-flex justify-content-between">
                     <div><strong>Inv. No:</strong> {{ $studentFee->invoice_no }}</div>
                     <div class="text-end"><strong>Date:</strong>
-                        {{ \Carbon\Carbon::parse($studentFee->created_at)->format('Y-m-d') }}</div>
+                        {{ $createdAt }}</div>
                 </div>
 
                 <div class="student-info d-flex flex-column margin: 0;">
