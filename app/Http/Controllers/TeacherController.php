@@ -12,7 +12,11 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $teachers = Teacher::all();
-        return view('teachers.index', compact('teachers'));
+        $createdAt = $teachers->map(function ($teacher) {
+            $nepDate = $teacher->created_at->format('Y-m-d');
+            return AD2BS($nepDate);
+        });
+        return view('teachers.index', compact('teachers', 'createdAt'));
     }
 
     public function show(string $action)

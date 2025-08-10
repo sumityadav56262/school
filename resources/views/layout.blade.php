@@ -52,7 +52,7 @@
             <a class="menu-item {{ request()->routeIs('student-fees.*') ? 'bg-success' : '' }}"
                 href="{{ route('student-fees.index') }}">
                 <i class="fas fa-file-invoice-dollar"></i>
-                <span>Student Fees</span>
+                <span>Collect Fee</span>
             </a>
 
             <div class="menu-divider my-3"></div>

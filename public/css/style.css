@@ -304,17 +304,27 @@ table tr:last-child td {
 }
 
 /* Nepali Calender START */
-.datepicker--nav-title,
-.datepicker--nav-title i,
-.datepicker--day-name,
-.datepicker--nav {
-    color: #198754 !important ;
+.ndp-today {
+    color: #198754 !important;
+    font-weight: 600 !important;
 }
 
-.datepicker--cell.-selected-,
-.datepicker--nav-action {
-    background: #198754 !important ;
+.ndp-selected {
+    color: white !important;
+    font-weight: 600 !important;
 }
+.ndp-table th,
+.ndp-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px; /* optional */
+}
+
+.ndp-container.ndp-light .ndp-table td.ndp-selected {
+    background: #198754 !important ;
+    text-align: end;
+}
+
 /* Nepali Calender END*/
 .dropdown-item:active {
     background-color: #198754 !important; /* Bootstrap's green (`.bg-success`) */

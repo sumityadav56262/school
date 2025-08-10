@@ -26,17 +26,11 @@
             <label for="loginEmail" class="form-label">
                 <i class="fas fa-envelope me-2"></i>Email Address
             </label>
-            <input type="email" 
-                   name="email" 
-                   class="form-control @error('email') is-invalid @enderror"
-                   id="loginEmail" 
-                   value="{{ old('email') }}" 
-                   required 
-                   autofocus
-                   placeholder="Enter your email address">
-            @error('email')
+            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="loginEmail"
+                value="{{ old('email') }}" required autofocus placeholder="Enter your email address">
+            {{-- @error('email')
                 <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="mb-3">
@@ -44,19 +38,15 @@
                 <i class="fas fa-lock me-2"></i>Password
             </label>
             <div class="password-input-group">
-                <input type="password" 
-                       name="password"
-                       class="form-control @error('password') is-invalid @enderror" 
-                       id="loginPassword" 
-                       required
-                       placeholder="Enter your password">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                    id="loginPassword" required placeholder="Enter your password">
                 <button type="button" class="password-toggle" id="togglePasswordIcon">
                     <i class="fas fa-eye"></i>
                 </button>
             </div>
-            @error('password')
+            {{-- @error('password')
                 <div class="text-danger">{{ $message }}</div>
-            @enderror
+            @enderror --}}
         </div>
 
         <button type="submit" class="btn btn-auth">
@@ -69,11 +59,11 @@
             </a>
         </div>
 
-        <div class="auth-links mt-2">
+        {{-- <div class="auth-links mt-2">
             <span class="text-muted">Don't have an account?</span>
             <a href="{{ route('register') }}" class="ms-1">
                 <i class="fas fa-user-plus me-1"></i>Create Account
             </a>
-        </div>
+        </div> --}}
     </form>
 @endsection

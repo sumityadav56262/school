@@ -15,7 +15,12 @@ class StudentController extends Controller
     {
         $students = Student::all();
 
-        return view('students.index', compact('students'));
+        $createdAt = $students->map(function ($student) {
+            $nepDate = $student->created_at->format('Y-m-d');
+            return AD2BS($nepDate);
+        });
+
+        return view('students.index', compact('students', 'createdAt'));
     }
     public function show(string $action)
     {

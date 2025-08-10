@@ -28,6 +28,7 @@
         <table class="table table-hover student_datatable">
             <thead>
                 <tr>
+                    <th><i class="fas fa-calendar-days me-1"></i>Date</th>
                     <th><i class="fas fa-id-card me-1"></i>EMIS</th>
                     <th><i class="fas fa-user me-1"></i>Name</th>
                     <th><i class="fas fa-school me-1"></i>Class</th>
@@ -41,6 +42,9 @@
             <tbody>
                 @foreach ($students as $student)
                     <tr>
+                        <td>
+                            <span class="badge bg-primary">{{ $createdAt[$loop->index] }}</span>
+                        </td>
                         <td>
                             <span class="badge bg-secondary">{{ $student->emis_no }}</span>
                         </td>
@@ -62,7 +66,8 @@
                         </td>
                         <td>
                             <div class="d-flex gap-1">
-                                <a href="{{ route('students.edit', $student) }}" class="btn btn-sm btn-primary" title="Edit Student">
+                                <a href="{{ route('students.edit', $student) }}" class="btn btn-sm btn-primary"
+                                    title="Edit Student">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <form action="{{ route('students.destroy', $student) }}" method="POST" class="d-inline">
