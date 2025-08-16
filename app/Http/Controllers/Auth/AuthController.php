@@ -46,31 +46,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-             // Set session for subscription days
-            $subscription = Subscriptions::where('user_id', Auth::id())
-                ->where('status', 'active')
-                ->orderByDesc('end_date')
-                ->first();
 
-            $daysLeft = 0;
-            $isExpired = true;
-
-            if ($subscription) {
-                $today = Carbon::today();
-                $endDate = Carbon::parse($subscription->end_date)->startOfDay();
-
-                if ($endDate->gte($today)) {
-                    $daysLeft = $today->diffInDays($endDate); // Days left
-                    $isExpired = false;
-                }
-            }
-
-            session([
-                'subscription_days_left' => $daysLeft,
-                'subscription_expired' => $isExpired,
-            ]);
-
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('status', 'Loggedin Successfully.!');
         }
 
         return back()->withErrors([

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('teacher_expenses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('teacher_id');
             $table->integer('salary_amt');
             $table->integer('paid_amt');

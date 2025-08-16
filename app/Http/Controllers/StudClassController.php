@@ -36,13 +36,9 @@ class StudClassController extends Controller
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('stud_classes')->where(
-                    fn($query) =>
-                    $query->where('user_id', Auth::id())
-                ),
+                'unique'
             ],
         ]);
-        $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user
         StudClass::create($validated);
 
         return redirect()->route('stud-classes.index')->with('success', 'Class created successfully.');
@@ -80,7 +76,6 @@ class StudClassController extends Controller
                 'max:255',
             ],
         ]);
-        $validated['user_id'] = Auth::id(); // Assuming you want to set the user_id to the authenticated user
         $studClass->update($validated);
 
         return redirect()->route('stud-classes.index')->with('success', 'Class updated successfully.');

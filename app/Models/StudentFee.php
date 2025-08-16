@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\UserScopedModel;
+use App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class StudentFee extends UserScopedModel
+class StudentFee extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_id',
         'emis_no',
         'class_name',
         'payment_date',

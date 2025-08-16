@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('student_fees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('emis_no');
             $table->string('payment_date');
             $table->string('admission_date')->nullable();
@@ -36,12 +35,11 @@ return new class extends Migration
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();
             $table->string('recurring_dues_included_amt')->nullable();
-            $table->unsignedBigInteger('invoice_no');
+            $table->unsignedBigInteger('invoice_no')->unique();
             $table->softDeletes(); // Add soft delete column
             $table->timestamps();
 
             $table->foreign('emis_no')->references('emis_no')->on('students')->onDelete('cascade');
-            $table->unique(['user_id', 'invoice_no']);
         });
     }
 

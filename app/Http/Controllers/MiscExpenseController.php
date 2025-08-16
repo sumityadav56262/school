@@ -35,7 +35,6 @@ class MiscExpenseController extends Controller
     public function store(Request $request)
     {
         $validated = $this->validateRequestData($request);
-        $validated['user_id'] = Auth::id();
         MiscExpense::create($validated);
         return redirect()->route('misc-expenses.index')->with('success', 'Expense Added successfully');
     }

@@ -35,7 +35,7 @@ class TeacherController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->validationRules(), $this->validationMessages());
-        Teacher::create($request->merge(['user_id' => Auth::id()])->all());
+        Teacher::create($request->all());
         return redirect()->route('teachers.index')->with('success', 'Teacher added successfully!');
     }
 
@@ -82,14 +82,7 @@ class TeacherController extends Controller
     protected function validationRules(?int $teacher_id = null): array
     {
         return [
-            'id_card_no' => [
-                'required',
-                'integer',
-                Rule::unique('teachers')->where(
-                    fn($query) =>
-                    $query->where('user_id', Auth::id())
-                )->ignore($teacher_id),
-            ],
+            'id_card_no' => 'required|integer|unique:teachers,id_card_no,',
             'teacher_name' => 'required|string|max:255',
             'mobile_no' => 'required|string|regex:/^[0-9]{10}$/',
             'designation' => 'required|string|max:100',

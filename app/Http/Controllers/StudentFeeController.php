@@ -55,7 +55,6 @@ class StudentFeeController extends Controller
 
         $invoiceNo = StudentFee::withTrashed()->max('invoice_no') + 1;
         $data = $this->prepareFeeData($request);
-        $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         $data['invoice_no'] = $invoiceNo; // Set the invoice number
         StudentFee::create($data);
 
@@ -83,7 +82,6 @@ class StudentFeeController extends Controller
     {
         $this->validateRequest($request);
         $data = $this->prepareFeeData($request);
-        $data['user_id'] = Auth::id(); // Set the user_id to the authenticated user
         $studentFee->update($data);
 
         return redirect()->route('student-fees.index')

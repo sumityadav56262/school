@@ -48,7 +48,6 @@ class TeacherExpenseController extends Controller
             return back()->withErrors(['id_card_no' => 'Teacher not found.'])->withInput();
         }
 
-        $validated['user_id'] = Auth::id();
         $validated['teacher_id'] = $teacher->id;
         unset($validated['id_card_no']);
         TeacherExpense::create($validated);
@@ -66,7 +65,9 @@ class TeacherExpenseController extends Controller
     public function update(Request $request, TeacherExpense $teacherExpense)
     {
         $validated = $this->validateRequestData($request);
+        $teacher_id = Teacher::where('id_card_no', $validated['id_card_no'])->value('id');
         unset($validated['id_card_no']);
+        $validated['teacher_id'] = $teacher_id;
         $teacherExpense->update($validated);
         return redirect()->route('teacher-expenses.index')->with('success', 'Record updated successfully!');
     }
@@ -93,13 +94,7 @@ class TeacherExpenseController extends Controller
                 'paid_by'    => 'required|string|max:50',
                 'paid_date'  => 'required|',
                 'remark'     => 'nullable|string|max:500',
-                'id_card_no' => [
-                    'required',
-                    Rule::exists('teachers', 'id_card_no')->where(
-                        fn($query) =>
-                        $query->where('user_id', Auth::id())
-                    ),
-                ],
+                'id_card_no' => 'required|integer',
             ],
             [
                 'salary_amt.required' => 'Salary amount is required.',

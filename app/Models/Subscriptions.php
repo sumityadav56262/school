@@ -11,7 +11,6 @@ class Subscriptions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'plan_name',
         'start_date',
         'end_date',

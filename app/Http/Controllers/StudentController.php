@@ -39,8 +39,6 @@ class StudentController extends Controller
     {
         $validated = $this->validateStudent($request);
 
-        $validated['user_id'] = Auth::id();
-
         Student::create($validated);
 
         return redirect()
