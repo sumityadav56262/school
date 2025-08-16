@@ -32,9 +32,11 @@
 
     <div class="container">
         <div class="menu">
-            <div class="mb-4 text-center">
-                <h5 class="text-light fw-bold mb-3">Navigation</h5>
+            <div class="w-100 text-center mb-4 p-4 pt-0 pb-0 d-flex justify-content-between align-items-center">
+                <h5 class="m-0 text-light fw-bold">Navigation</h5>
+                <i class="fa-solid fa-rectangle-list" id='sidebarIcon'></i>
             </div>
+
 
             <a class="menu-item {{ request()->routeIs('dashboard') ? 'bg-success' : '' }}"
                 href="{{ route('dashboard') }}">
@@ -119,6 +121,7 @@
     </script>
     <script src="{{ asset('js/student_fee.js') }}"></script>
     <script src="{{ asset('js/teacher_expense.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 
     <script type="text/javascript">
         // Nepali date picker initialization
