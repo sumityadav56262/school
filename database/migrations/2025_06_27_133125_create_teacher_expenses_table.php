@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('paid_by');
             $table->string('paid_date');
             $table->string('remark')->nullable();
+            $table->unsignedBigInteger('invoice_no')->unique();
             $table->softDeletes();
             $table->timestamps();
 

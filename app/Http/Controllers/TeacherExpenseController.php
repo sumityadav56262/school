@@ -24,8 +24,16 @@ class TeacherExpenseController extends Controller
             $expenses = TeacherExpense::onlyTrashed()->get();
             return view('teacher_expenses.trash', compact('expenses'));
         }
-        return redirect()->route('teacher-expenses.index');
+        $teacherExpense = TeacherExpense::with('teacher')->findOrFail($id);
+        $nepaliDate = $teacherExpense->created_at->format('Y-m-d') ?? now()->format('Y-m-d');;
+        $createdAt = AD2BS($nepaliDate);
+        if (!$teacherExpense) {
+            abort(404, 'Teacher expense record not found.');
+        }
+
+        return view('teacher_expenses.show', compact('teacherExpense', 'createdAt'));
     }
+
     public function create()
     {
         $teachers = Teacher::all();
@@ -50,6 +58,10 @@ class TeacherExpenseController extends Controller
 
         $validated['teacher_id'] = $teacher->id;
         unset($validated['id_card_no']);
+
+        $invoiceNo = TeacherExpense::withTrashed()->max('invoice_no') + 1;
+        $validated['invoice_no'] = $invoiceNo;
+
         TeacherExpense::create($validated);
 
         return redirect()->route('teacher-expenses.index')->with('success', 'Expense added successfully!');

@@ -12,6 +12,7 @@ class TeacherExpense extends Model
 
     protected $fillable = [
         'teacher_id',
+        'invoice_no',
         'salary_amt',
         'paid_amt',
         'due_amt',

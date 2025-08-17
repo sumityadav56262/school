@@ -82,6 +82,7 @@
 
 .summary-table td {
     padding: 3px;
+    width: 33.33%;
 }
 
 .summary-table td:last-child {

@@ -98,7 +98,8 @@
 
     <div class="form-group">
         <label for="remark">Remark:</label>
-        <input type="text" name="remark" id="remark" value="{{ old('remark', $teacherExpense->remark ?? '') }}">
+        <input type="text" name="remark" id="remark" value="{{ old('remark', $teacherExpense->remark ?? '') }}"
+            required>
     </div>
 </div>
 

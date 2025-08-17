@@ -60,6 +60,10 @@
                         </td>
                         <td>
                             <div class="d-flex gap-1">
+                                <a href="{{ route('teacher-expenses.show', $exp->id) }}" class="btn btn-sm btn-success"
+                                    title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                                 <a href="{{ route('teacher-expenses.edit', $exp) }}" class="btn btn-sm btn-primary"
                                     title="Edit Expense">
                                     <i class="fas fa-edit"></i>
