@@ -18,6 +18,8 @@ use App\Models\StudentFee;
 use App\Models\Teacher;
 use App\Models\TeacherExpense;
 
+use function PHPUnit\Framework\isEmpty;
+
 Route::middleware('guest')->group(function () {
     // Authentication Routes
     Route::view('/login', 'auth.login')->name('login');
@@ -75,3 +77,10 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/change-password', 'auth.change-password')->name('password.change');
     Route::post('/change-password', [AuthController::class, 'update'])->name('password.change.update');
 });
+Route::get('/sidebar', function () {
+    if (isEmpty(session('isHidden'))) {
+        session(['isHidden' => session('isHidden') ? false : true]);
+    } else {
+        session(['isHidden' => true]);
+    }
+})->name('sidebar');

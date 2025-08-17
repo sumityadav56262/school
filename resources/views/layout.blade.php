@@ -31,7 +31,7 @@
     @include('component.nav')
 
     <div class="container">
-        <div class="menu">
+        <div class="menu {{ session('isHidden') ? 'hide' : '' }}">
             <div class="w-100 text-center mb-4 p-4 pt-0 pb-0 d-flex justify-content-between align-items-center">
                 <h5 class="m-0 text-light fw-bold">Navigation</h5>
                 <i class="fa-solid fa-rectangle-list" id='sidebarIcon'></i>
@@ -96,7 +96,6 @@
             {{ session('archive') }}
         </div>
     @endif
-
 
     {{-- Jquery JS --}}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
