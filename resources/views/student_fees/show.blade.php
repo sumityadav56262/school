@@ -7,14 +7,18 @@
         @for ($i = 0; $i < 2; $i++)
             <div class="invoice-container">
                 <div class="invoice-header">
-                    <h1 style="margin: 0 !important;">SAPIENCE ACADEMY</h1>
-                    <p>Lalbandi Municipality-7, Sarlahi</p>
-                    <p>EST: 2075</p>
-                    <p style="font-size: 18px;">TAX INVOICE
-                    <p>
+                    <div class="d-flex align-items-center justify-content-center position-relative">
+                        <div class="logo"><img src="{{ asset('images/logo.jpg') }}" alt="" srcset=""></div>
+                        <div class="z-1 text-center">
+                            <h1 style="margin: 0 !important;">SAPIENCE ACADEMY</h1>
+                            <p>Lalbandi Municipality-7, Sarlahi</p>
+                            <p>EST: 2075</p>
+                            <p style="font-size: 18px;">TAX INVOICE
+                            <p>
+                        </div>
+                    </div>
                     <div class="invoice-line"></div>
                 </div>
-
                 <div class="invoice-meta d-flex justify-content-between">
                     <div><strong>Inv. No:</strong> {{ $studentFee->invoice_no }}</div>
                     <div class="text-end"><strong>Date:</strong>
