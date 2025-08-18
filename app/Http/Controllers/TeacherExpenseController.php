@@ -106,7 +106,7 @@ class TeacherExpenseController extends Controller
                 'paid_by'    => 'required|string|max:50',
                 'paid_date'  => 'required|',
                 'remark'     => 'nullable|string|max:500',
-                'id_card_no' => 'required|integer',
+                'id_card_no' => 'required|integer|exists:teachers,id_card_no',
             ],
             [
                 'salary_amt.required' => 'Salary amount is required.',

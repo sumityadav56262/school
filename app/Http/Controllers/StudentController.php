@@ -124,6 +124,10 @@ class StudentController extends Controller
         $studentId = $request->route('student')?->id; // Get the current student's ID if updating
 
         $rules = [
+            'emis_no' => [
+                'required',
+                Rule::unique('students', 'emis_no')->ignore($request->emis_no, 'emis_no'),
+            ],
             'stud_name' => ['required', 'string', 'max:100'],
             'class_id' => ['required', 'exists:stud_classes,id'],
             'roll_no' => [
@@ -137,12 +141,6 @@ class StudentController extends Controller
             'mobile_no' => ['required', 'regex:/^[0-9]{10}$/'],
             'address' => ['required', 'string', 'max:255'],
         ];
-
-        if (!$update) {
-            $rules = array_merge($rules, [
-                'emis_no' => ['required', 'unique:students,emis_no'],
-            ]);
-        }
 
         return $rules;
     }
