@@ -9,3 +9,12 @@ document.getElementById('sidebarIcon').addEventListener('click', function () {
         console.error('Error:', error);
     });
 });
+document.addEventListener('DOMContentLoaded', function () {
+    const alerts = document.querySelectorAll('.autoDismissAlert');
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, 4000);
+    });
+});

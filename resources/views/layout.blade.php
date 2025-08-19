@@ -85,14 +85,14 @@
     </div>
     {{-- Success message --}}
     @if (session('success') || session('status'))
-        <div class="alert bg-success text-white alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3"
-            role="alert" id="autoDismissAlert">
+        <div class="alert bg-success text-white alert-dismissible fade show position-fixed bottom-0 end-0 m-3 z-3 autoDismissAlert"
+            role="alert">
             {{ session('success') ?? session('status') }}
         </div>
     @endif
     @if (session('archive'))
-        <div class="alert bg-danger text-white alert-dismissible fade show position-fixed top-0 end-0 m-3 z-3"
-            role="alert" id="autoDismissAlert">
+        <div class="alert bg-danger text-white alert-dismissible fade show position-fixed bottom-0 end-0 m-3 z-3 autoDismissAlert"
+            role="alert">
             {{ session('archive') }}
         </div>
     @endif
