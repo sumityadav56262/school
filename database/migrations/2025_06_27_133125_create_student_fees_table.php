@@ -34,7 +34,6 @@ return new class extends Migration
             $table->string('payment_by');
             $table->string('received_by');
             $table->string('recurring_dues')->nullable();
-            $table->string('recurring_dues_included_amt')->nullable();
             $table->unsignedBigInteger('invoice_no')->unique();
             $table->softDeletes(); // Add soft delete column
             $table->timestamps();

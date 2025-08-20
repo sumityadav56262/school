@@ -126,7 +126,7 @@ class StudentController extends Controller
         $rules = [
             'emis_no' => [
                 'required',
-                Rule::unique('students', 'emis_no')->ignore($request->emis_no, 'emis_no'),
+                Rule::unique('students', 'emis_no')->ignore($studentId),
             ],
             'stud_name' => ['required', 'string', 'max:100'],
             'class_id' => ['required', 'exists:stud_classes,id'],

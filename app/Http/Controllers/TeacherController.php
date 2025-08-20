@@ -46,7 +46,8 @@ class TeacherController extends Controller
 
     public function update(Request $request, Teacher $teacher)
     {
-        $mergeRulesMessage = array_merge($this->validationRules($teacher->id), $this->validationMessages());
+        $teacherId = $request->route('teacher')?->id; // Get the current teacher's ID if updating
+        $mergeRulesMessage = array_merge($this->validationRules($teacherId), $this->validationMessages());
         $validated = $request->validate($mergeRulesMessage);
         $teacher->update($validated);
         return redirect()->route('teachers.index')->with('success', 'Teacher updated successfully!');

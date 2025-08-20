@@ -36,7 +36,7 @@
                     <tr>
                         <th>Sr. No</th>
                         <th>Particular</th>
-                        <th>Amount</th>
+                        <th>Paid Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +84,6 @@
     </div>
 
     <div class="no-print">
-        <button onclick="window.print()" class="btn btn-success"> <i class="fas fa-print"></i>Print</button>
+        <button onclick="window.print()" class="btn btn-success text-left"> <i class="fas fa-print"></i>Print</button>
     </div>
 @endsection

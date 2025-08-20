@@ -179,7 +179,6 @@ class StudentFeeController extends Controller
                 'payment_by'     => $request->payment_by,
                 'received_by'    => $request->received_by,
                 'recurring_dues' => $dues,
-                'recurring_dues_included_amt' => $recurringFromPrevious,
             ]
         );
     }
